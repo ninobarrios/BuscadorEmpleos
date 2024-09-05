@@ -1,31 +1,34 @@
 import React from 'react';
+import Select from 'react-select';
 
 function Selectores({ onSelectLugar, onSelectEmpresa, empresas, lugar, empresa, departamentos }) {
+    // Opciones para react-select
+    const defaultLugarOption = { value: '', label: 'Departamentos' };
+    const defaultEmpresaOption = { value: '', label: 'Empresas' };
+
+    const lugaresOptions = [defaultLugarOption, ...departamentos.map(dep => ({ value: dep, label: dep }))];
+    const empresasOptions = [defaultEmpresaOption, ...empresas.map(emp => ({ value: emp, label: emp }))];
+
     return (
         <div className='selectores'>
-            <select
-                className='select-empresa'
-                value={lugar}
-                onChange={(e) => onSelectLugar(e.target.value)}
-            >
-                <option className='empresaselects' value="lugar">Todos los lugares</option>
-                {departamentos.map((dep, index) => (
-                    <option key={index} value={dep}>{dep}</option>
-                ))}
-            </select>
+            <Select
+                className='select-lugar'
+                options={lugaresOptions}
+                value={lugaresOptions.find(option => option.value === lugar) || defaultLugarOption}
+                onChange={(selectedOption) => onSelectLugar(selectedOption.value)}
+                placeholder="Selecciona un lugar"
+            />
 
-            <select
-                className='select-empresa'
-                value={empresa}
-                onChange={(e) => onSelectEmpresa(e.target.value)}
-            >
-                <option className='empresaselects' value="empresa">Todas las empresas</option>
-                {empresas.map((emp, index) => (
-                    <option key={index} value={emp}>{emp}</option>
-                ))}
-            </select>
+            <Select
+                className='select-lugar'
+                options={empresasOptions}
+                value={empresasOptions.find(option => option.value === empresa) || defaultEmpresaOption}
+                onChange={(selectedOption) => onSelectEmpresa(selectedOption.value)}
+                placeholder="Selecciona una empresa"
+            />
         </div>
     );
 }
 
 export default Selectores;
+

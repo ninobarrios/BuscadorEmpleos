@@ -709,7 +709,6 @@ body {
 
 
 
-
 .select-empresa:focus {
     border-color: #47b72f;
     box-shadow: 0 0 5px rgba(71, 183, 47, 0.5);
@@ -718,45 +717,90 @@ body {
 }
 
 .select-empresa option {
-    padding: 10px;
-    background-color: #f3efef;
-    color: #333;
+    background-color: #ffffff;
+    color: #000000;
     font-size: 16px;
     border-radius: 50px;
-}
+    width: 50px !important;
+}   
 
 .select-empresa option:hover {
     background-color: #47b72f;
     color: #fff;
 }
+.select-items{
+    width: 25px;
+    background-color: #038c3e;
+}
+
+
+
+.select-empresa option {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 16px;
+    border-radius: 50px;
+    width: 20px;
+}
+
+/* Selectores.css */
+
+.selectores {
+    display: flex;
+    gap: 10px; /* Espaciado entre los selectores */
+}
+.select-lugar{
+    margin-top: 20px;
+    width: 300px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    align-content: center;
+}
+
+.uno{
+    margin: 0px;
+
+    padding: 0px;
+}
+
+
+
+
+/* Estilos generales aplicables a todos los tamaños de pantalla */
+
+/* Estilos específicos para pantallas menores a 764px */
 @media (max-width: 764px) {
-    .portada{
+    .uno{
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+    .portada {
         height: 30vh;
     }
-    .contentform h1{
+    .contentform h1 {
         font-size: 30px;
         margin-top: 50px;
     }
-    .contentform h3{
+    .contentform h3 {
         font-size: 20px;
     }
-    .imagenlogo{
+    .imagenlogo {
         width: 150px;
         left: 20px;
     }
-    .inserciones{
+    .inserciones {
         width: 95%;
     }
-    .inserciones p{
+    .inserciones p {
         font-size: 35px;
         margin-bottom: 10px;
     }
-    .inserciones h5{
+    .inserciones h5 {
         font-size: 15px;
         text-align: center;
         width: 50%;
     }
-    .semana, .total, .dia{
+    .semana, .total, .dia {
         height: 90px;
         overflow: hidden;
         position: relative;
@@ -765,52 +809,54 @@ body {
         padding: 15px;
         justify-content: flex-start;
     }
-    .semana p, .total p, .dia p{
+    .semana p, .total p, .dia p {
         width: 80%;
-        margin: 0px;
+        margin: 0;
     }
-    .semana h5, .total h5, .dia h5{
+    .semana h5, .total h5, .dia h5 {
         width: 98%;
         display: flex;
         justify-content: center;
         font-size: 14px;
     }
-    .buscador{
-        width: 350px;
+    .buscador {
+        width: 100%;
+        max-width: 350px; /* Añadido para limitar el ancho */
         padding: 30px 20px;
     }
-    .buscador h3{
+    .buscador h3 {
         font-size: 25px;
     }
-    .btn_cajainiciobox{
+    .btn_cajainiciobox {
         right: 20px;
     }
-    .selectores{
+    .selectores {
         display: flex;
         flex-direction: column;
-        margin: 20px 0px;
+        margin: 20px 0;
     }
-    .side-content{
-        margin-top: 0px;
+    .side-content {
+        margin-top: 0;
         width: 85vw;
     }
-    .boxcajaoferta{
-        margin: 6px 0px;
+    .boxcajaoferta {
+        margin: 6px 0;
     }
-
 }
-@media (max-width: 1024px) {
-    .semana p, .total p, .dia p{
+
+/* Estilos específicos para pantallas menores a 1024px, pero mayores a 764px */
+@media (min-width: 765px) and (max-width: 1024px) {
+    .semana p, .total p, .dia p {
         width: 80%;
-        margin: 0px;
+        margin: 0;
     }
-    .semana h5, .total h5, .dia h5{
+    .semana h5, .total h5, .dia h5 {
         width: 90%;
         display: flex;
         justify-content: center;
         font-size: 18px;
     }
-    .semana, .total, .dia{
+    .semana, .total, .dia {
         height: 110px;
         overflow: hidden;
         position: relative;
@@ -819,13 +865,13 @@ body {
         padding: 15px;
         justify-content: flex-start;
     }
-    .inserciones{
+    .inserciones {
         width: 90vw;
     }
-    .side-content{
-        margin-top: 0px;
+    .side-content {
+        margin-top: 0;
     }
-    .boxcajaoferta{
-        margin: 6px 0px;
+    .boxcajaoferta {
+        margin: 6px 0;
     }
 }
