@@ -1,25 +1,37 @@
-// src/componentes/Paginacion.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Paginacion({ paginaActual, totalPaginas, onCambiarPagina }) {
+    const [rangoDePaginacion, setRangoDePaginacion] = useState(5);
+
+    // Detecta el tamaño de la pantalla y ajusta el rango de paginación
+    useEffect(() => {
+        const ajustarRangoPaginacion = () => {
+            if (window.innerWidth <= 768) {
+                setRangoDePaginacion(3); // Si la pantalla es 768px o menos, usa un rango de 3
+            } else {
+                setRangoDePaginacion(5); // De lo contrario, usa el rango de 5
+            }
+        };
+
+        // Llama a la función de ajuste al cargar la página
+        ajustarRangoPaginacion();
+
+        // Agrega un listener para ajustar el rango de paginación cuando la ventana cambie de tamaño
+        window.addEventListener('resize', ajustarRangoPaginacion);
+
+        // Limpia el listener cuando el componente se desmonte
+        return () => {
+            window.removeEventListener('resize', ajustarRangoPaginacion);
+        };
+    }, []);
+
     const generarNumerosPagina = () => {
-        const rangoDePaginacion = 5;
         let paginas = [];
         const startPage = Math.max(1, paginaActual - Math.floor(rangoDePaginacion / 2));
         const endPage = Math.min(startPage + rangoDePaginacion - 1, totalPaginas);
 
-        if (startPage > 2) {
-        
-            if (startPage > 3);
-        }
-
         for (let i = startPage; i <= endPage; i++) {
             paginas.push(i);
-        }
-
-        if (endPage < totalPaginas - 1) {
-            if (endPage < totalPaginas - 2);
-         
         }
 
         return paginas;

@@ -729,3 +729,103 @@ body {
     background-color: #47b72f;
     color: #fff;
 }
+@media (max-width: 764px) {
+    .portada{
+        height: 30vh;
+    }
+    .contentform h1{
+        font-size: 30px;
+        margin-top: 50px;
+    }
+    .contentform h3{
+        font-size: 20px;
+    }
+    .imagenlogo{
+        width: 150px;
+        left: 20px;
+    }
+    .inserciones{
+        width: 95%;
+    }
+    .inserciones p{
+        font-size: 35px;
+        margin-bottom: 10px;
+    }
+    .inserciones h5{
+        font-size: 15px;
+        text-align: center;
+        width: 50%;
+    }
+    .semana, .total, .dia{
+        height: 90px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        text-align: center;
+        padding: 15px;
+        justify-content: flex-start;
+    }
+    .semana p, .total p, .dia p{
+        width: 80%;
+        margin: 0px;
+    }
+    .semana h5, .total h5, .dia h5{
+        width: 98%;
+        display: flex;
+        justify-content: center;
+        font-size: 14px;
+    }
+    .buscador{
+        width: 350px;
+        padding: 30px 20px;
+    }
+    .buscador h3{
+        font-size: 25px;
+    }
+    .btn_cajainiciobox{
+        right: 20px;
+    }
+    .selectores{
+        display: flex;
+        flex-direction: column;
+        margin: 20px 0px;
+    }
+    .side-content{
+        margin-top: 0px;
+        width: 85vw;
+    }
+    .boxcajaoferta{
+        margin: 6px 0px;
+    }
+
+}
+@media (max-width: 1024px) {
+    .semana p, .total p, .dia p{
+        width: 80%;
+        margin: 0px;
+    }
+    .semana h5, .total h5, .dia h5{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        font-size: 18px;
+    }
+    .semana, .total, .dia{
+        height: 110px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        text-align: center;
+        padding: 15px;
+        justify-content: flex-start;
+    }
+    .inserciones{
+        width: 90vw;
+    }
+    .side-content{
+        margin-top: 0px;
+    }
+    .boxcajaoferta{
+        margin: 6px 0px;
+    }
+}

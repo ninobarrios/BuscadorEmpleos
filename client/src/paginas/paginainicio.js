@@ -14,20 +14,41 @@ function PaginaInicio() {
     const [error, setError] = useState(null);
     const [paginaActual, setPaginaActual] = useState(1);
     const [totalOfertas, setTotalOfertas] = useState(0);
+    const [ofertasPorPagina, setOfertasPorPagina] = useState(14); // Ahora esto es dinámico
     const [filtros, setFiltros] = useState({
         palabraClave: '',
         lugar: 'lugar',
         empresa: 'empresa'
     });
-    const ofertasPorPagina = 14;
 
-    // Mover listaDepartamentos dentro de un useMemo
     const listaDepartamentos = useMemo(() => [
         'Arequipa', 'Lima', 'Cusco', 'Puno', 'Apurimac', 'Amazonas', 'Ancash', 'Ayacucho', 
         'Cajamarca', 'Callao', 'Huancavelica', 'Huanuco', 'Ica', 'Junin', 'La Libertad', 
         'Lambayeque', 'Loreto', 'Madre de Dios', 'Moquegua', 'Pasco', 'Piura', 'San Martin', 
         'Tacna', 'Tumbes', 'Ucayali','Peru'
-    ], []); // Dependencias vacías para que solo se inicialice una vez
+    ], []);
+
+    // Cambiar el número de ofertas por página según el tamaño de la pantalla
+    useEffect(() => {
+        const ajustarOfertasPorPagina = () => {
+            if (window.innerWidth <= 768) {
+                setOfertasPorPagina(10); // Si la pantalla es menor o igual a 768px, usa 10 ofertas por página
+            } else {
+                setOfertasPorPagina(14); // De lo contrario, usa 14 ofertas por página
+            }
+        };
+
+        // Ejecutar al cargar la página
+        ajustarOfertasPorPagina();
+
+        // Agregar listener para redimensionar la pantalla
+        window.addEventListener('resize', ajustarOfertasPorPagina);
+
+        // Limpiar listener cuando el componente se desmonte
+        return () => {
+            window.removeEventListener('resize', ajustarOfertasPorPagina);
+        };
+    }, []);
 
     useEffect(() => {
         const fetchOfertas = async () => {
@@ -99,7 +120,7 @@ function PaginaInicio() {
         }));
     }, []);
 
-    const totalPaginas = useMemo(() => Math.ceil(totalOfertas / ofertasPorPagina), [totalOfertas]);
+    const totalPaginas = useMemo(() => Math.ceil(totalOfertas / ofertasPorPagina), [totalOfertas, ofertasPorPagina]);
     const indexOfLastOffer = paginaActual * ofertasPorPagina;
     const indexOfFirstOffer = indexOfLastOffer - ofertasPorPagina;
     const ofertasMostradas = useMemo(() => resultadosFiltrados.slice(indexOfFirstOffer, indexOfLastOffer), [resultadosFiltrados, indexOfFirstOffer, indexOfLastOffer]);
