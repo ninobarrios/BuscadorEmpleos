@@ -6,9 +6,16 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 3306;
+const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({
+    origin: [
+        'https://buscadorempleos-1.onrender.com', // Dominio de producción
+        'http://localhost:3000' // Dominio de desarrollo local
+    ],
+    methods: ['GET', 'POST']
+}));
+
 
 // Configuración de la conexión a la base de datos
 const connection = mysql.createConnection({
