@@ -6,7 +6,7 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 app.use(cors({
     origin: [
@@ -36,7 +36,7 @@ connection.connect((err) => {
 app.get("/obtenerOfertas", (req, res) => {
     connection.query("SELECT * FROM `ofertas_laborales` ORDER BY RAND()", (err, results) => {
         if (err) {
-            res.status(500).send("Error retrieving data from database");
+            res.status(500).send("Error ");
         } else {
             res.json(results);
         }
