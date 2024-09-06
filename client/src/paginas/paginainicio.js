@@ -54,7 +54,7 @@ function PaginaInicio() {
         const fetchOfertas = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('http://localhost:3001/obtenerOfertas');
+                const response = await axios.get('https://buscadorempleos-1.onrender.com/obtenerOfertas');
                 setResultados(response.data);
                 setTotalOfertas(response.data.length);
                 setPaginaActual(1);
