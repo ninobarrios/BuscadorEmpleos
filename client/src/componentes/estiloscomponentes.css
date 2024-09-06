@@ -735,13 +735,7 @@ body {
 
 
 
-.select-empresa option {
-    background-color: #ffffff;
-    color: #000000;
-    font-size: 16px;
-    border-radius: 50px;
-    width: 20px;
-}
+
 
 /* Selectores.css */
 
@@ -755,6 +749,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     align-content: center;
+    background-color: yellow !important;
 }
 
 .uno{
@@ -763,12 +758,14 @@ body {
     padding: 0px;
 }
 
+.css-13cymwt-control{
+    border-radius: 0px !important;
+}
 
+.css-1xc3v61-indicatorContainer {
+    color: #47b72f !important;
+}
 
-
-/* Estilos generales aplicables a todos los tamaños de pantalla */
-
-/* Estilos específicos para pantallas menores a 764px */
 @media (max-width: 764px) {
     .uno{
         margin-top: 5px;
@@ -821,7 +818,7 @@ body {
     }
     .buscador {
         width: 100%;
-        max-width: 350px; /* Añadido para limitar el ancho */
+        max-width: 350px; 
         padding: 30px 20px;
     }
     .buscador h3 {
