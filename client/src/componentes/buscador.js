@@ -11,7 +11,7 @@ function Buscador({ onBuscar, onSugerencias }) {
     const fetchSugerencias = async (query) => {
         if (query.length > 2) {
             try {
-                const response = await axios.get('http://localhost:3001/sugerencias', {
+                const response = await axios.get('https://buscadorempleos.onrender.com/sugerencias', {
                     params: { palabra: query }
                 });
                 const nuevasSugerencias = response.data;

@@ -112,24 +112,6 @@ app.get('/contarObservacionesTotal', (req, res) => {
     });
 });
 
-app.get('/carreraprofesional/:nombrecarrera', (req, res) => {
-    const nombreCarrera = req.params.nombrecarrera;
-
-    const query = `
-        SELECT * 
-        FROM ofertas_laborales 
-        WHERE nom_oferta LIKE ? 
-           OR link_pagina LIKE ?;
-    `;
-
-    connection.query(query, [`%${nombreCarrera}%`, `%${nombreCarrera}%`], (err, results) => {
-        if (err) {
-            res.status(500).send("Error");
-        } else {
-            res.json(results); // Devolver todos los resultados que coincidan
-        }
-    });
-});
 
 
 
