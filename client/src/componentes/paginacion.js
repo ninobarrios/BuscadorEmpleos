@@ -9,7 +9,7 @@ function Paginacion({ paginaActual, totalPaginas, onCambiarPagina }) {
             if (window.innerWidth <= 768) {
                 setRangoDePaginacion(3); // Si la pantalla es 768px o menos, usa un rango de 3
             } else {
-                setRangoDePaginacion(5); // De lo contrario, usa el rango de 5
+                setRangoDePaginacion(9); // De lo contrario, usa el rango de 5
             }
         };
 

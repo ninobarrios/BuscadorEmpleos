@@ -7,16 +7,22 @@ function Selectores({ onSelectLugar, onSelectEmpresa, empresas, lugar, empresa, 
     const defaultEmpresaOption = { value: '', label: 'Todas las Empresas' };
 
     const lugaresOptions = [defaultLugarOption, ...departamentos.map(dep => ({ value: dep, label: dep }))];
-    const empresasOptions = [defaultEmpresaOption, ...empresas.map(emp => ({ value: emp, label: emp }))];
 
-    // Estilos personalizados
+    // Filtra empresas vacías antes de crear las opciones
+    const empresasOptions = [
+        defaultEmpresaOption, 
+        ...empresas
+            .filter(emp => emp && emp.trim() !== '') // Filtra las empresas vacías o que solo tienen espacios
+            .map(emp => ({ value: emp, label: emp }))
+    ];
+
     const customStyles = {
         control: (provided, state) => ({
             ...provided,
-            borderColor: state.isFocused ? '#47b72f' : '#d0d0d0', // Color verde cuando está enfocado, gris cuando no lo está
-            boxShadow: state.isFocused ? '0 0 0 1px #47b72f' : null, // Sombra verde cuando está enfocado
+            borderColor: state.isFocused ? '#47b72f' : '#d0d0d0', 
+            boxShadow: state.isFocused ? '0 0 0 1px #47b72f' : null, 
             '&:hover': {
-                borderColor: '#47b72f', // Borde verde cuando está en hover
+                borderColor: '#47b72f', 
             },
         }),
         menu: (provided) => ({
@@ -25,10 +31,10 @@ function Selectores({ onSelectLugar, onSelectEmpresa, empresas, lugar, empresa, 
         }),
         option: (provided, state) => ({
             ...provided,
-            backgroundColor: state.isSelected ? '#47b72f' : state.isFocused ? '#e0f7e9' : provided.backgroundColor, // Fondo verde cuando está seleccionado, verde claro cuando está enfocado
+            backgroundColor: state.isSelected ? '#47b72f' : state.isFocused ? '#e0f7e9' : provided.backgroundColor, 
             color: state.isSelected ? 'white' : provided.color,
             '&:hover': {
-                backgroundColor: '#e0f7e9', // Fondo verde claro cuando se pasa el mouse por encima
+                backgroundColor: '#e0f7e9', 
             },
         }),
     };

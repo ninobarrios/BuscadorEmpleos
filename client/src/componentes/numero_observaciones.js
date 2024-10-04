@@ -13,9 +13,9 @@ function NumeroObservaciones() {
             setLoading(true);
             try {
                 const [responseDiaAnterior, responseSemana, responseTotal] = await Promise.all([
-                    axios.get('https://buscadorempleos.onrender.com/contarObservacionesDiaAnterior'),
-                    axios.get('https://buscadorempleos.onrender.com/contarObservacionesSemana'),
-                    axios.get('https://buscadorempleos.onrender.com/contarObservacionesTotal')
+                    axios.get('http://localhost:3001/contarObservacionesDiaAnterior'),
+                    axios.get('http://localhost:3001/contarObservacionesSemana'),
+                    axios.get('http://localhost:3001/contarObservacionesTotal')
                 ]);
 
                 setConteo(responseDiaAnterior.data.count);
@@ -44,17 +44,18 @@ function NumeroObservaciones() {
         <div className='total_observaciones'>
             <div className='inserciones'>
                 <div className='dia'>
-                    <p>{conteo !== null ? conteo : 'No disponible'}</p>
-                    <h5>Ofertas Laborales Hoy</h5>
+                    <p>{conteo !== null ? conteo.toLocaleString('es-PE') : 'No disponible'}</p>
+                    <h5>Ofertas laborales hoy</h5>
                 </div>
                 <div className='semana'>
-                    <p>{conteo2 !== null ? conteo2 : 'No disponible'}</p>
-                    <h5>Ofertas Laborales Esta Semana</h5>
+                    <p>{conteo2 !== null ? conteo2.toLocaleString('es-PE') : 'No disponible'}</p>
+                    <h5>Ofertas laborales últimos 7 días</h5>
                 </div>
                 <div className='total'>
-                    <p>{conteo3 !== null ? conteo3 : 'No disponible'}</p>
-                    <h5>Total Ofertas Laborales</h5>
+                    <p>{conteo3 !== null ? conteo3.toLocaleString('es-PE') : 'No disponible'}</p>
+                    <h5>Total ofertas menores a 20 dias</h5>
                 </div>
+
             </div>
         </div>
     );

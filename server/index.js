@@ -1,4 +1,3 @@
-// Requiere dotenv para cargar las variables del archivo .env
 require('dotenv').config();
 
 const express = require('express');
@@ -6,15 +5,10 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 3001;
 
-app.use(cors({
-    origin: [
-        'https://buscadorempleos-1.onrender.com', // Dominio de producción
-        'http://localhost:3000' // Dominio de desarrollo local
-    ],
-    methods: ['GET', 'POST']
-}));
+app.use(cors());
+app.use(express.json());
 
 
 // Configuración de la conexión a la base de datos
@@ -24,6 +18,8 @@ const connection = mysql.createConnection({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE
 });
+
+// Conectar a la base de datos y manejar errores
 connection.connect((err) => {
     if (err) {
         console.error('Error connecting to the database:', err.stack);
@@ -33,36 +29,37 @@ connection.connect((err) => {
 });
 
 // Rutas
-app.get("/obtenerOfertas", (req, res) => {
-    connection.query("SELECT * FROM `ofertas_laborales` ORDER BY RAND()", (err, results) => {
+
+// Ruta para obtener ofertas de trabajo
+app.get("/Ofertas-Laborales", (req, res) => {
+    const query = "SELECT * FROM `ofertas_laborales` ORDER BY `fecha` DESC;";
+    connection.query(query, (err, results) => {
         if (err) {
-            res.status(500).send("Error ");
-        } else {
-            res.json(results);
+            console.error('Error executing query:', err);
+            return res.status(500).send("Error al obtener ofertas");
         }
+        res.json(results);
     });
 });
 
-
+// Ruta para sugerencias basadas en la palabra clave
 app.get('/sugerencias', (req, res) => {
     const palabra = req.query.palabra || '';
 
     if (palabra.length === 0) {
-        return res.json([]);
+        return res.json([]);  // Si no hay palabra, devolvemos un array vacío
     }
 
     const sql = `
-        SELECT DISTINCT nom_oferta, link_pagina
+        SELECT DISTINCT nom_oferta
         FROM ofertas_laborales 
         WHERE nom_oferta COLLATE utf8mb4_unicode_ci LIKE ? 
-           OR link_pagina COLLATE utf8mb4_unicode_ci LIKE ? 
         LIMIT 10;
     `;
 
-    // Ejecutar la consulta con dos parámetros
     connection.query(sql, [`%${palabra}%`, `%${palabra}%`], (error, results) => {
         if (error) {
-            console.error('Error ejecutando la consulta:', error);
+            console.error('Error ejecutando la consulta de sugerencias:', error);
             return res.status(500).json({ error: 'Error al obtener sugerencias' });
         }
         const sugerencias = results.map(row => row.nom_oferta);
@@ -70,54 +67,52 @@ app.get('/sugerencias', (req, res) => {
     });
 });
 
-
+// Ruta para contar observaciones del día anterior
 app.get('/contarObservacionesDiaAnterior', (req, res) => {
-    const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE fecha = (SELECT MAX(fecha) FROM ofertas_laborales);`;
+    const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE DATE(fecha_insercion) = ( SELECT DATE(MAX(fecha)) FROM ofertas_laborales );`;
     connection.query(query, (err, results) => {
         if (err) {
-            res.status(500).send("Error");
-        } else {
-            res.json(results[0]);
+            console.error('Error ejecutando la consulta:', err);
+            return res.status(500).send("Error al contar observaciones del día anterior");
         }
+        res.json(results[0]);
     });
 });
 
+// Ruta para contar observaciones de la última semana
 app.get('/contarObservacionesSemana', (req, res) => {
-    const query = `        SELECT COUNT(*) AS count         FROM ofertas_laborales AS ol         JOIN ( 
+    const query = `
+        SELECT COUNT(*) AS count 
+        FROM ofertas_laborales AS ol 
+        JOIN (
             SELECT fecha 
             FROM ofertas_laborales 
             GROUP BY fecha 
             ORDER BY fecha DESC 
-            LIMIT 7 
-        ) AS f 
-        ON ol.fecha = f.fecha;
+            LIMIT 7
+        ) AS ultimas_fechas 
+        ON ol.fecha = ultimas_fechas.fecha;
     `;
     connection.query(query, (err, results) => {
         if (err) {
-            res.status(500).send("Error");
-        } else {
-            res.json(results[0]);
+            console.error('Error ejecutando la consulta:', err);
+            return res.status(500).send("Error al contar observaciones de la semana");
         }
+        res.json(results[0]);
     });
 });
 
+// Ruta para contar el total de observaciones
 app.get('/contarObservacionesTotal', (req, res) => {
     const query = `SELECT COUNT(*) AS count FROM ofertas_laborales;`;
     connection.query(query, (err, results) => {
         if (err) {
-            res.status(500).send("Error");
-        } else {
-            res.json(results[0]);
+            console.error('Error ejecutando la consulta:', err);
+            return res.status(500).send("Error al contar observaciones totales");
         }
+        res.json(results[0]);
     });
 });
-
-
-
-
-
-
-
 
 // Iniciar el servidor
 app.listen(PORT, () => {
