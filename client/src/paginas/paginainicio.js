@@ -64,7 +64,6 @@ function PaginaInicio() {
         { value: 'Odontología', label: 'Odontología' },
         { value: 'Psicología', label: 'Psicología' },
         { value: 'Publicidad_y_multimedia', label: 'Publicidad y Multimedia' },
-
         { value: 'Recursos_Humanos', label: 'Recursos Humanos' },
         { value: 'Ventas', label: 'Ventas' },
         { value: 'Almacén', label: 'Almacén' },

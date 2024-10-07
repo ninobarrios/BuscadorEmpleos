@@ -32,7 +32,7 @@ connection.connect((err) => {
 
 // Ruta para obtener ofertas de trabajo
 app.get("/Ofertas-Laborales", (req, res) => {
-    const query = "SELECT * FROM `ofertas_laborales` ORDER BY `fecha` DESC;";
+    const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` ORDER BY `fecha` DESC, `nom_empresa` ASC;";
     connection.query(query, (err, results) => {
         if (err) {
             console.error('Error executing query:', err);

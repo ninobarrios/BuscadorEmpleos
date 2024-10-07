@@ -59,9 +59,7 @@ const CajaOferta = ({ oferta_laboral }) => {
                     <img src={platformImage} alt={`Logo ${oferta_laboral.plataforma}`} />
                 )}
             </div>
-            <div className='descripcion' style={{ display: 'none' }}>
-                {oferta_laboral.descripcion}
-            </div>
+
             <button className='btn-official' onClick={handleButtonClick}>
                 {oferta_laboral.plataforma === 'Computrabajo' ? 'Copiar enlace' : 'Postular aquí'}
             </button>
@@ -94,7 +92,6 @@ CajaOferta.propTypes = {
         lugar: PropTypes.string.isRequired,
         link_pagina: PropTypes.string.isRequired,
         plataforma: PropTypes.string.isRequired,
-        descripcion: PropTypes.string.isRequired,
     }).isRequired,
 };
 
