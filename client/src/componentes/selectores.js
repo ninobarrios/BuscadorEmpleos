@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import './estiloscomponentes.css'
 
 function Selectores({ onSelectLugar, onSelectEmpresa, empresas, lugar, empresa, departamentos }) {
     // Opciones para react-select

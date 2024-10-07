@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './estiloscomponentes.css'
 
 function Paginacion({ paginaActual, totalPaginas, onCambiarPagina }) {
     const [rangoDePaginacion, setRangoDePaginacion] = useState(5);

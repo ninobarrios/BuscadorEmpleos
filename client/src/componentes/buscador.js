@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import './estiloscomponentes.css'
 
 function Buscador({ onBuscar, onSugerencias }) {
     const [palabraClave, setPalabraClave] = useState('');

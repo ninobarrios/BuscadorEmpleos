@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './estiloscomponentes.css'
 
 function NumeroObservaciones() {
     const [conteo, setConteo] = useState(null);

@@ -7,6 +7,7 @@ import MTEP from '../imagenes/computrabajo.png';
 import Ubi from '../imagenes/ubi.png';
 import Convocatorias from '../imagenes/convocatorias_2024.png';
 import Buscojobs from '../imagenes/buscojobs.JPG';
+import './estiloscomponentes.css'
 
 const plataformaImages = {
     Indeed: indeed,
