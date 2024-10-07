@@ -57,7 +57,6 @@ body {
 
 .input_cajainiciobox:focus {
     border-color: #14a800;
-    /* Asegúrate de que el color del borde sea consistente al enfocar */
 }
 
 
@@ -159,31 +158,7 @@ body {
     padding-bottom: 3px;
 }
 
-/* Modal.css */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
 
-.modal {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.modal button {
-    margin-top: 10px;
-}
 
 
 
@@ -389,7 +364,6 @@ body {
 
 
 
-/* PaginaInicio.css */
 
 
 
@@ -471,7 +445,6 @@ body {
 }
 
 
-/* Estilos generales para el contenedor de la paginación */
 .paginacion {
     display: flex;
     justify-content: center;
@@ -483,7 +456,6 @@ body {
 
 }
 
-/* Estilos para los botones de paginación */
 .paginacion button {
     background-color: #003366;
     color: #fff;
@@ -495,19 +467,16 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Estilos para los botones de paginación deshabilitados */
 .paginacion button:disabled {
     background-color: #c0c0c0;
     cursor: not-allowed;
 
 }
 
-/* Estilos para los números de página */
 .paginacion .numero-pagina {
     display: flex;
 }
 
-/* Estilos para los botones de números de página */
 .paginacion .numero-pagina button {
     background-color: #f1ecec;
     color: #003366;
@@ -517,31 +486,24 @@ body {
 
 }
 
-/* Estilos para el botón de número de página activo */
 .paginacion .numero-pagina button.active {
     box-shadow: inset 0 0 0 3px #47b72f;
     color: #000000;
     border-radius: 0px;
 }
 
-/* Estilos para la separación de números de página */
 .paginacion .numero-pagina button:not(:last-child)::after {
 
-    /* Estilos generales para el contenedor de la paginación */
     .paginacion {
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 10px;
         width: 400px;
-        /* Ancho fijo para el contenedor de paginación */
         margin: 0 auto;
-        /* Centra el contenedor horizontalmente */
         box-sizing: border-box;
-        /* Incluye padding y border en el ancho total */
     }
 
-    /* Estilos para los botones de paginación */
     .paginacion button {
         background-color: #038c3e;
         color: #fff;
@@ -552,18 +514,15 @@ body {
         font-size: 16px;
     }
 
-    /* Estilos para los botones de paginación deshabilitados */
     .paginacion button:disabled {
         background-color: #c0c0c0;
         cursor: not-allowed;
     }
 
-    /* Estilos para los números de página */
     .paginacion .numero-pagina {
         display: flex;
     }
 
-    /* Estilos para los botones de números de página */
     .paginacion .numero-pagina button {
         background-color: #fff;
         color: #038c3e;
@@ -572,13 +531,11 @@ body {
         width: 20px;
     }
 
-    /* Estilos para el botón de número de página activo */
     .paginacion .numero-pagina button.active {
         background-color: #038c3e;
         color: #fff;
     }
 
-    /* Estilos para la separación de números de página */
     .paginacion .numero-pagina button:not(:last-child)::after {
         content: '';
         color: #038c3e;
@@ -599,7 +556,6 @@ body {
 
 .btn-official {
     background-color: #47b72f;
-    /* Cambia el color según tu diseño */
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -629,9 +585,7 @@ body {
 
 .spinner {
     border: 16px solid #f3f3f3;
-    /* Light grey */
     border-top: 16px solid #3498db;
-    /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -671,7 +625,7 @@ body {
 
 .total_observaciones {
     width: 100vw;
-    background-color: #009dff;
+    background-color: #09324b;
     display: flex;
     align-items: center;
     justify-content: center;
