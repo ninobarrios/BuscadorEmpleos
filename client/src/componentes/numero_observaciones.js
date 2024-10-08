@@ -14,9 +14,9 @@ function NumeroObservaciones() {
             setLoading(true);
             try {
                 const [responseDiaAnterior, responseSemana, responseTotal] = await Promise.all([
-                    axios.get('https://buscadorempleos.onrender.com/contarObservacionesDiaAnterior'),
-                    axios.get('https://buscadorempleos.onrender.com/contarObservacionesSemana'),
-                    axios.get('https://buscadorempleos.onrender.com/contarObservacionesTotal')
+                    axios.get('https://buscadorempleos-1.onrender.com/contarObservacionesDiaAnterior'),
+                    axios.get('https://buscadorempleos-1.onrender.com/contarObservacionesSemana'),
+                    axios.get('https://buscadorempleos-1.onrender.com/contarObservacionesTotal')
                 ]);
 
                 setConteo(responseDiaAnterior.data.count);

@@ -1,3 +1,4 @@
+// Requiere dotenv para cargar las variables del archivo .env
 require('dotenv').config();
 
 const express = require('express');
@@ -7,11 +8,11 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(express.json());
+// Configuración de CORS
 app.use(cors({
     origin: [
-        'https://buscadorempleos-1.onrender.com', 
-        'http://localhost:3000' 
+        'https://buscadorempleos-1.onrender.com', // Dominio de producción
+        'http://localhost:3000' // Dominio de desarrollo local
     ],
     methods: ['GET', 'POST']
 }));
@@ -22,16 +23,28 @@ const pool = mysql.createPool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
+    ssl: {
+        rejectUnauthorized: true 
+    },
     waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    connectionLimit: 10, // Número máximo de conexiones en el pool
+    queueLimit: 0 // Sin límite de cola
 });
-// Rutas
+
+// Middleware para manejar errores de conexión
+pool.getConnection((err, connection) => {
+    if (err) {
+        console.error('Error connecting to the database:', err.stack);
+        return;
+    }
+    console.log('Connected to the database.');
+    connection.release(); // Libera la conexión para que se pueda reutilizar
+});
 
 // Ruta para obtener ofertas de trabajo
 app.get("/Ofertas-Laborales", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` ORDER BY `fecha` DESC, `nom_empresa` ASC;";
-    connection.query(query, (err, results) => {
+    pool.query(query, (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
             return res.status(500).send("Error al obtener ofertas");
@@ -55,7 +68,7 @@ app.get('/sugerencias', (req, res) => {
         LIMIT 10;
     `;
 
-    connection.query(sql, [`%${palabra}%`, `%${palabra}%`], (error, results) => {
+    pool.query(sql, [`%${palabra}%`], (error, results) => {
         if (error) {
             console.error('Error ejecutando la consulta de sugerencias:', error);
             return res.status(500).json({ error: 'Error al obtener sugerencias' });
@@ -68,7 +81,7 @@ app.get('/sugerencias', (req, res) => {
 // Ruta para contar observaciones del día anterior
 app.get('/contarObservacionesDiaAnterior', (req, res) => {
     const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE DATE(fecha_insercion) = ( SELECT DATE(MAX(fecha)) FROM ofertas_laborales );`;
-    connection.query(query, (err, results) => {
+    pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
             return res.status(500).send("Error al contar observaciones del día anterior");
@@ -91,7 +104,7 @@ app.get('/contarObservacionesSemana', (req, res) => {
         ) AS ultimas_fechas 
         ON ol.fecha = ultimas_fechas.fecha;
     `;
-    connection.query(query, (err, results) => {
+    pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
             return res.status(500).send("Error al contar observaciones de la semana");
@@ -103,7 +116,7 @@ app.get('/contarObservacionesSemana', (req, res) => {
 // Ruta para contar el total de observaciones
 app.get('/contarObservacionesTotal', (req, res) => {
     const query = `SELECT COUNT(*) AS count FROM ofertas_laborales;`;
-    connection.query(query, (err, results) => {
+    pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
             return res.status(500).send("Error al contar observaciones totales");
