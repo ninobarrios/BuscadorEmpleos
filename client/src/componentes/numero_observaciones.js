@@ -17,6 +17,7 @@ function NumeroObservaciones() {
                     axios.get('https://buscadorempleos.onrender.com/contarObservacionesDiaAnterior'),
                     axios.get('https://buscadorempleos.onrender.com/contarObservacionesSemana'),
                     axios.get('https://buscadorempleos.onrender.com/contarObservacionesTotal')
+                    
                 ]);
     
                 setConteo(responseDiaAnterior.data.count);

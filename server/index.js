@@ -8,16 +8,7 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors({
-    origin: [
-        'https://buscadorempleos-1.onrender.com', // Dominio de tu frontend
-        'https://buscadorempleos.onrender.com', // Dominio del servicio web
-        'http://localhost:3000',
-        'https://www.practicasuniversitariasperu.com/'
-    
-    ],
-    methods: ['GET', 'POST']
-}));
+app.use(cors()); // Permitir todos los orígenes
 
 
 // Configuración del pool de conexiones a la base de datos
