@@ -7,9 +7,14 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
 app.use(express.json());
-
+app.use(cors({
+    origin: [
+        'https://buscadorempleos-1.onrender.com', 
+        'http://localhost:3000' 
+    ],
+    methods: ['GET', 'POST']
+}));
 
 // Configuración de la conexión a la base de datos
 const connection = mysql.createConnection({
