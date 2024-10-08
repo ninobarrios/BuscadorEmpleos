@@ -16,23 +16,16 @@ app.use(cors({
     methods: ['GET', 'POST']
 }));
 
-// Configuración de la conexión a la base de datos
-const connection = mysql.createConnection({
+// Configuración del pool de conexiones a la base de datos
+const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
+    database: process.env.DB_DATABASE,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
-
-// Conectar a la base de datos y manejar errores
-connection.connect((err) => {
-    if (err) {
-        console.error('Error connecting to the database:', err.stack);
-        return;
-    }
-    console.log('Connected to the database.');
-});
-
 // Rutas
 
 // Ruta para obtener ofertas de trabajo
