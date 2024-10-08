@@ -8,14 +8,15 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Configuración de CORS
 app.use(cors({
     origin: [
-        'https://buscadorempleos-1.onrender.com', // Dominio de producción
+        'https://buscadorempleos-1.onrender.com', // Dominio de tu frontend
+        'https://buscadorempleos.onrender.com', // Dominio del servicio web
         'http://localhost:3000' // Dominio de desarrollo local
     ],
     methods: ['GET', 'POST']
 }));
+
 
 // Configuración del pool de conexiones a la base de datos
 const pool = mysql.createPool({

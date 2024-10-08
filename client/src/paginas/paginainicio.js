@@ -91,7 +91,7 @@ function PaginaInicio() {
         const fetchOfertas = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('http://localhost:3001/Ofertas-Laborales');
+                const response = await axios.get('https://buscadorempleos.onrender.com/Ofertas-Laborales');
                 setResultados(response.data);
                 setResultadosFiltrados(response.data);
                 setTotalOfertas(response.data.length);
@@ -103,9 +103,10 @@ function PaginaInicio() {
                 setLoading(false);
             }
         };
-
+    
         fetchOfertas();
     }, []);
+    
 
     const empresasFiltradas = useMemo(() =>
         [...new Set(resultadosFiltrados.map(oferta => oferta.nom_empresa))],
