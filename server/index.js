@@ -79,7 +79,7 @@ app.get('/sugerencias', (req, res) => {
 });
 
 app.get('/contarObservacionesDiaAnterior', (req, res) => {
-    const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE DATE(fecha_insercion) = ( SELECT DATE(MAX(fecha)) FROM ofertas_laborales );`;
+    const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE DATE(fecha) = ( SELECT DATE(MAX(fecha)) FROM ofertas_laborales );`;
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
