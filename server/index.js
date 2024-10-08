@@ -28,8 +28,8 @@ const pool = mysql.createPool({
         rejectUnauthorized: true 
     },
     waitForConnections: true,
-    connectionLimit: 10, // Número máximo de conexiones en el pool
-    queueLimit: 0 // Sin límite de cola
+    connectionLimit: 10, 
+    queueLimit: 0 
 });
 
 // Middleware para manejar errores de conexión
@@ -39,12 +39,12 @@ pool.getConnection((err, connection) => {
         return;
     }
     console.log('Connected to the database.');
-    connection.release(); // Libera la conexión para que se pueda reutilizar
+    connection.release(); 
 });
 
 // Ruta para obtener ofertas de trabajo
 app.get("/Ofertas-Laborales", (req, res) => {
-    const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` ORDER BY `fecha` DESC, `nom_empresa` ASC;";
+    const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` ORDER BY `fecha` DESC, RAND();";
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
@@ -54,12 +54,11 @@ app.get("/Ofertas-Laborales", (req, res) => {
     });
 });
 
-// Ruta para sugerencias basadas en la palabra clave
 app.get('/sugerencias', (req, res) => {
     const palabra = req.query.palabra || '';
 
     if (palabra.length === 0) {
-        return res.json([]);  // Si no hay palabra, devolvemos un array vacío
+        return res.json([]);  
     }
 
     const sql = `
@@ -79,7 +78,6 @@ app.get('/sugerencias', (req, res) => {
     });
 });
 
-// Ruta para contar observaciones del día anterior
 app.get('/contarObservacionesDiaAnterior', (req, res) => {
     const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE DATE(fecha_insercion) = ( SELECT DATE(MAX(fecha)) FROM ofertas_laborales );`;
     pool.query(query, (err, results) => {
@@ -91,7 +89,6 @@ app.get('/contarObservacionesDiaAnterior', (req, res) => {
     });
 });
 
-// Ruta para contar observaciones de la última semana
 app.get('/contarObservacionesSemana', (req, res) => {
     const query = `
         SELECT COUNT(*) AS count 
@@ -114,7 +111,6 @@ app.get('/contarObservacionesSemana', (req, res) => {
     });
 });
 
-// Ruta para contar el total de observaciones
 app.get('/contarObservacionesTotal', (req, res) => {
     const query = `SELECT COUNT(*) AS count FROM ofertas_laborales;`;
     pool.query(query, (err, results) => {
@@ -126,7 +122,6 @@ app.get('/contarObservacionesTotal', (req, res) => {
     });
 });
 
-// Iniciar el servidor
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
