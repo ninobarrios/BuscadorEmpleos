@@ -41,25 +41,30 @@ function Selectores({ onSelectLugar, onSelectEmpresa, empresas, lugar, empresa, 
     };
 
     return (
-        <div className='selectores'>
-            <Select
-                className='select-lugar'
-                styles={customStyles}
-                options={lugaresOptions}
-                value={lugaresOptions.find(option => option.value === lugar) || defaultLugarOption}
-                onChange={(selectedOption) => onSelectLugar(selectedOption.value)}
-                placeholder="Selecciona un lugar"
-            />
+<div className='selectores'>
+    <Select
+        id="select-lugar"
+        className='select-lugar'
+        styles={customStyles}
+        options={lugaresOptions}
+        value={lugaresOptions.find(option => option.value === lugar) || defaultLugarOption}
+        onChange={(selectedOption) => onSelectLugar(selectedOption.value)}
+        placeholder="Selecciona un lugar"
+        aria-label="Selecciona un lugar" 
+    />
 
-            <Select
-                className='select-lugar'
-                styles={customStyles}
-                options={empresasOptions}
-                value={empresasOptions.find(option => option.value === empresa) || defaultEmpresaOption}
-                onChange={(selectedOption) => onSelectEmpresa(selectedOption.value)}
-                placeholder="Selecciona una empresa"
-            />
-        </div>
+    <Select
+        id="select-empresa"
+        className='select-lugar'
+        styles={customStyles}
+        options={empresasOptions}
+        value={empresasOptions.find(option => option.value === empresa) || defaultEmpresaOption}
+        onChange={(selectedOption) => onSelectEmpresa(selectedOption.value)}
+        placeholder="Selecciona una empresa"
+        aria-label="Selecciona una empresa" 
+    />
+</div>
+
     );
 }
 

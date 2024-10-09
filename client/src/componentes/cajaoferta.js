@@ -57,7 +57,7 @@ const CajaOferta = ({ oferta_laboral }) => {
             </div>
             <div className='foto_plataforma'>
                 {platformImage && (
-                    <img src={platformImage} alt={`Logo ${oferta_laboral.plataforma}`} />
+                    <img src={platformImage} alt={`Logo ${oferta_laboral.plataforma}`} loading='lazy' />
                 )}
             </div>
 
