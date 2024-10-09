@@ -235,7 +235,7 @@ function PaginaInicio() {
             <img className='imagenlogo' src={Logo} alt="Logo Buscojobs" />
             <div className='portada'>
                 <div className='contentform'>
-                    <h1>Abre la Puerta a <span style={{ color: '#47b72f' }}>Nuevas Oportunidades</span></h1>
+                    <h1>La Puerta a <span style={{ color: '#47b72f' }}>Nuevas Oportunidades</span></h1>
                     <h3>Explora tu primer empleo, para Estudiantes y Egresados</h3>
                 </div>
             </div>
