@@ -250,6 +250,7 @@ function PaginaInicio() {
                     onChange={e => handleFiltroChange('carrera', e.value)}
                     value={opcionesCarrera.find(option => option.value === filtros.carrera)}
                     placeholder="Selecciona una carrera"
+                    aria-label="Selecciona una carrera" 
                 />
             </div>
 
@@ -261,6 +262,7 @@ function PaginaInicio() {
                 lugar={filtros.lugar}
                 empresa={filtros.empresa}
                 departamentos={departamentosFiltrados}
+
             />
 
             <div className='totalofertas'>{totalOfertas.toLocaleString('es-PE')} Empleos</div>
