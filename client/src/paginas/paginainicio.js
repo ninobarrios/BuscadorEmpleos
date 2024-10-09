@@ -5,7 +5,7 @@ import Buscador from '../componentes/buscador';
 import Paginacion from '../componentes/paginacion';
 import Inserciones from '../componentes/numero_observaciones';
 import Selectores from '../componentes/selectores';
-import Logo from '../imagenes/logo.png';
+import Logo from '../imagenes/logo.avif';
 import Footer from '../componentes/footer';
 import Select from 'react-select';
 import '../componentes/estiloscomponentes.css'

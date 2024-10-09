@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import bumeran from '../imagenes/bumeran.png';
-import indeed from '../imagenes/indeed.png';
-import linkedin from '../imagenes/Linkedin.png';
-import MTEP from '../imagenes/computrabajo.png'; 
-import Ubi from '../imagenes/ubi.png';
-import Convocatorias from '../imagenes/convocatorias_2024.png';
-import Buscojobs from '../imagenes/buscojobs.JPG';
+import bumeran from '../imagenes/bumeran.avif';
+import indeed from '../imagenes/indeed.avif';
+import linkedin from '../imagenes/Linkedin.avif';
+import MTEP from '../imagenes/computrabajo.avif'; 
+import Ubi from '../imagenes/ubi.avif';
+import Convocatorias from '../imagenes/convocatorias_2024.avif';
+import Buscojobs from '../imagenes/buscojobs.avif';
 import './estiloscomponentes.css'
 
 const plataformaImages = {
