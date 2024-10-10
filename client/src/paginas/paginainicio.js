@@ -9,6 +9,8 @@ import Logo from '../imagenes/logo.avif';
 import Footer from '../componentes/footer';
 import Select from 'react-select';
 import '../componentes/estiloscomponentes.css'
+
+
 function PaginaInicio() {
     const [resultados, setResultados] = useState([]);
     const [resultadosFiltrados, setResultadosFiltrados] = useState([]);
