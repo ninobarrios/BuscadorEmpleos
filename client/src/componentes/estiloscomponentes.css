@@ -782,7 +782,7 @@ body {
         position: relative;
         display: flex;
         text-align: center;
-        padding: 15px;
+        padding: 10px 15px;
         justify-content: flex-start;
     }
     .semana p, .total p, .dia p {
@@ -790,12 +790,13 @@ body {
         margin: 0;
         display: flex;
         justify-content: center;
+        font-size: 30px;
     }
     .semana h5, .total h5, .dia h5 {
         width: 98%;
         display: flex;
         justify-content: center;
-        font-size: 14px;
+        font-size: 13px;
     }
     .buscador {
         width: 100%;
