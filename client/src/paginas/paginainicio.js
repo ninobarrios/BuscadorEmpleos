@@ -29,7 +29,7 @@ function PaginaInicio() {
         'Tacna', 'Tumbes', 'Ucayali', 'Peru'
     ], []);
     const opcionesCarrera = [
-        { value: '', label: 'Selecciona una carrera' },
+        { value: '', label: 'Seleccionar Carrera' },
         { value: 'Administración', label: 'Administración' },
         { value: 'Arquitectura', label: 'Arquitectura' },
         { value: 'Biología', label: 'Biología' },
@@ -239,8 +239,8 @@ function PaginaInicio() {
             <div className='portada'>
                 <img src={portadaImg} alt='Portada'  loading="lazy"/>
                 <div className='contentform'>
-                    <h1>La Puerta a <span style={{ color: '#47b72f' }}>Nuevas Oportunidades</span></h1>
-                    <h3>Explora tu primer empleo, para Estudiantes y Egresados</h3>
+                    <h1>Oportunidades Laborales</h1>
+                    <h3>Explora tu primer empleo, para Estudiantes y Egresados <br></br>en multiples carreras profesionales y tecnicas.</h3>
                 </div>
             </div>
 

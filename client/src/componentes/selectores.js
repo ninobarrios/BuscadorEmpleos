@@ -4,8 +4,8 @@ import './estiloscomponentes.css'
 
 function Selectores({ onSelectLugar, onSelectEmpresa, empresas, lugar, empresa, departamentos }) {
     // Opciones para react-select
-    const defaultLugarOption = { value: '', label: 'Todos los Departamentos' };
-    const defaultEmpresaOption = { value: '', label: 'Todas las Empresas' };
+    const defaultLugarOption = { value: '', label: 'Seleccionar Departamento' };
+    const defaultEmpresaOption = { value: '', label: 'Seleccionar Empresas' };
 
     const lugaresOptions = [defaultLugarOption, ...departamentos.map(dep => ({ value: dep, label: dep }))];
 
