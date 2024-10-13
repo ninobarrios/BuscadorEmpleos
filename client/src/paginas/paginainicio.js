@@ -9,6 +9,7 @@ import Logo from '../imagenes/logo.avif';
 import Footer from '../componentes/footer';
 import Select from 'react-select';
 import '../componentes/estiloscomponentes.css'
+import portadaImg from '../imagenes/portada.avif';
 
 
 function PaginaInicio() {
@@ -105,10 +106,10 @@ function PaginaInicio() {
                 setLoading(false);
             }
         };
-    
+
         fetchOfertas();
     }, []);
-    
+
 
     const empresasFiltradas = useMemo(() =>
         [...new Set(resultadosFiltrados.map(oferta => oferta.nom_empresa))],
@@ -143,15 +144,15 @@ function PaginaInicio() {
 
             // Filtra por carrera
             const diccionarios = {
-                Administración: ['administracion', 'Administrador','logistica','nominas','creditos y cobranzas','comercial','costos','planeamiento','trade'],
+                Administración: ['administracion', 'Administrador', 'logistica', 'nominas', 'creditos y cobranzas', 'comercial', 'costos', 'planeamiento', 'trade'],
                 Arquitectura: ['Arquitectura'],
                 Biología: ['Biologia', 'Microbiologia'],
-                Ciencia_de_la_Computación: ['Ciencia de la Computacion', 'programacion', 'base de datos', 'Ciberseguridad','cloud','programador','estructuras de datos'],
+                Ciencia_de_la_Computación: ['Ciencia de la Computacion', 'programacion', 'base de datos', 'Ciberseguridad', 'cloud', 'programador', 'estructuras de datos'],
                 Ciencia_Política: ['Politica'],
                 Ciencias_de_la_Comunicación: ['comunicacion', 'Periodismo', 'Audiovisuales', 'relaciones publicas', 'comunicador social', 'redes sociales', 'comunicador', 'periodista'],
-                Contabilidad: ['Contabilidad', 'impuestos', 'contable','costos','creditos y cobranzas'],
+                Contabilidad: ['Contabilidad', 'impuestos', 'contable', 'costos', 'creditos y cobranzas'],
                 Derecho: ['Derecho', 'abogado', 'litigio', 'legal', 'abogada'],
-                Economía: ['Economia', 'finanzas', 'mercado', 'inversion','nominas','creditos y cobranzas','comercial'],
+                Economía: ['Economia', 'finanzas', 'mercado', 'inversion', 'nominas', 'creditos y cobranzas', 'comercial'],
                 Educación: ['Educacion', 'docente', 'profesor', 'profesora'],
                 Enfermería: ['Enfermeria', 'enfermera'],
                 Estadística: ['Estadistica'],
@@ -159,34 +160,34 @@ function PaginaInicio() {
                 Gastronomía: ['Gastronomia', 'gastronomica', 'gastronomico', 'cocinero', 'cocinera', 'cocina'],
                 Hotelería_y_Turismo: ['Hoteleria', 'turismo', 'turistico'],
                 Ingeniería_Agrícola: ['Ingenieria Agricola', 'Ingeniero Agronomo', 'agronomia', 'agronomo', 'agronomia', 'agroindustrial', 'Ingenieria Agronoma'],
-                Ingeniería_Ambiental: ['Ingenieria Ambiental', 'ambiental','SHEQ'],
+                Ingeniería_Ambiental: ['Ingenieria Ambiental', 'ambiental', 'SHEQ'],
                 Ingeniería_de_Industrias_alimentarias: ['alimentaria'],
                 Ingeniería_Civil: ['Ingenieria Civil', 'civil', 'urbano', 'urbana'],
-                Ingeniería_de_Minas: ['Ingeniería de Minas', 'mina', 'mineria', 'minero','SHEQ'],
-                Ingeniería_de_Sistemas: ['Ingeniería de Sistemas', 'Ingeniero de sistemas', 'Ing Sistemas', 'Ing. sistemas', 'react', 'programación', 'angular', 'sql', 'data', 'devops', ' ti ', 'php', 'soporte tecnico', 'Seguridad de la Informacion', 'Analisis De Datos','cloud','Data Analytics','Mysql'],
-                Ingeniería_Eléctrica: ['electrica', 'electricista', 'Transformadores', 'electronica', 'electronico','ING. ELECTRICA'],
-                Ingeniería_Industrial: ['Ingenieria Industrial', 'Industrial', 'Ing industrial', 'Ing. Industrial','logistica','nominas','creditos y cobranzas','comercial','costos','planeamiento','trade'],
+                Ingeniería_de_Minas: ['Ingeniería de Minas', 'mina', 'mineria', 'minero', 'SHEQ'],
+                Ingeniería_de_Sistemas: ['Ingeniería de Sistemas', 'Ingeniero de sistemas', 'Ing Sistemas', 'Ing. sistemas', 'react', 'programación', 'angular', 'sql', 'data', 'devops', ' ti ', 'php', 'soporte tecnico', 'Seguridad de la Informacion', 'Analisis De Datos', 'cloud', 'Data Analytics', 'Mysql'],
+                Ingeniería_Eléctrica: ['electrica', 'electricista', 'Transformadores', 'electronica', 'electronico', 'ING. ELECTRICA'],
+                Ingeniería_Industrial: ['Ingenieria Industrial', 'Industrial', 'Ing industrial', 'Ing. Industrial', 'logistica', 'nominas', 'creditos y cobranzas', 'comercial', 'costos', 'planeamiento', 'trade'],
                 Ingeniería_Mecánica: ['mecanica', 'mecanico'],
                 Ingeniería_Mecatrónica: ['mecatronica', 'mecatronica'],
                 Ingeniería_Química: ['quimica', 'quimico'],
-                Marketing: ['Marketing', 'Publicidad', ' marca ', 'Branding','trade'],
+                Marketing: ['Marketing', 'Publicidad', ' marca ', 'Branding', 'trade'],
                 Medicina: ['Medicina'],
                 Medicina_Veterinaria: ['Veterinaria', 'veterinario', 'zootecnia'],
-                Negocios_Internacionales: ['Negocios Internacionales', 'comercio', 'exportacion', 'comercial', 'aduanas','logistica'],
+                Negocios_Internacionales: ['Negocios Internacionales', 'comercio', 'exportacion', 'comercial', 'aduanas', 'logistica'],
                 Nutrición: ['Nutricion'],
                 Odontología: ['Odontologia', 'dental'],
-                Psicología: ['Psicologia', 'psicologo', 'psicologa','seleccion'],
+                Psicología: ['Psicologia', 'psicologo', 'psicologa', 'seleccion'],
                 Publicidad_y_multimedia: ['publicidad', 'multimedia'],
-                Recursos_Humanos: ['Recursos humanos','seleccion'],
+                Recursos_Humanos: ['Recursos humanos', 'seleccion'],
                 Ventas: ['Ventas'],
-                Almacén: ['almacen', 'inventarios','carga'],
+                Almacén: ['almacen', 'inventarios', 'carga'],
                 Diseñador_Grafico: ['diseñador grafico', 'grafico', 'diseño gráfico'],
             };
 
             if (carrera) {
                 filtrados = filtrados.filter(oferta =>
                     diccionarios[carrera]?.some(term =>
-                        oferta.nom_oferta.toLowerCase().includes(term.toLowerCase()) 
+                        oferta.nom_oferta.toLowerCase().includes(term.toLowerCase())
                     )
                 );
             }
@@ -234,13 +235,16 @@ function PaginaInicio() {
     };
     return (
         <div className='pagina-inicio'>
-            <img className='imagenlogo' src={Logo} alt="Logo Buscojobs" />
+            <img className='imagenlogo' src={Logo} alt="Portada" />
             <div className='portada'>
+                <img src={portadaImg} alt='Portada'  />
                 <div className='contentform'>
                     <h1>La Puerta a <span style={{ color: '#47b72f' }}>Nuevas Oportunidades</span></h1>
                     <h3>Explora tu primer empleo, para Estudiantes y Egresados</h3>
                 </div>
             </div>
+
+
             <Inserciones />
             <Buscador onBuscar={palabra => handleFiltroChange('palabraClave', palabra)} />
 
@@ -252,7 +256,7 @@ function PaginaInicio() {
                     onChange={e => handleFiltroChange('carrera', e.value)}
                     value={opcionesCarrera.find(option => option.value === filtros.carrera)}
                     placeholder="Selecciona una carrera"
-                    aria-label="Selecciona una carrera" 
+                    aria-label="Selecciona una carrera"
                 />
             </div>
 
