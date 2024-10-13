@@ -235,9 +235,9 @@ function PaginaInicio() {
     };
     return (
         <div className='pagina-inicio'>
-            <img className='imagenlogo' src={Logo} alt="Portada" />
+            <img className='imagenlogo' src={Logo} alt="Portada" loading="lazy"/>
             <div className='portada'>
-                <img src={portadaImg} alt='Portada'  />
+                <img src={portadaImg} alt='Portada'  loading="lazy"/>
                 <div className='contentform'>
                     <h1>La Puerta a <span style={{ color: '#47b72f' }}>Nuevas Oportunidades</span></h1>
                     <h3>Explora tu primer empleo, para Estudiantes y Egresados</h3>

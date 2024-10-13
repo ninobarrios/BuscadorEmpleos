@@ -275,16 +275,18 @@ body {
     text-align: center;
     align-items: center;
     overflow: hidden;
-    /* Asegura que todo el contenido esté contenido en el bloque */
 }
 
 .portada img {
     position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    max-height: 60vh; /* Altura máxima */
+    max-width: 100vw;  /* Ancho máximo */
+    object-fit: cover; 
     z-index: 1;
 }
+
 
 .portada::before {
     content: "";
@@ -920,4 +922,25 @@ body {
 .css-hlgwow {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
+}
+
+
+@media (max-width: 376px) {
+    .contentform h1{
+        font-size: 30px !important;
+        margin-bottom: 5px;
+    }
+    .contentform{
+        margin-top: 25px !important;
+    }
+    .buscador{
+        width: 80%;
+        position: relative;
+    }
+    .input_cajainiciobox{
+        width: 80%;
+    }
+    .btn_cajainiciobox{
+        height: 35px;
+    }
 }
