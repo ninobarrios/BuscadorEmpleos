@@ -4,12 +4,17 @@ require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+const prerender = require('prerender-node'); // Importa el middleware de Prerender.io
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors()); // Permitir todos los orígenes
-
+// Configura el token de Prerender.io
+app.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// Permitir todos los orígenes
+app.use(cors()); 
 
 // Configuración del pool de conexiones a la base de datos
 const pool = mysql.createPool({
