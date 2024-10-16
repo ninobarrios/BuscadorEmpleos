@@ -8,16 +8,15 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors()); // Permitir todos los orígenes
+app.use(cors()); 
 
 
-// Configuración del pool de conexiones a la base de datos
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    connectTimeout: 10000,
+    connectTimeout: 100000,
     ssl: {
         rejectUnauthorized: true 
     },
@@ -26,7 +25,6 @@ const pool = mysql.createPool({
     queueLimit: 0 
 });
 
-// Middleware para manejar errores de conexión
 pool.getConnection((err, connection) => {
     if (err) {
         console.error('Error connecting to the database:', err.stack);
@@ -36,7 +34,6 @@ pool.getConnection((err, connection) => {
     connection.release(); 
 });
 
-// Ruta para obtener ofertas de trabajo
 app.get("/Ofertas-Laborales", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` ORDER BY `fecha` DESC, RAND();";
     pool.query(query, (err, results) => {
