@@ -273,6 +273,7 @@ body {
     text-align: center;
     align-items: center;
     overflow: hidden;
+    height: 60vh;
 }
 
 .portada img {
