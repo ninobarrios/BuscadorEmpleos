@@ -9,10 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors()); // Permitir todos los orígenes
-app.use((req, res, next) => {
-    res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=86400, must-revalidate');
-    next();
-});
+
 
 // Configuración del pool de conexiones a la base de datos
 const pool = mysql.createPool({
@@ -20,6 +17,7 @@ const pool = mysql.createPool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
+    connectTimeout: 10000,
     ssl: {
         rejectUnauthorized: true 
     },
