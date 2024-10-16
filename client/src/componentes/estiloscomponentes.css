@@ -267,7 +267,6 @@ body {
 .portada {
     position: relative;
     width: 100vw;
-    height: 70vh;
     display: flex;
     justify-content: center;
     color: white;

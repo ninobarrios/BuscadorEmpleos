@@ -4,17 +4,12 @@ require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
-const prerender = require('prerender-node'); // Importa el middleware de Prerender.io
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Configura el token de Prerender.io
-app.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-// Permitir todos los orígenes
-app.use(cors()); 
+app.use(cors()); // Permitir todos los orígenes
+
 
 // Configuración del pool de conexiones a la base de datos
 const pool = mysql.createPool({
@@ -77,7 +72,7 @@ app.get('/sugerencias', (req, res) => {
 });
 
 app.get('/contarObservacionesDiaAnterior', (req, res) => {
-    const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE fecha = (SELECT MAX(fecha) FROM ofertas_laborales);`;
+    const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE DATE(fecha) = ( SELECT DATE(MAX(fecha)) FROM ofertas_laborales );`;
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
