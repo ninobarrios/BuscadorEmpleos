@@ -24,40 +24,37 @@
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
-        <url>
+    <url>
         <loc>https://www.practicasuniversitariasperu.com/departamentos/Callao</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
-        <url>
+    <url>
         <loc>https://www.practicasuniversitariasperu.com/departamentos/Cusco</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
-        <url>
+    <url>
         <loc>https://www.practicasuniversitariasperu.com/departamentos/Ica</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
-    </url>
-        <url>
+    <url>
         <loc>https://www.practicasuniversitariasperu.com/departamentos/Junín</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
-    </url>
-        <url>
+    <url>
         <loc>https://www.practicasuniversitariasperu.com/departamentos/Piura</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
-        </url>
-        <url>
+    <url>
         <loc>https://www.practicasuniversitariasperu.com/departamentos/Puno</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
@@ -75,7 +72,7 @@
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
-        <url>
+    <url>
         <loc>https://www.practicasuniversitariasperu.com/carreras/Contabilidad</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
@@ -87,19 +84,19 @@
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
-        <url>
+    <url>
         <loc>https://www.practicasuniversitariasperu.com/carreras/Marketing</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
-        <url>
+    <url>
         <loc>https://www.practicasuniversitariasperu.com/carreras/Recursos_Humanos</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
-        <url>
+    <url>
         <loc>https://www.practicasuniversitariasperu.com/carreras/Ingeniería_Industrial</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
@@ -111,13 +108,13 @@
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
-        <url>
+    <url>
         <loc>https://www.practicasuniversitariasperu.com/Gastronomía</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
-        <url>
+    <url>
         <loc>https://www.practicasuniversitariasperu.com/Educación</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
