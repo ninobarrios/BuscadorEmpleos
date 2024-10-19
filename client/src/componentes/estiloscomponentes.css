@@ -1214,11 +1214,10 @@ body {
 
 a.nav-link {
 	color: white;
-	font-weight: 400;
 	font-size: 16px;
 	text-align: center;
 	font-size: 17px;
-	font-weight: 600;
+	font-weight: 400;
 	flex-wrap: wrap;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
