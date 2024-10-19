@@ -67,7 +67,7 @@ function Carreras() {
             setOfertas(ofertasCache[carre]);
             setTotalOfertas(ofertasCache[carre].length);
             setLoading(false);
-            return;
+            return; 
         }
 
         const palabrasClave = diccionarios[carre]?.join('|') || '';
