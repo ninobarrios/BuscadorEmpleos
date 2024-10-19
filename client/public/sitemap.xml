@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.practicasuniversitariasperu.com/</loc>
         <lastmod>2024-10-18</lastmod>
-            <changefreq>daily</changefreq> 
+        <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.practicasuniversitariasperu.com/departamentos/</loc>
         <lastmod>2024-10-18</lastmod>
-            <changefreq>daily</changefreq>   
-      <priority>0.8</priority>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.practicasuniversitariasperu.com/departamentos/Arequipa</loc>
         <lastmod>2024-10-18</lastmod>
-            <changefreq>daily</changefreq> 
+        <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
@@ -79,7 +79,7 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://www.practicasuniversitariasperu.com/carreras/Ingeniería_Industrial</loc>
+        <loc>https://www.practicasuniversitariasperu.com/carreras/Ingeniería-de-Sistemas</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
@@ -91,19 +91,19 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://www.practicasuniversitariasperu.com/carreras/Recursos_Humanos</loc>
+        <loc>https://www.practicasuniversitariasperu.com/carreras/Recursos-Humanos</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://www.practicasuniversitariasperu.com/carreras/Ingeniería_Industrial</loc>
+        <loc>https://www.practicasuniversitariasperu.com/carreras/Ingeniería-Industrial</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://www.practicasuniversitariasperu.com/Ingeniería_Mecánica</loc>
+        <loc>https://www.practicasuniversitariasperu.com/Ingeniería-Mecánica</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
@@ -121,7 +121,7 @@
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.practicasuniversitariasperu.com/como_postular</loc>
+        <loc>https://www.practicasuniversitariasperu.com/como-postular</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
