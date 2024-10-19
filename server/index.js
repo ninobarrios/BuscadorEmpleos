@@ -135,7 +135,7 @@ app.get("/selecionardepartamento/:departamento", (req, res) => {
     });
 });
 app.get("/selecionarcarrera/:carrera", (req, res) => {
-    const carrera = req.params.carrera;  // Carrera ya viene separada por |
+    const carrera = req.params.carrera;  
     const query = `
         SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina 
         FROM ofertas_laborales 

@@ -90,31 +90,18 @@ function Inicio() {
     useEffect(() => {
         const fetchOfertas = async () => {
             setLoading(true);
-            const cachedData = localStorage.getItem('ofertasLaboralesHoy');
-    
-            if (cachedData) {
-                // Si hay datos en el caché, se usan
-                const data = JSON.parse(cachedData);
-                setResultados(data);
-                setResultadosFiltrados(data);
-                setTotalOfertas(data.length);
-                setPaginaActual(1);
-            } else {
+            
                 try {
                     const response = await axios.get('https://buscadorempleos.onrender.com/Ofertas-Laborales-hoy');
                     setResultados(response.data);
                     setResultadosFiltrados(response.data);
                     setTotalOfertas(response.data.length);
                     setPaginaActual(1);
-                    localStorage.setItem('ofertasLaboralesHoy', JSON.stringify(response.data));
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 }
-            }
-    
             setLoading(false);
         };
-    
         fetchOfertas();
     }, []);
     
