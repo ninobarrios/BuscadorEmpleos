@@ -43,21 +43,13 @@ app.get("/Ofertas-Laborales", (req, res) => {
         res.json(results);
     });
 });
-// Node.js endpoint
 app.get("/Ofertas-Laborales-hoy", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales WHERE fecha = (SELECT MAX(fecha) FROM ofertas_laborales) ORDER BY RAND();";
-    
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
             return res.status(500).send("Error al obtener ofertas");
         }
-
-        console.log('Results:', results); // Verificar qué devuelve la consulta
-        if (results.length === 0) {
-            return res.status(404).send("No hay ofertas laborales disponibles.");
-        }
-        
         res.json(results);
     });
 });

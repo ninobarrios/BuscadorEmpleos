@@ -43,7 +43,6 @@ const Departamentos = () => {
         setError(null);
         try {
             const response = await axios.get(`https://buscadorempleos.onrender.com/selecionardepartamento/${dep}`);
-            // Almacenar en caché
             ofertasCache[dep] = response.data;
             setOfertas(response.data);
             setTotalOfertas(response.data.length);

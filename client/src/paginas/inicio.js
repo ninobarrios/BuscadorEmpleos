@@ -87,12 +87,12 @@ function Inicio() {
         window.addEventListener('resize', ajustarOfertasPorPagina);
         return () => window.removeEventListener('resize', ajustarOfertasPorPagina);
     }, []);
+
     useEffect(() => {
         const fetchOfertas = async () => {
             setLoading(true);
             try {
                 const response = await axios.get('https://buscadorempleos.onrender.com/Ofertas-Laborales-hoy');
-                console.log('Fetched data:', response.data); // Verificar los datos recibidos
                 setResultados(response.data);
                 setResultadosFiltrados(response.data);
                 setTotalOfertas(response.data.length);
@@ -104,10 +104,10 @@ function Inicio() {
                 setLoading(false);
             }
         };
-    
+
         fetchOfertas();
     }, []);
-    
+
 
 
     const empresasFiltradas = useMemo(() =>
@@ -120,28 +120,22 @@ function Inicio() {
             const { palabraClave, lugar, empresa, carrera } = filtros;
             let filtrados = resultados;
 
-            // Filtra por palabra clave
             if (palabraClave) {
                 filtrados = filtrados.filter(oferta =>
                     oferta.nom_oferta.toLowerCase().includes(palabraClave.toLowerCase())
                 );
             }
-
-            // Filtra por lugar
             if (lugar) {
                 filtrados = filtrados.filter(oferta =>
                     oferta.lugar.toLowerCase().includes(lugar.toLowerCase())
                 );
             }
-
-            // Filtra por empresa
             if (empresa) {
                 filtrados = filtrados.filter(oferta =>
                     oferta.nom_empresa.toLowerCase().includes(empresa.toLowerCase())
                 );
             }
 
-            // Filtra por carrera
             const diccionarios = {
                 Administración: ['administracion', 'Administrador', 'logistica', 'nominas', 'creditos y cobranzas', 'comercial', 'costos', 'planeamiento', 'trade'],
                 Arquitectura: ['Arquitectura'],
@@ -235,11 +229,11 @@ function Inicio() {
     return (
         <div className='pagina-inicio'>
             <div className='portada'>
-                <img src={portadaImg} alt='Portada'  loading="lazy"/>
+                <img src={portadaImg} alt='Portada' loading="lazy" />
                 <div className='contentform'>
-                    <h1>Oportunidades <span style={{color:'white'}}>Laborales</span> </h1>
+                    <h1>Oportunidades <span style={{ color: 'white' }}>Laborales</span> </h1>
                     <h3>Descubre oportunidades laborales para estudiantes y recién egresados<br></br> en diversas carreras técnicas y profesionales.</h3>
-                    </div>
+                </div>
             </div>
 
 
