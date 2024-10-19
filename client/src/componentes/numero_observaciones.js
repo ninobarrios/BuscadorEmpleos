@@ -36,7 +36,7 @@ function NumeroObservaciones() {
     
 
     if (loading) {
-        return <p>Cargando...</p>;
+        return <div className="loading" style={{margin:'50px'}}><div className="spinner"></div></div>;
     }
 
     if (error) {

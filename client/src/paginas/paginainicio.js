@@ -1,15 +1,17 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import axios from 'axios';
+import Select from 'react-select';
+import '../componentes/estiloscomponentes.css'
+import portadaImg from '../imagenes/portada.avif';
+
 import CajaOferta from '../componentes/cajaoferta';
 import Buscador from '../componentes/buscador';
 import Paginacion from '../componentes/paginacion';
 import Inserciones from '../componentes/numero_observaciones';
 import Selectores from '../componentes/selectores';
-import Logo from '../imagenes/logo.avif';
 import Footer from '../componentes/footer';
-import Select from 'react-select';
-import '../componentes/estiloscomponentes.css'
-import portadaImg from '../imagenes/portada.avif';
+
+
 
 
 function PaginaInicio() {
@@ -51,7 +53,6 @@ function PaginaInicio() {
         { value: 'Ingeniería_Ambiental', label: 'Ingeniería Ambiental' },
         { value: 'Ingeniería_Civil', label: 'Ingeniería Civil' },
         { value: 'Ingeniería_de_Industrias_alimentarias', label: 'Ingeniería de Industria Alimentaria' },
-
         { value: 'Ingeniería_de_Minas', label: 'Ingeniería de Minas' },
         { value: 'Ingeniería_de_Sistemas', label: 'Ingeniería de Sistemas' },
         { value: 'Ingeniería_Eléctrica', label: 'Ingeniería Eléctrica' },
@@ -152,6 +153,7 @@ function PaginaInicio() {
                 Ciencias_de_la_Comunicación: ['comunicacion', 'Periodismo', 'Audiovisuales', 'relaciones publicas', 'comunicador social', 'redes sociales', 'comunicador', 'periodista'],
                 Contabilidad: ['Contabilidad', 'impuestos', 'contable', 'costos', 'creditos y cobranzas'],
                 Derecho: ['Derecho', 'abogado', 'litigio', 'legal', 'abogada'],
+                Diseñador_Grafico: ['diseñador grafico', 'grafico', 'diseño gráfico'],
                 Economía: ['Economia', 'finanzas', 'mercado', 'inversion', 'nominas', 'creditos y cobranzas', 'comercial'],
                 Educación: ['Educacion', 'docente', 'profesor', 'profesora'],
                 Enfermería: ['Enfermeria', 'enfermera'],
@@ -181,9 +183,7 @@ function PaginaInicio() {
                 Recursos_Humanos: ['Recursos humanos', 'seleccion'],
                 Ventas: ['Ventas'],
                 Almacén: ['almacen', 'inventarios', 'carga'],
-                Diseñador_Grafico: ['diseñador grafico', 'grafico', 'diseño gráfico'],
             };
-
             if (carrera) {
                 filtrados = filtrados.filter(oferta =>
                     diccionarios[carrera]?.some(term =>
@@ -191,8 +191,6 @@ function PaginaInicio() {
                     )
                 );
             }
-
-
             setResultadosFiltrados(filtrados);
             setTotalOfertas(filtrados.length);
             setPaginaActual(1);
@@ -235,7 +233,6 @@ function PaginaInicio() {
     };
     return (
         <div className='pagina-inicio'>
-            <img className='imagenlogo' src={Logo} alt="Portada" loading="lazy"/>
             <div className='portada'>
                 <img src={portadaImg} alt='Portada'  loading="lazy"/>
                 <div className='contentform'>
@@ -272,8 +269,8 @@ function PaginaInicio() {
             />
 
             <div className='totalofertas'>{totalOfertas.toLocaleString('es-PE')} Empleos</div>
-            <div className='main-content'>
-                <div className='side-content'>
+            <div className='contenidoprincipal'>
+                <div className='contenedordecajas'>
                     {ofertasMostradas.length > 0 ? (
                         ofertasMostradas.map((oferta_laboral, index) => (
                             <CajaOferta

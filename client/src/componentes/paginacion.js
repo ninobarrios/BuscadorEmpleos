@@ -3,24 +3,18 @@ import './estiloscomponentes.css'
 
 function Paginacion({ paginaActual, totalPaginas, onCambiarPagina }) {
     const [rangoDePaginacion, setRangoDePaginacion] = useState(5);
-
-    // Detecta el tamaño de la pantalla y ajusta el rango de paginación
     useEffect(() => {
         const ajustarRangoPaginacion = () => {
             if (window.innerWidth <= 768) {
-                setRangoDePaginacion(3); // Si la pantalla es 768px o menos, usa un rango de 3
+                setRangoDePaginacion(3); 
             } else {
-                setRangoDePaginacion(9); // De lo contrario, usa el rango de 5
+                setRangoDePaginacion(9); 
             }
         };
-
-        // Llama a la función de ajuste al cargar la página
         ajustarRangoPaginacion();
 
-        // Agrega un listener para ajustar el rango de paginación cuando la ventana cambie de tamaño
         window.addEventListener('resize', ajustarRangoPaginacion);
 
-        // Limpia el listener cuando el componente se desmonte
         return () => {
             window.removeEventListener('resize', ajustarRangoPaginacion);
         };

@@ -43,7 +43,16 @@ app.get("/Ofertas-Laborales", (req, res) => {
         res.json(results);
     });
 });
-
+app.get("/Ofertas-Laborales-hoy", (req, res) => {
+    const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales WHERE fecha = (SELECT MAX(fecha) FROM ofertas_laborales) ORDER BY RAND();";
+    pool.query(query, (err, results) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            return res.status(500).send("Error al obtener ofertas");
+        }
+        res.json(results);
+    });
+});
 app.get('/sugerencias', (req, res) => {
     const palabra = req.query.palabra || '';
 
@@ -111,6 +120,40 @@ app.get('/contarObservacionesTotal', (req, res) => {
         res.json(results[0]);
     });
 });
+
+app.get("/selecionardepartamento/:departamento", (req, res) => {
+    const departamento = req.params.departamento; 
+    const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` WHERE lugar LIKE ? ORDER BY `fecha` DESC, RAND();"; 
+    const values = [`%${departamento}%`]; 
+
+    pool.query(query, values, (err, results) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            return res.status(500).send("Error al obtener ofertas");
+        }
+        res.json(results); 
+    });
+});
+app.get("/selecionarcarrera/:carrera", (req, res) => {
+    const carrera = req.params.carrera;  // Carrera ya viene separada por |
+    const query = `
+        SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina 
+        FROM ofertas_laborales 
+        WHERE nom_oferta REGEXP ? 
+        ORDER BY fecha DESC, RAND();
+    `;
+    
+    pool.query(query, [carrera], (err, results) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            return res.status(500).send("Error al obtener ofertas");
+        }
+        res.json(results);
+    });
+});
+
+
+
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
