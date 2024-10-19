@@ -691,13 +691,13 @@ body {
 }
 
 .footer {
-	width: 100vw;
-	height: 150px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: #003366;
-	color: white;
+    width: 100vw;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #003366;
+    color: white;
 }
 
 .desktop-buttons {
@@ -1227,12 +1227,14 @@ a.nav-link {
 	color: #47b72f !important;
 }
 
+
 .btn_departamentos {
 	margin: 50px 20vw;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
+    min-height: 300%;
 }
 
 .amtah {

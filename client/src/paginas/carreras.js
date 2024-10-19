@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useCallback } from 'react'; 
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Select from 'react-select'; // Importar react-select
@@ -67,7 +67,7 @@ function Carreras() {
             setOfertas(ofertasCache[carre]);
             setTotalOfertas(ofertasCache[carre].length);
             setLoading(false);
-            return; 
+            return;
         }
 
         const palabrasClave = diccionarios[carre]?.join('|') || '';
@@ -148,7 +148,7 @@ function Carreras() {
 
             <div className='contenidoprincipal'>
                 <div className='contenedordecajas'>
-                    {loading && <div className="loading"><div className="spinner"></div></div>}
+                    {loading && <div className="loading"><div className="spinner" style={{ marginBottom: '900px',marginTop:'100px' }}></div></div>}
                     {error && <p>Error al cargar las ofertas: {error.message}</p>}
                     {ofertasMostradas.length > 0 ? (
                         ofertasMostradas.map((oferta, index) => (

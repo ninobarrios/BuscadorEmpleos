@@ -109,8 +109,8 @@ const Departamentos = () => {
 
             <div className='contenidoprincipal'>
                 <div className='contenedordecajas'>
-                    {loading}
-                    {error && <p>Error al cargar las ofertas: {error.message}</p>}
+                {loading && <div className="loading"><div className="spinner" style={{ marginBottom: '900px',marginTop:'100px' }}></div></div>}
+                {error && <p>Error al cargar las ofertas: {error.message}</p>}
                     {ofertasMostradas.length > 0 ? (
                         ofertasMostradas.map((oferta, index) => (
                                 <CajaOferta oferta_laboral={oferta} />
