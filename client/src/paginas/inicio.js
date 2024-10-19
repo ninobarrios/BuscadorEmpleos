@@ -1,33 +1,36 @@
-import React, { useState, useMemo, useCallback, useEffect, Suspense } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
-import '../componentes/estiloscomponentes.css';
+import '../componentes/estiloscomponentes.css'
 import portadaImg from '../imagenes/portada.avif';
 
-const Selectores = React.lazy(() => import('../componentes/selectores'));
-const Footer = React.lazy(() => import('../componentes/footer'));
-const CajaOferta = React.lazy(() => import('../componentes/cajaoferta'));
-const Buscador = React.lazy(() => import('../componentes/buscador'));
-const Paginacion = React.lazy(() => import('../componentes/paginacion'));
-const Inserciones = React.lazy(() => import('../componentes/numero_observaciones'));
+import CajaOferta from '../componentes/cajaoferta';
+import Buscador from '../componentes/buscador';
+import Paginacion from '../componentes/paginacion';
+import Inserciones from '../componentes/numero_observaciones';
+import Selectores from '../componentes/selectores';
+import Footer from '../componentes/footer';
+
+
+
+
 
 function Inicio() {
     const [resultados, setResultados] = useState([]);
     const [resultadosFiltrados, setResultadosFiltrados] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const [paginaActual, setPaginaActual] = useState(1);
     const [totalOfertas, setTotalOfertas] = useState(0);
     const [ofertasPorPagina, setOfertasPorPagina] = useState(14);
     const [filtros, setFiltros] = useState({ palabraClave: '', lugar: '', empresa: '', carrera: '' });
-
     const listaDepartamentos = useMemo(() => [
         'Arequipa', 'Lima', 'Cusco', 'Puno', 'Apurimac', 'Amazonas', 'Ancash', 'Ayacucho',
         'Cajamarca', 'Callao', 'Huancavelica', 'Huanuco', 'Ica', 'Junin', 'La Libertad',
         'Lambayeque', 'Loreto', 'Madre de Dios', 'Moquegua', 'Pasco', 'Piura', 'San Martin',
         'Tacna', 'Tumbes', 'Ucayali', 'Peru'
     ], []);
-
-    const opcionesCarrera = useMemo(() => [
+    const opcionesCarrera = [
         { value: '', label: 'Seleccionar Carrera' },
         { value: 'Administración', label: 'Administración' },
         { value: 'Arquitectura', label: 'Arquitectura' },
@@ -68,15 +71,13 @@ function Inicio() {
         { value: 'Recursos_Humanos', label: 'Recursos Humanos' },
         { value: 'Ventas', label: 'Ventas' },
         { value: 'Almacén', label: 'Almacén' },
-    ], []);
-
+    ];
     const departamentosFiltrados = useMemo(() => {
         const departamentos = [...new Set(resultadosFiltrados.map(oferta =>
             listaDepartamentos.find(departamento => oferta.lugar.includes(departamento))
         ))];
         return departamentos.filter(Boolean).sort((a, b) => a.localeCompare(b));
     }, [resultadosFiltrados, listaDepartamentos]);
-
     useEffect(() => {
         const ajustarOfertasPorPagina = () => {
             setOfertasPorPagina(window.innerWidth <= 768 ? 10 : 20);
@@ -86,45 +87,54 @@ function Inicio() {
         window.addEventListener('resize', ajustarOfertasPorPagina);
         return () => window.removeEventListener('resize', ajustarOfertasPorPagina);
     }, []);
-
     useEffect(() => {
         const fetchOfertas = async () => {
             setLoading(true);
-            
-                try {
-                    const response = await axios.get('https://buscadorempleos.onrender.com/Ofertas-Laborales-hoy');
-                    setResultados(response.data);
-                    setResultadosFiltrados(response.data);
-                    setTotalOfertas(response.data.length);
-                    setPaginaActual(1);
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                }
-            setLoading(false);
+            try {
+                const response = await axios.get('https://buscadorempleos.onrender.com/Ofertas-Laborales-hoy');
+                console.log('Fetched data:', response.data); // Verificar los datos recibidos
+                setResultados(response.data);
+                setResultadosFiltrados(response.data);
+                setTotalOfertas(response.data.length);
+                setPaginaActual(1);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
         };
+    
         fetchOfertas();
     }, []);
     
 
-    const empresasFiltradas = useMemo(() => (
-        [...new Set(resultadosFiltrados.map(oferta => oferta.nom_empresa))]
-    ), [resultadosFiltrados]);
+
+    const empresasFiltradas = useMemo(() =>
+        [...new Set(resultadosFiltrados.map(oferta => oferta.nom_empresa))],
+        [resultadosFiltrados]
+    );
 
     useEffect(() => {
         const filtrarResultados = () => {
             const { palabraClave, lugar, empresa, carrera } = filtros;
             let filtrados = resultados;
 
+            // Filtra por palabra clave
             if (palabraClave) {
                 filtrados = filtrados.filter(oferta =>
                     oferta.nom_oferta.toLowerCase().includes(palabraClave.toLowerCase())
                 );
             }
+
+            // Filtra por lugar
             if (lugar) {
                 filtrados = filtrados.filter(oferta =>
                     oferta.lugar.toLowerCase().includes(lugar.toLowerCase())
                 );
             }
+
+            // Filtra por empresa
             if (empresa) {
                 filtrados = filtrados.filter(oferta =>
                     oferta.nom_empresa.toLowerCase().includes(empresa.toLowerCase())
@@ -133,8 +143,44 @@ function Inicio() {
 
             // Filtra por carrera
             const diccionarios = {
-                Administración: ['administracion', 'administrador', 'logistica', 'nominas', 'creditos y cobranzas', 'comercial', 'costos', 'planeamiento', 'trade'],
-                Arquitectura: ['arquitectura'],
+                Administración: ['administracion', 'Administrador', 'logistica', 'nominas', 'creditos y cobranzas', 'comercial', 'costos', 'planeamiento', 'trade'],
+                Arquitectura: ['Arquitectura'],
+                Biología: ['Biologia', 'Microbiologia'],
+                Ciencia_de_la_Computación: ['Ciencia de la Computacion', 'programacion', 'base de datos', 'Ciberseguridad', 'cloud', 'programador', 'estructuras de datos'],
+                Ciencia_Política: ['Politica'],
+                Ciencias_de_la_Comunicación: ['comunicacion', 'Periodismo', 'Audiovisuales', 'relaciones publicas', 'comunicador social', 'redes sociales', 'comunicador', 'periodista'],
+                Contabilidad: ['Contabilidad', 'impuestos', 'contable', 'costos', 'creditos y cobranzas'],
+                Derecho: ['Derecho', 'abogado', 'litigio', 'legal', 'abogada'],
+                Economía: ['Economia', 'finanzas', 'mercado', 'inversion', 'nominas', 'creditos y cobranzas', 'comercial'],
+                Educación: ['Educacion', 'docente', 'profesor', 'profesora'],
+                Enfermería: ['Enfermeria', 'enfermera'],
+                Estadística: ['Estadistica'],
+                Farmacia_y_Bioquímica: ['farmacia', 'bioquimica', 'laboratorio'],
+                Gastronomía: ['Gastronomia', 'gastronomica', 'gastronomico', 'cocinero', 'cocinera', 'cocina'],
+                Hotelería_y_Turismo: ['Hoteleria', 'turismo', 'turistico'],
+                Ingeniería_Agrícola: ['Ingenieria Agricola', 'Ingeniero Agronomo', 'agronomia', 'agronomo', 'agronomia', 'agroindustrial', 'Ingenieria Agronoma'],
+                Ingeniería_Ambiental: ['Ingenieria Ambiental', 'ambiental', 'SHEQ'],
+                Ingeniería_de_Industrias_alimentarias: ['alimentaria'],
+                Ingeniería_Civil: ['Ingenieria Civil', 'civil', 'urbano', 'urbana'],
+                Ingeniería_de_Minas: ['Ingeniería de Minas', 'mina', 'mineria', 'minero', 'SHEQ'],
+                Ingeniería_de_Sistemas: ['Ingeniería de Sistemas', 'Ingeniero de sistemas', 'Ing Sistemas', 'Ing. sistemas', 'react', 'programación', 'angular', 'sql', 'data', 'devops', ' ti ', 'php', 'soporte tecnico', 'Seguridad de la Informacion', 'Analisis De Datos', 'cloud', 'Data Analytics', 'Mysql'],
+                Ingeniería_Eléctrica: ['electrica', 'electricista', 'Transformadores', 'electronica', 'electronico', 'ING. ELECTRICA'],
+                Ingeniería_Industrial: ['Ingenieria Industrial', 'Industrial', 'Ing industrial', 'Ing. Industrial', 'logistica', 'nominas', 'creditos y cobranzas', 'comercial', 'costos', 'planeamiento', 'trade'],
+                Ingeniería_Mecánica: ['mecanica', 'mecanico'],
+                Ingeniería_Mecatrónica: ['mecatronica', 'mecatronica'],
+                Ingeniería_Química: ['quimica', 'quimico'],
+                Marketing: ['Marketing', 'Publicidad', ' marca ', 'Branding', 'trade'],
+                Medicina: ['Medicina'],
+                Medicina_Veterinaria: ['Veterinaria', 'veterinario', 'zootecnia'],
+                Negocios_Internacionales: ['Negocios Internacionales', 'comercio', 'exportacion', 'comercial', 'aduanas', 'logistica'],
+                Nutrición: ['Nutricion'],
+                Odontología: ['Odontologia', 'dental'],
+                Psicología: ['Psicologia', 'psicologo', 'psicologa', 'seleccion'],
+                Publicidad_y_multimedia: ['publicidad', 'multimedia'],
+                Recursos_Humanos: ['Recursos humanos', 'seleccion'],
+                Ventas: ['Ventas'],
+                Almacén: ['almacen', 'inventarios', 'carga'],
+                Diseñador_Grafico: ['diseñador grafico', 'grafico', 'diseño gráfico'],
             };
 
             if (carrera) {
@@ -145,11 +191,11 @@ function Inicio() {
                 );
             }
 
+
             setResultadosFiltrados(filtrados);
             setTotalOfertas(filtrados.length);
             setPaginaActual(1);
         };
-
         filtrarResultados();
     }, [resultados, filtros]);
 
@@ -164,7 +210,6 @@ function Inicio() {
     const indexOfLastOffer = paginaActual * ofertasPorPagina;
     const indexOfFirstOffer = indexOfLastOffer - ofertasPorPagina;
     const ofertasMostradas = useMemo(() => resultadosFiltrados.slice(indexOfFirstOffer, indexOfLastOffer), [resultadosFiltrados, indexOfFirstOffer, indexOfLastOffer]);
-
     const customStyles = {
         control: (provided, state) => ({
             ...provided,
@@ -187,21 +232,19 @@ function Inicio() {
             },
         }),
     };
-
     return (
         <div className='pagina-inicio'>
             <div className='portada'>
-                <img src={portadaImg} alt='Portada' loading="lazy" />
+                <img src={portadaImg} alt='Portada'  loading="lazy"/>
                 <div className='contentform'>
-                    <h1>Oportunidades <span style={{ color: 'white' }}>Laborales</span></h1>
-                    <h3>Descubre oportunidades laborales para estudiantes y recién egresados en diversas carreras técnicas y profesionales.</h3>
-                </div>
+                    <h1>Oportunidades <span style={{color:'white'}}>Laborales</span> </h1>
+                    <h3>Descubre oportunidades laborales para estudiantes y recién egresados<br></br> en diversas carreras técnicas y profesionales.</h3>
+                    </div>
             </div>
 
-            <Suspense fallback={<div className="loading"><div className="spinner"></div></div>}>
-                <Inserciones />
-                <Buscador onBuscar={palabra => handleFiltroChange('palabraClave', palabra)} />
-            </Suspense>
+
+            <Inserciones />
+            <Buscador onBuscar={palabra => handleFiltroChange('palabraClave', palabra)} />
 
             <div className='selectores'>
                 <Select
@@ -215,48 +258,42 @@ function Inicio() {
                 />
             </div>
 
-            <Suspense fallback={<div className="loading"><div className="spinner"></div></div>}>
-                <Selectores
-                    onSelectLugar={selectedLugar => handleFiltroChange('lugar', selectedLugar)}
-                    onSelectEmpresa={selectedEmpresa => handleFiltroChange('empresa', selectedEmpresa)}
-                    empresas={empresasFiltradas}
-                    lugar={filtros.lugar}
-                    empresa={filtros.empresa}
-                    departamentos={departamentosFiltrados}
-                />
-            </Suspense>
+
+            <Selectores
+                onSelectLugar={selectedLugar => handleFiltroChange('lugar', selectedLugar)}
+                onSelectEmpresa={selectedEmpresa => handleFiltroChange('empresa', selectedEmpresa)}
+                empresas={empresasFiltradas}
+                lugar={filtros.lugar}
+                empresa={filtros.empresa}
+                departamentos={departamentosFiltrados}
+
+            />
 
             <div className='totalofertas'>{totalOfertas.toLocaleString('es-PE')} Empleos Hoy</div>
             <div className='contenidoprincipal'>
                 <div className='contenedordecajas'>
-                    <Suspense fallback={<div className="loading"><div className="spinner"></div></div>}>
-                        {loading ? (
-                            <div className="loading"><div className="spinner"></div></div>
-                        ) : (
-                            ofertasMostradas.length > 0 ? (
-                                ofertasMostradas.map((oferta_laboral, index) => (
-                                    <CajaOferta
-                                        key={index}
-                                        oferta_laboral={oferta_laboral}
-                                        navigateToLink={handleLinkSeleccionado}
-                                    />
-                                ))
-                            ) : (
-                                <div>Error: No hay ofertas disponibles.</div>
-                            )
-                        )}
-                    </Suspense>
+                    {ofertasMostradas.length > 0 ? (
+                        ofertasMostradas.map((oferta_laboral, index) => (
+                            <CajaOferta
+                                key={index}
+                                oferta_laboral={oferta_laboral}
+                                navigateToLink={handleLinkSeleccionado}
+                            />
+                        ))
+                    ) : (
+                        <div>
+                            {loading && <div className="loading"><div className="spinner"></div></div>}
+                            {error && <div>Error: {error.message}</div>}
+                        </div>
+                    )}
                 </div>
             </div>
-
-            <Suspense fallback={<div className="loading"><div className="spinner"></div></div>}>
-                <Paginacion
-                    paginaActual={paginaActual}
-                    totalPaginas={totalPaginas}
-                    onPageChange={handleCambiarPagina}
-                />
-                <Footer />
-            </Suspense>
+            <Paginacion
+                paginaActual={paginaActual}
+                totalPaginas={totalPaginas}
+                onCambiarPagina={handleCambiarPagina}
+            />
+            <Footer />
         </div>
     );
 }

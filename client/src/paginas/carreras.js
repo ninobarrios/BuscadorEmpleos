@@ -65,7 +65,7 @@ function Carreras() {
         const palabrasClave = diccionarios[carre]?.join('|') || '';
 
         try {
-            const response = await axios.get(`http://localhost:3001/selecionarcarrera/${palabrasClave}`);
+            const response = await axios.get(`https://buscadorempleos.onrender.com/selecionarcarrera/${palabrasClave}`);
             setOfertas(response.data);
             setTotalOfertas(response.data.length);
             setPaginaActual(1);

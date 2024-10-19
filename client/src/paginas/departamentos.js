@@ -31,7 +31,6 @@ const Departamentos = () => {
     ];
 
     const fetchOfertas = useCallback(async (dep) => {
-        // Verificar si ya tenemos las ofertas en el cache
         if (ofertasCache[dep]) {
             const cachedOfertas = ofertasCache[dep];
             setOfertas(cachedOfertas);
@@ -43,7 +42,7 @@ const Departamentos = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.get(`http://localhost:3001/selecionardepartamento/${dep}`);
+            const response = await axios.get(`https://buscadorempleos.onrender.com/selecionardepartamento/${dep}`);
             // Almacenar en caché
             ofertasCache[dep] = response.data;
             setOfertas(response.data);
