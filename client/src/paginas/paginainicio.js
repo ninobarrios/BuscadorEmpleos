@@ -3,17 +3,12 @@ import axios from 'axios';
 import Select from 'react-select';
 import '../componentes/estiloscomponentes.css'
 import portadaImg from '../imagenes/portada.avif';
-
 import CajaOferta from '../componentes/cajaoferta';
 import Buscador from '../componentes/buscador';
 import Paginacion from '../componentes/paginacion';
 import Inserciones from '../componentes/numero_observaciones';
 import Selectores from '../componentes/selectores';
 import Footer from '../componentes/footer';
-
-
-
-
 function PaginaInicio() {
     const [resultados, setResultados] = useState([]);
     const [resultadosFiltrados, setResultadosFiltrados] = useState([]);
@@ -23,7 +18,6 @@ function PaginaInicio() {
     const [totalOfertas, setTotalOfertas] = useState(0);
     const [ofertasPorPagina, setOfertasPorPagina] = useState(14);
     const [filtros, setFiltros] = useState({ palabraClave: '', lugar: '', empresa: '', carrera: '' });
-
     const listaDepartamentos = useMemo(() => [
         'Arequipa', 'Lima', 'Cusco', 'Puno', 'Apurimac', 'Amazonas', 'Ancash', 'Ayacucho',
         'Cajamarca', 'Callao', 'Huancavelica', 'Huanuco', 'Ica', 'Junin', 'La Libertad',
@@ -71,8 +65,6 @@ function PaginaInicio() {
         { value: 'Recursos_Humanos', label: 'Recursos Humanos' },
         { value: 'Ventas', label: 'Ventas' },
         { value: 'Almacén', label: 'Almacén' },
-
-
     ];
     const departamentosFiltrados = useMemo(() => {
         const departamentos = [...new Set(resultadosFiltrados.map(oferta =>
@@ -80,17 +72,14 @@ function PaginaInicio() {
         ))];
         return departamentos.filter(Boolean).sort((a, b) => a.localeCompare(b));
     }, [resultadosFiltrados, listaDepartamentos]);
-
     useEffect(() => {
         const ajustarOfertasPorPagina = () => {
             setOfertasPorPagina(window.innerWidth <= 768 ? 10 : 20);
         };
-
         ajustarOfertasPorPagina();
         window.addEventListener('resize', ajustarOfertasPorPagina);
         return () => window.removeEventListener('resize', ajustarOfertasPorPagina);
     }, []);
-
     useEffect(() => {
         const fetchOfertas = async () => {
             setLoading(true);
@@ -107,43 +96,31 @@ function PaginaInicio() {
                 setLoading(false);
             }
         };
-
         fetchOfertas();
     }, []);
-
-
     const empresasFiltradas = useMemo(() =>
         [...new Set(resultadosFiltrados.map(oferta => oferta.nom_empresa))],
         [resultadosFiltrados]
     );
-
     useEffect(() => {
         const filtrarResultados = () => {
             const { palabraClave, lugar, empresa, carrera } = filtros;
             let filtrados = resultados;
-
-            // Filtra por palabra clave
             if (palabraClave) {
                 filtrados = filtrados.filter(oferta =>
                     oferta.nom_oferta.toLowerCase().includes(palabraClave.toLowerCase())
                 );
             }
-
-            // Filtra por lugar
             if (lugar) {
                 filtrados = filtrados.filter(oferta =>
                     oferta.lugar.toLowerCase().includes(lugar.toLowerCase())
                 );
             }
-
-            // Filtra por empresa
             if (empresa) {
                 filtrados = filtrados.filter(oferta =>
                     oferta.nom_empresa.toLowerCase().includes(empresa.toLowerCase())
                 );
             }
-
-            // Filtra por carrera
             const diccionarios = {
                 Administración: ['administracion', 'Administrador', 'logistica', 'nominas', 'creditos y cobranzas', 'comercial', 'costos', 'planeamiento', 'trade'],
                 Arquitectura: ['Arquitectura'],
@@ -197,14 +174,12 @@ function PaginaInicio() {
         };
         filtrarResultados();
     }, [resultados, filtros]);
-
     const handleCambiarPagina = useCallback(nuevaPagina => setPaginaActual(nuevaPagina), []);
     const handleLinkSeleccionado = useCallback(link => console.log("Link seleccionado:", link), []);
 
     const handleFiltroChange = useCallback((nombreFiltro, valor) => {
         setFiltros(prevFiltros => ({ ...prevFiltros, [nombreFiltro]: valor }));
     }, []);
-
     const totalPaginas = useMemo(() => Math.ceil(totalOfertas / ofertasPorPagina), [totalOfertas, ofertasPorPagina]);
     const indexOfLastOffer = paginaActual * ofertasPorPagina;
     const indexOfFirstOffer = indexOfLastOffer - ofertasPorPagina;
@@ -234,15 +209,45 @@ function PaginaInicio() {
     return (
         <div className='pagina-inicio'>
             <div className='portada'>
-                <img src={portadaImg} alt='Portada'  loading="lazy"/>
+                <img src={portadaImg} alt='Portada' loading="lazy" />
                 <div className='contentform'>
-                    <h1>Oportunidades <span style={{color:'white'}}>Laborales</span> </h1>
+                    <h1>Oportunidades <span style={{ color: 'white' }}>Laborales</span> </h1>
                     <h3>Descubre oportunidades laborales para estudiantes y recién egresados<br></br> en diversas carreras técnicas y profesionales.</h3>
-                    </div>
+                </div>
             </div>
 
 
             <Inserciones />
+            <div className="tips-busqueda-container">
+                <h2>Consejos de Busqueda</h2>
+                <p style={{width:'80%'}}>
+                    Al buscar empleo, es fundamental ingresar palabras clave relacionadas con tu carrera para asegurarte de no perderte ninguna oportunidad. Aquí tienes algunas sugerencias para diferentes campos:
+                </p>
+                <div className='imgtip'></div>
+                <ul className="tips-list">
+                    <li>
+                        <h3>Ingeniería Agronómica</h3>
+                        <p style={{width:'90%'}}>
+                            Utiliza palabras clave como: <strong>'Ingeniería Agrícola', 'Ingeniero Agrónomo', 'Agronomía', 'Agroindustrial'</strong>.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Economía</h3>
+                        <p>
+                            Considera usar términos como: <strong>'finanzas', 'mercado', 'inversiones', 'nóminas', 'créditos y cobranzas'</strong>.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Ciencias de la Comunicación</h3>
+                        <p>
+                            Busca con palabras clave como: <strong>'comunicación', 'periodismo', 'audiovisuales', 'relaciones públicas', 'comunicador social', 'redes sociales', 'periodista'</strong>.
+                        </p>
+                    </li>
+                </ul>
+                <p>
+                    <strong>Tip:</strong> Usa combinaciones específicas para ampliar tus opciones laborales y mejorar tus resultados en la búsqueda.
+                </p>
+            </div>
             <Buscador onBuscar={palabra => handleFiltroChange('palabraClave', palabra)} />
 
             <div className='selectores'>

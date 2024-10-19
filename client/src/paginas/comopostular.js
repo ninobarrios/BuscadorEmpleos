@@ -42,12 +42,21 @@ function comopostular() {
                 <div className='steps'>
                     <h2>Revisa las Ofertas de Empleo</h2>
                     <p>Navega por nuestras ofertas de empleo y selecciona las que más te interesen.
-                        Puedes buscar y usar los filtros para buscar por carrera y por lugar de residencia</p>
+                        Puedes buscar y usar los filtros para buscar por carrera y por lugar de residencia.</p>
                 </div>
+                <div className='steps'>
+                    <h2>Palabras clave</h2>
+                    <p>Usa palabras clave específicas, habilidades técnicas,
+                        ubicación, modalidad (remoto/presencial), nivel de
+                        experiencia y sinónimos para mejorar las búsquedas de empleo.
+                        <a href='./paginainicio.js' style={{color:'#47b72f',fontWeight:'bold'}}>Ingresa aquí</a>
+                    </p>
+                </div>
+
                 <div className='steps'>
                     <h2>Postulación</h2>
                     <p>Seleciona la oferta de tu interes e ingresa al link de la pagina de postulacion,
-                        Asegúrate de leer detenidamente los requisitos y responsabilidades del puesto
+                        Asegúrate de leer detenidamente los requisitos y responsabilidades del puesto.
                     </p>
                 </div>
                 <div className='steps'>
