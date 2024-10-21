@@ -2,20 +2,12 @@ require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
-const path = require('path'); // Asegúrate de importar el módulo path
+const path = require('path'); 
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-// Resto de tu código...
-
 
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
@@ -39,6 +31,7 @@ pool.getConnection((err, connection) => {
     console.log('Connected to the database.');
     connection.release(); 
 });
+
 
 app.get("/Ofertas-Laborales", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` ORDER BY `fecha` DESC, RAND();";
@@ -161,8 +154,11 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
     });
 });
 
+app.use(express.static(path.join(__dirname, '../client/build')));
 
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);

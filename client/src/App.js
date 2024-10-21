@@ -2,21 +2,25 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import './componentes/estiloscomponentes.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; 
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Asegúrate de importar Bootstrap JS
 import Logo from './imagenes/logo.avif';
+// Páginas
 import Inicio from './paginas/inicio';
 import Departamentos from './paginas/departamentos';
 import Carreras from './paginas/carreras';
 import PaginaInicio from './paginas/paginainicio';
 import Comopostular from './paginas/comopostular';
 
+// Componente Navbar
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    // Función para manejar la apertura/cierre del menú
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    // Función para cerrar el menú al hacer clic en un enlace
     const handleNavItemClick = () => {
         setIsMenuOpen(false);
     };
