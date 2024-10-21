@@ -1,18 +1,21 @@
-// Requiere dotenv para cargar las variables del archivo .env
 require('dotenv').config();
-
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+const path = require('path'); // Asegúrate de importar el módulo path
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-app.use(cors());
+
+// Resto de tu código...
+
 
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
