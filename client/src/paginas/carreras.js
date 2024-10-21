@@ -111,7 +111,6 @@ function Carreras() {
 
     const carrerasKeys = Object.keys(diccionarios);
 
-    // Convertir las carreras en un formato adecuado para react-select
     const opcionesCarreras = carrerasKeys.map(carrera => ({
         value: carrera,
         label: carrera.replace(/_/g, ' ')
@@ -134,11 +133,11 @@ function Carreras() {
 
                 <div className='selectores mobile-dropdown'>
                     <Select
-                        value={opcionesCarreras.find(option => option.value === selectedCarrera)} // Establecer el valor seleccionado
-                        onChange={(selectedOption) => handleButtonClick(selectedOption.value)} // Manejar el cambio
-                        options={opcionesCarreras} // Opciones del select
-                        className="select-lugar" // Clase para estilos personalizados
-                        classNamePrefix="select-lugar" // Prefijo para los estilos
+                        value={opcionesCarreras.find(option => option.value === selectedCarrera)} 
+                        onChange={(selectedOption) => handleButtonClick(selectedOption.value)} 
+                        options={opcionesCarreras} 
+                        className="select-lugar" 
+                        classNamePrefix="select-lugar" 
                     />
                 </div>
             </div>
