@@ -15,12 +15,12 @@ const Departamentos = () => {
     const { departamento } = useParams();
     const navigate = useNavigate();
     const [ofertas, setOfertas] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false); // Cambiar a false por defecto
     const [error, setError] = useState(null);
     const [selectedDepartamento, setSelectedDepartamento] = useState(departamento || "Arequipa");
     const [paginaActual, setPaginaActual] = useState(1);
     const [totalOfertas, setTotalOfertas] = useState(0);
-    const ofertasPorPagina = 14; // Se puede dejar sin estado
+    const ofertasPorPagina = 14;
 
     const departamentos = [
         "Amazonas", "Áncash", "Apurímac", "Arequipa", "Ayacucho", "Cajamarca",
@@ -31,6 +31,7 @@ const Departamentos = () => {
     ];
 
     const fetchOfertas = useCallback(async (dep) => {
+        // Return cached offers if available
         if (ofertasCache[dep]) {
             const cachedOfertas = ofertasCache[dep];
             setOfertas(cachedOfertas);
@@ -69,8 +70,16 @@ const Departamentos = () => {
         fetchOfertas(dep);
     };
 
-    const handleSelectChange = (selectedOption) => handleDepartamentoChange(selectedOption.value);
-    const handleCambiarPagina = useCallback(nuevaPagina => setPaginaActual(nuevaPagina), []);
+    const handleSelectChange = (selectedOption) => {
+        if (selectedOption) {
+            handleDepartamentoChange(selectedOption.value);
+        }
+    };
+
+    const handleCambiarPagina = useCallback(nuevaPagina => {
+        setPaginaActual(nuevaPagina);
+        // No es necesario volver a cargar ofertas al cambiar de página si ya están disponibles
+    }, []);
 
     const totalPaginas = useMemo(() => Math.ceil(totalOfertas / ofertasPorPagina), [totalOfertas]);
     const indexOfLastOffer = paginaActual * ofertasPorPagina;
@@ -97,8 +106,8 @@ const Departamentos = () => {
                         options={options}
                         value={options.find(option => option.value === selectedDepartamento)}
                         onChange={handleSelectChange}
-                        className='select-lugar' 
-                        classNamePrefix="select-lugar" 
+                        className='select-lugar'
+                        classNamePrefix="select-lugar"
                     />
                 </div>
             </div>
@@ -109,14 +118,21 @@ const Departamentos = () => {
 
             <div className='contenidoprincipal'>
                 <div className='contenedordecajas'>
-                {loading && <div className="loading"><div className="spinner" style={{ marginBottom: '900px',marginTop:'100px' }}></div></div>}
-                {error && <p>Error al cargar las ofertas: {error.message}</p>}
-                    {ofertasMostradas.length > 0 ? (
-                        ofertasMostradas.map((oferta, index) => (
-                            <CajaOferta key={oferta.id || index} oferta_laboral={oferta} />
-                        ))
+                    {loading ? (
+                        <div className="loading">
+                            <div className="spinner" style={{ marginBottom: '900px', marginTop: '100px' }}></div>
+                        </div>
                     ) : (
-                        !loading && <p>No hay ofertas disponibles para este departamento.</p>
+                        <>
+                            {error && <p>Error al cargar las ofertas: {error.message}</p>}
+                            {ofertasMostradas.length > 0 ? (
+                                ofertasMostradas.map((oferta, index) => (
+                                    <CajaOferta key={oferta.id || index} oferta_laboral={oferta} />
+                                ))
+                            ) : (
+                                <p>No hay ofertas disponibles para este departamento.</p>
+                            )}
+                        </>
                     )}
                 </div>
             </div>
