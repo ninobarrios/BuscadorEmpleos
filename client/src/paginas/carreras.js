@@ -16,8 +16,7 @@ function Carreras() {
     const [selectedCarrera, setSelectedCarrera] = useState(carrera || "Administración");
     const [paginaActual, setPaginaActual] = useState(1);
     const [totalOfertas, setTotalOfertas] = useState(0);
-    const [ofertasPorPagina] = useState(14);
-    const [ofertasCache, setOfertasCache] = useState({});  
+    const [ofertasPorPagina] = useState(14); 
 
     const diccionarios = useMemo(() => ({
         Administración: ['administracion', 'Administrador', 'logistica', 'nominas', 'creditos y cobranzas', 'comercial', 'costos', 'planeamiento', 'trade'],
@@ -64,30 +63,19 @@ function Carreras() {
         setLoading(true);
         setError(null);
 
-        if (ofertasCache[carre]) {
-            setOfertas(ofertasCache[carre]);
-            setTotalOfertas(ofertasCache[carre].length);
-            setLoading(false);
-            return;
-        }
-
         const palabrasClave = diccionarios[carre]?.join('|') || '';
         try {
             const response = await axios.get(`https://buscadorempleos.onrender.com/selecionarcarrera/${palabrasClave}`);
             setOfertas(response.data);
             setTotalOfertas(response.data.length);
             setPaginaActual(1);
-            setOfertasCache(prevCache => ({
-                ...prevCache,
-                [carre]: response.data
-            }));
         } catch (error) {
             console.error('Error fetching data:', error);
             setError(error);
         } finally {
             setLoading(false);
         }
-    }, [diccionarios, ofertasCache]);
+    }, [diccionarios]);
 
     useEffect(() => {
         if (carrera) {
@@ -102,6 +90,7 @@ function Carreras() {
         navigate(`/carreras/${carre}`);
         fetchOfertas(carre);
     };
+
     const handleLinkSeleccionado = useCallback(link => console.log("Link seleccionado:", link), []);
 
     const handleCambiarPagina = useCallback(nuevaPagina => setPaginaActual(nuevaPagina), []);
