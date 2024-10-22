@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+// Importa las imágenes directamente
 import Ubi from '../imagenes/ubi.avif';
+import Indeed from '../imagenes/indeed.avif';
+import Convocatorias from '../imagenes/convocatorias_2024.avif';
+import Buscojobs from '../imagenes/buscojobs.avif';
+import Linkedin from '../imagenes/Linkedin.avif';
+import Computrabajo from '../imagenes/computrabajo.avif';
+import Bumeran from '../imagenes/bumeran.avif';
 
-import './estiloscomponentes.css'
+import './estiloscomponentes.css';
 
 const plataformaImages = {
-    Indeed: `${process.env.PUBLIC_URL}/imagenes/indeed.avif`,
-    'Convocatorias de Trabajo': `${process.env.PUBLIC_URL}/imagenes/convocatorias_2024.avif`,
-    Buscojobs: `${process.env.PUBLIC_URL}/imagenes/buscojobs.avif`,
-    Linkedin: `${process.env.PUBLIC_URL}/imagenes/Linkedin.avif`,
-    Computrabajo: `${process.env.PUBLIC_URL}/imagenes/computrabajo.avif`,
-    Bumeran: `${process.env.PUBLIC_URL}/imagenes/bumeran.avif`,
+    Indeed,
+    'Convocatorias de Trabajo': Convocatorias,
+    Buscojobs,
+    Linkedin,
+    Computrabajo,
+    Bumeran,
 };
-
 
 const CajaOferta = ({ oferta_laboral }) => {
     const [copied, setCopied] = useState(false);

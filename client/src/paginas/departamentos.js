@@ -113,7 +113,7 @@ const Departamentos = () => {
                 {error && <p>Error al cargar las ofertas: {error.message}</p>}
                     {ofertasMostradas.length > 0 ? (
                         ofertasMostradas.map((oferta, index) => (
-                                <CajaOferta oferta_laboral={oferta} />
+                            <CajaOferta key={oferta.id || index} oferta_laboral={oferta} />
                         ))
                     ) : (
                         !loading && <p>No hay ofertas disponibles para este departamento.</p>
