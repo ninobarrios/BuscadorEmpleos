@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Ubi from '../imagenes/ubi.png';
-import Indeed from '../imagenes/indeed.png';
+import Ubi from '../imagenes/ubi.png';  // Ruta correcta para la ubicación
+import Indeed from '../imagenes/indeed.png';  // Verifica que esta ruta sea correcta
 import Convocatorias from '../imagenes/convocatorias_2024.png';
 import Buscojobs from '../imagenes/buscojobs.JPG';
 import Linkedin from '../imagenes/Linkedin.png';
@@ -43,7 +43,7 @@ const CajaOferta = ({ oferta_laboral }) => {
         return text.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
     };
 
-    const platformImage = plataformaImages[oferta_laboral.plataforma] ;
+    const platformImage = plataformaImages[oferta_laboral.plataforma];
 
     return (
         <div className='boxcajaoferta'>
@@ -58,14 +58,14 @@ const CajaOferta = ({ oferta_laboral }) => {
             </div>
             <div className='foto_plataforma'>
                 {platformImage && (
-                    <img src={platformImage} alt={`Logo ${oferta_laboral.plataforma}`}  />
+                    <img src={platformImage} alt={`Logo ${oferta_laboral.plataforma}`} />
                 )}
             </div>
 
             <button className='btn-official' onClick={handleButtonClick}>
                 {oferta_laboral.plataforma === 'Computrabajo' ? 'Copiar enlace' : 'Postular aquí'}
             </button>
-            
+
             {copied && (
                 <div style={{
                     backgroundColor: '#48b72f', 
