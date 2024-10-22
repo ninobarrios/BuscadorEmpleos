@@ -22,17 +22,16 @@ const CajaOferta = ({ oferta_laboral }) => {
     const [copied, setCopied] = useState(false);
 
     const handleButtonClick = (e) => {
-        e.stopPropagation(); // Evita que el clic en el botón active el clic en el contenedor
+        e.stopPropagation(); 
 
         if (oferta_laboral.plataforma === 'Computrabajo') {
             navigator.clipboard.writeText(oferta_laboral.link_pagina)
                 .then(() => {
                     setCopied(true);
-                    setTimeout(() => setCopied(false), 2000); // Muestra "Copiado" por 2 segundos
+                    setTimeout(() => setCopied(false), 2000); 
                 })
                 .catch(err => console.error('Error al copiar el enlace', err));
         } else {
-            // Para otras plataformas, redirigir directamente
             window.open(oferta_laboral.link_pagina, '_blank');
         }
     };

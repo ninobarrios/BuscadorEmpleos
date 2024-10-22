@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Select from 'react-select'; // Importar react-select
+import Select from 'react-select'; 
 import CajaOferta from '../componentes/cajaoferta';
 import Paginacion from '../componentes/paginacion';
 import Footer from '../componentes/footer';
+import '../componentes/estiloscomponentes.css'
 
 function Carreras() {
     const { carrera } = useParams();
