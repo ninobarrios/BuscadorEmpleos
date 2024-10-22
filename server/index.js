@@ -154,15 +154,6 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
     });
 });
 
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-app.get('*', (req, res) => {
-    const filePath = path.join(__dirname, '../client/build', 'index.html');
-    console.log('Requested URL:', req.originalUrl);
-    console.log('File path:', filePath);
-    res.sendFile(filePath);
-});
-
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);

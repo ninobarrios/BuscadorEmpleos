@@ -17,7 +17,7 @@ function Carreras() {
     const [paginaActual, setPaginaActual] = useState(1);
     const [totalOfertas, setTotalOfertas] = useState(0);
     const [ofertasPorPagina] = useState(14);
-    const [ofertasCache, setOfertasCache] = useState({});  // Cache for job offers
+    const [ofertasCache, setOfertasCache] = useState({});  
 
     const diccionarios = useMemo(() => ({
         Administración: ['administracion', 'Administrador', 'logistica', 'nominas', 'creditos y cobranzas', 'comercial', 'costos', 'planeamiento', 'trade'],
@@ -102,6 +102,7 @@ function Carreras() {
         navigate(`/carreras/${carre}`);
         fetchOfertas(carre);
     };
+    const handleLinkSeleccionado = useCallback(link => console.log("Link seleccionado:", link), []);
 
     const handleCambiarPagina = useCallback(nuevaPagina => setPaginaActual(nuevaPagina), []);
     const totalPaginas = useMemo(() => Math.ceil(totalOfertas / ofertasPorPagina), [totalOfertas, ofertasPorPagina]);
@@ -152,7 +153,11 @@ function Carreras() {
                     {error && <p>Error al cargar las ofertas: {error.message}</p>}
                     {ofertasMostradas.length > 0 ? (
                         ofertasMostradas.map((oferta, index) => (
-                            <CajaOferta key={index} oferta_laboral={oferta} />
+                            <CajaOferta 
+                            key={index} 
+                            oferta_laboral={oferta} 
+                            navigateToLink={handleLinkSeleccionado}
+                            />
                         ))
                     ) : (
                         !loading && <p>No se encontraron ofertas para esta carrera.</p>
