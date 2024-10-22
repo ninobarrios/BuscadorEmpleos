@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Importa las imágenes directamente
-import Ubi from '../imagenes/ubi.avif';
+import Ubi from '../imagenes/ubi.png';
 import Indeed from '../imagenes/indeed.avif';
 import Convocatorias from '../imagenes/convocatorias_2024.avif';
 import Buscojobs from '../imagenes/buscojobs.avif';
-import Linkedin from '../imagenes/Linkedin.avif';
-import Computrabajo from '../imagenes/computrabajo.avif';
-import Bumeran from '../imagenes/bumeran.avif';
+import Linkedin from '../imagenes/Linkedin.png';
+import Computrabajo from '../imagenes/computrabajo.png';
+import Bumeran from '../imagenes/bumeran.png';
 
 import './estiloscomponentes.css';
 
