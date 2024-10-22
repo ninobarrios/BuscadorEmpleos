@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, NavLink, Navigate } from 'react-router-dom';
+import ReactDOM from 'react-dom/client'; // Asegurarse de importar ReactDOM
+import { BrowserRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import './componentes/estiloscomponentes.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; 
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Logo from './imagenes/logo.avif';
 import Inicio from './paginas/inicio';
 import Departamentos from './paginas/departamentos';
@@ -66,7 +67,7 @@ function Navbar() {
 
 function App() {
     return (
-        <Router basename="/"> 
+        <BrowserRouter basename="/">
             <Navbar />
             <Routes>
                 <Route path="/" element={<Inicio />} />
@@ -77,8 +78,11 @@ function App() {
                 <Route path="/todas_las_ofertas" element={<PaginaInicio />} />
                 <Route path="/como_postular" element={<Comopostular />} />
             </Routes>
-        </Router>
+        </BrowserRouter>
     );
 }
+
+const root = ReactDOM.createRoot(document.getElementById('root')); // Inicializar correctamente ReactDOM
+root.render(<App />);
 
 export default App;
