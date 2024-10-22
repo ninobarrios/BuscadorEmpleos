@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e9bd578a.css",
+    "main.js": "/static/js/main.505758fb.js",
+    "static/js/646.e32c42cb.chunk.js": "/static/js/646.e32c42cb.chunk.js",
+    "static/js/239.eab0352a.chunk.js": "/static/js/239.eab0352a.chunk.js",
+    "static/js/213.fc3621de.chunk.js": "/static/js/213.fc3621de.chunk.js",
+    "static/js/455.60ba7def.chunk.js": "/static/js/455.60ba7def.chunk.js",
+    "static/js/762.806fceba.chunk.js": "/static/js/762.806fceba.chunk.js",
+    "static/media/portada.avif": "/static/media/portada.9fd919ebc37718e4bde4.avif",
+    "static/media/indeed.png": "/static/media/indeed.708aabb0e5fccb081ace.png",
+    "static/media/computrabajo.png": "/static/media/computrabajo.b32c9ef92f2f2c26ab25.png",
+    "static/media/Linkedin.png": "/static/media/Linkedin.d7023f54e64120293072.png",
+    "static/media/logo.avif": "/static/media/logo.bfa0642c4a08b007accd.avif",
+    "static/media/buscojobs.JPG": "/static/media/buscojobs.4dd03c0777c6472a7fc8.JPG",
+    "index.html": "/index.html",
+    "main.e9bd578a.css.map": "/static/css/main.e9bd578a.css.map",
+    "main.505758fb.js.map": "/static/js/main.505758fb.js.map",
+    "646.e32c42cb.chunk.js.map": "/static/js/646.e32c42cb.chunk.js.map",
+    "239.eab0352a.chunk.js.map": "/static/js/239.eab0352a.chunk.js.map",
+    "213.fc3621de.chunk.js.map": "/static/js/213.fc3621de.chunk.js.map",
+    "455.60ba7def.chunk.js.map": "/static/js/455.60ba7def.chunk.js.map",
+    "762.806fceba.chunk.js.map": "/static/js/762.806fceba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e9bd578a.css",
+    "static/js/main.505758fb.js"
+  ]
+}
