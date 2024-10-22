@@ -66,7 +66,7 @@ function Navbar() {
 
 function App() {
     return (
-        <Router>
+        <Router basename="/"> 
             <Navbar />
             <Routes>
                 <Route path="/" element={<Inicio />} />
