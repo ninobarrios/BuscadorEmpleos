@@ -84,7 +84,7 @@ app.get('/contarObservacionesDiaAnterior', (req, res) => {
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
-            return res.status(500).send("Error al contar observaciones del día anterior");
+            return res.status(500).send("Error al obtener datos");
         }
         res.json(results[0]);
     });
@@ -153,12 +153,22 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
         res.json(results);
     });
 });
-
-app.use(express.static('public'));
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+app.get('/departamentos/:nombre', (req, res) => {
+    const nombreDepartamento = req.params.nombre;
+    res.sendFile(path.join(__dirname, 'public', 'departamentos', `${nombreDepartamento}.html`));
+});
+app.get('/carreras/:nombre', (req, res) => {
+    const nombreCarrera = req.params.nombre;
+    res.sendFile(path.join(__dirname, 'public', 'carreras', `${nombreCarrera}.html`));
+});
+app.get('/todas_las_ofertas', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'todas_las_ofertas.html'));
+});
+app.get('/como_postular', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'como_postular.html'));
 });
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
