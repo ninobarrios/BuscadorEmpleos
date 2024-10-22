@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import bumeran from '../imagenes/bumeran.avif';
-import indeed from '../imagenes/indeed.avif';
-import linkedin from '../imagenes/Linkedin.avif';
-import MTEP from '../imagenes/computrabajo.avif'; 
+
 import Ubi from '../imagenes/ubi.avif';
-import Convocatorias from '../imagenes/convocatorias_2024.avif';
-import Buscojobs from '../imagenes/buscojobs.avif';
+
 import './estiloscomponentes.css'
 
 const plataformaImages = {
-    Indeed: indeed,
-    'Convocatorias de Trabajo': Convocatorias,
-    Buscojobs: Buscojobs,
-    Linkedin: linkedin,
-    Computrabajo: MTEP,
-    Bumeran: bumeran,
+    Indeed: `${process.env.PUBLIC_URL}/imagenes/indeed.avif`,
+    'Convocatorias de Trabajo': `${process.env.PUBLIC_URL}/imagenes/convocatorias_2024.avif`,
+    Buscojobs: `${process.env.PUBLIC_URL}/imagenes/buscojobs.avif`,
+    Linkedin: `${process.env.PUBLIC_URL}/imagenes/Linkedin.avif`,
+    Computrabajo: `${process.env.PUBLIC_URL}/imagenes/computrabajo.avif`,
+    Bumeran: `${process.env.PUBLIC_URL}/imagenes/bumeran.avif`,
 };
+
 
 const CajaOferta = ({ oferta_laboral }) => {
     const [copied, setCopied] = useState(false);
@@ -37,7 +34,7 @@ const CajaOferta = ({ oferta_laboral }) => {
     };
 
     const capitalizeFirstLetter = (text) => {
-        if (!text) return ''; // Si text es undefined o null, retorna una cadena vacía
+        if (!text) return ''; 
         return text.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
     };
 
@@ -73,8 +70,8 @@ const CajaOferta = ({ oferta_laboral }) => {
                     position: 'fixed',
                     top: '50%',
                     left: '50%',
-                    transform: 'translate(-50%, -50%)', // Centrar en la pantalla
-                    zIndex: 1000, // Asegúrate de que esté encima de otros elementos
+                    transform: 'translate(-50%, -50%)', 
+                    zIndex: 1000, 
                     transition: 'opacity 0.5s',
                     opacity: copied ? 1 : 0,
                 }}>
