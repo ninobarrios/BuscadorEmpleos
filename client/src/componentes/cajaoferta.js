@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 // Importa las imágenes directamente
 import Ubi from '../imagenes/ubi.png';
-import Indeed from '../imagenes/indeed.avif';
-import Convocatorias from '../imagenes/convocatorias_2024.avif';
-import Buscojobs from '../imagenes/buscojobs.avif';
+import Indeed from '../imagenes/indeed.png';
+import Convocatorias from '../imagenes/convocatorias_2024.png';
+import Buscojobs from '../imagenes/buscojobs.JPG';
 import Linkedin from '../imagenes/Linkedin.png';
 import Computrabajo from '../imagenes/computrabajo.png';
 import Bumeran from '../imagenes/bumeran.png';
