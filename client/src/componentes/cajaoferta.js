@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-// Importa las imágenes directamente
 import Ubi from '../imagenes/ubi.png';
 import Indeed from '../imagenes/indeed.png';
 import Convocatorias from '../imagenes/convocatorias_2024.png';
@@ -59,7 +58,7 @@ const CajaOferta = ({ oferta_laboral }) => {
             </div>
             <div className='foto_plataforma'>
                 {platformImage && (
-                    <img src={platformImage} alt={`Logo ${oferta_laboral.plataforma}`} loading='lazy' />
+                    <img src={platformImage} alt={`Logo ${oferta_laboral.plataforma}`}  />
                 )}
             </div>
 
