@@ -154,21 +154,21 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
     });
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 app.get('/departamentos/:nombre', (req, res) => {
     const nombreDepartamento = req.params.nombre;
-    res.sendFile(path.join(__dirname, 'public', 'departamentos', `${nombreDepartamento}.html`));
+    res.sendFile(path.join(__dirname, 'build', 'departamentos', `${nombreDepartamento}.html`));
 });
 app.get('/carreras/:nombre', (req, res) => {
     const nombreCarrera = req.params.nombre;
-    res.sendFile(path.join(__dirname, 'public', 'carreras', `${nombreCarrera}.html`));
+    res.sendFile(path.join(__dirname, 'build', 'carreras', `${nombreCarrera}.html`));
 });
 app.get('/todas_las_ofertas', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'todas_las_ofertas.html'));
+    res.sendFile(path.join(__dirname, 'build', 'todas_las_ofertas.html'));
 });
 app.get('/como_postular', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'como_postular.html'));
+    res.sendFile(path.join(__dirname, 'build', 'como_postular.html'));
 });
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
