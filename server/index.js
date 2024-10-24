@@ -167,9 +167,30 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
 });
 
 
+// Servir archivos estáticos desde el directorio de compilación
+app.use(express.static(path.join(__dirname, '../client/build')));
 
+// Manejar rutas específicas
+app.get('/departamentos/:departamento', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 
-// Iniciar el servidor
+app.get('/carreras/:carrera', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
+app.get('/todas_las_ofertas', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
+app.get('/como_postular', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
