@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom/client'; // Asegurarse de importar ReactDOM
-import { BrowserRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom';
+import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import './componentes/estiloscomponentes.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -67,7 +66,7 @@ function Navbar() {
 
 function App() {
     return (
-        <BrowserRouter basename="/">
+        <>
             <Navbar />
             <Routes>
                 <Route path="/" element={<Inicio />} />
@@ -78,11 +77,8 @@ function App() {
                 <Route path="/todas_las_ofertas" element={<PaginaInicio />} />
                 <Route path="/como_postular" element={<Comopostular />} />
             </Routes>
-        </BrowserRouter>
+        </>
     );
 }
-
-const root = ReactDOM.createRoot(document.getElementById('root')); 
-root.render(<App />);
 
 export default App;

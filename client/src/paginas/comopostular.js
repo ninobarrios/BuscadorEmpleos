@@ -89,20 +89,20 @@ function comopostular() {
                 </div>
             </div>
 
-            <section class="ofertas-seccion">
+            <section className="ofertas-seccion">
                 <h2>Ofertas en Números</h2>
-                <div class="ofertas-contenido">
-                    <div class="oferta-item">
+                <div className="ofertas-contenido">
+                    <div className="oferta-item">
                         <h3>+1. 000</h3>
                         <p>Ofertas Diarias</p>
                     </div>
-                    <div class="linea-separador"></div>
-                    <div class="oferta-item">
+                    <div className="linea-separador"></div>
+                    <div className="oferta-item">
                         <h3>+6. 000</h3>
                         <p>Ofertas Semanales</p>
                     </div>
-                    <div class="linea-separador"></div>
-                    <div class="oferta-item">
+                    <div className="linea-separador"></div>
+                    <div className="oferta-item">
                         <h3>+20. 000</h3>
                         <p>Ofertas Vigentes Menores a 20 Días</p>
                     </div>

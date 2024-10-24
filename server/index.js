@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // Configuración del pool de conexiones MySQL
 const pool = mysql.createPool({
@@ -168,8 +168,9 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
 });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
+
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
