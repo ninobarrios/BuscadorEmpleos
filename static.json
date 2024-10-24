@@ -1,0 +1,6 @@
+{
+    "routes": {
+      "/**": "./client/build/index.html"
+    }
+  }
+  
