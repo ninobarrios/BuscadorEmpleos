@@ -76,9 +76,7 @@ function App() {
                 <Route path="/carreras/:carrera" element={<Carreras />} />
                 <Route path="/todas_las_ofertas" element={<PaginaInicio />} />
                 <Route path="/como_postular" element={<Comopostular />} />
-                <Route path="*" element={<Navigate to="/" />} />  {/* Redirige cualquier ruta no definida a la página de inicio */}
             </Routes>
-
         </>
     );
 }
