@@ -4,12 +4,12 @@ require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
-
+const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, '../client/build')));
 // Crear un pool de conexiones a la base de datos
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
@@ -165,7 +165,32 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
     });
 });
 
-// Iniciar el servidor
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
+app.get('/departamentos/:nombre', (req, res) => {
+    const nombreDepartamento = req.params.nombre;
+    res.sendFile(path.join(__dirname, '../client/build', 'departamentos', `${nombreDepartamento}.html`));
+});
+
+app.get('/carreras/:nombre', (req, res) => {
+    const nombreCarrera = req.params.nombre;
+    res.sendFile(path.join(__dirname, '../client/build', 'carreras', `${nombreCarrera}.html`));
+});
+
+app.get('/todas_las_ofertas', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'todas_las_ofertas.html'));
+});
+
+app.get('/como_postular', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'como_postular.html'));
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+    console.log(`Server listening on ${PORT}`);
 });
