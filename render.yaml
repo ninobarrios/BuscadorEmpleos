@@ -1,9 +1,10 @@
-version: 1
 services:
   - type: web
-    name: frontend
-    env: static
-    staticPublishPath: client/build
+    name: BuscadorEmpleos
+    env: node
+    buildCommand: npm run build
+    startCommand: node server.js
+    plan: free
     routes:
-      - source: /*
-        destination: /index.html
+      - src: /.*
+        dest: /
