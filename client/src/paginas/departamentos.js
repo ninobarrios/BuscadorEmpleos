@@ -4,18 +4,17 @@ import axios from 'axios';
 import Select from 'react-select';
 import '../componentes/estiloscomponentes.css';
 
-// Lazy load components
 const CajaOferta = lazy(() => import('../componentes/cajaoferta'));
 const Paginacion = lazy(() => import('../componentes/paginacion'));
 const Footer = lazy(() => import('../componentes/footer'));
 
-const ofertasCache = {}; // Cache para almacenar ofertas
+const ofertasCache = {};
 
 const Departamentos = () => {
     const { departamento } = useParams();
     const navigate = useNavigate();
     const [ofertas, setOfertas] = useState([]);
-    const [loading, setLoading] = useState(false); // Cambiar a false por defecto
+    const [loading, setLoading] = useState(false); 
     const [error, setError] = useState(null);
     const [selectedDepartamento, setSelectedDepartamento] = useState(departamento || "Arequipa");
     const [paginaActual, setPaginaActual] = useState(1);
@@ -78,7 +77,6 @@ const Departamentos = () => {
 
     const handleCambiarPagina = useCallback(nuevaPagina => {
         setPaginaActual(nuevaPagina);
-        // No es necesario volver a cargar ofertas al cambiar de página si ya están disponibles
     }, []);
 
     const totalPaginas = useMemo(() => Math.ceil(totalOfertas / ofertasPorPagina), [totalOfertas]);

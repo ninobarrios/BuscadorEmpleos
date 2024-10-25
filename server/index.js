@@ -7,7 +7,11 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://www.practicasuniversitariasperu.com', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true 
+}));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 const pool = mysql.createPool({
@@ -155,21 +159,6 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
     });
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-app.get('/departamentos/:departamento', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-app.get('/carreras/:carrera', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-app.get('/todas_las_ofertas', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-app.get('/como_postular', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
