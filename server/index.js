@@ -2,15 +2,13 @@ require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
-const path = require('path');
+const path = require('path'); 
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'client/build')));
 
-// Configuración del pool de conexiones MySQL
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -18,26 +16,23 @@ const pool = mysql.createPool({
     database: process.env.DB_DATABASE,
     connectTimeout: 100000,
     ssl: {
-        rejectUnauthorized: true
+        rejectUnauthorized: true 
     },
     waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    connectionLimit: 10, 
+    queueLimit: 0 
 });
 
-// Probar la conexión a la base de datos
 pool.getConnection((err, connection) => {
     if (err) {
         console.error('Error connecting to the database:', err.stack);
         return;
     }
     console.log('Connected to the database.');
-    connection.release();
+    connection.release(); 
 });
 
-// Rutas API
 
-// Obtener todas las ofertas laborales ordenadas por fecha y aleatoriamente
 app.get("/Ofertas-Laborales", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` ORDER BY `fecha` DESC, RAND();";
     pool.query(query, (err, results) => {
@@ -48,8 +43,6 @@ app.get("/Ofertas-Laborales", (req, res) => {
         res.json(results);
     });
 });
-
-// Obtener ofertas laborales del día más reciente
 app.get("/Ofertas-Laborales-hoy", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales WHERE fecha = (SELECT MAX(fecha) FROM ofertas_laborales) ORDER BY RAND();";
     pool.query(query, (err, results) => {
@@ -61,12 +54,12 @@ app.get("/Ofertas-Laborales-hoy", (req, res) => {
     });
 });
 
-// Sugerencias de ofertas laborales basadas en una palabra clave
+
 app.get('/sugerencias', (req, res) => {
     const palabra = req.query.palabra || '';
 
     if (palabra.length === 0) {
-        return res.json([]);  // Devuelve un array vacío si no se proporciona una palabra clave
+        return res.json([]);  
     }
 
     const sql = `
@@ -86,7 +79,6 @@ app.get('/sugerencias', (req, res) => {
     });
 });
 
-// Contar las observaciones del día anterior
 app.get('/contarObservacionesDiaAnterior', (req, res) => {
     const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE DATE(fecha) = ( SELECT DATE(MAX(fecha)) FROM ofertas_laborales );`;
     pool.query(query, (err, results) => {
@@ -98,7 +90,6 @@ app.get('/contarObservacionesDiaAnterior', (req, res) => {
     });
 });
 
-// Contar las observaciones de la semana
 app.get('/contarObservacionesSemana', (req, res) => {
     const query = `
         SELECT COUNT(*) AS count 
@@ -121,7 +112,6 @@ app.get('/contarObservacionesSemana', (req, res) => {
     });
 });
 
-// Contar todas las observaciones en la base de datos
 app.get('/contarObservacionesTotal', (req, res) => {
     const query = `SELECT COUNT(*) AS count FROM ofertas_laborales;`;
     pool.query(query, (err, results) => {
@@ -133,31 +123,28 @@ app.get('/contarObservacionesTotal', (req, res) => {
     });
 });
 
-// Obtener ofertas laborales por departamento
 app.get("/selecionardepartamento/:departamento", (req, res) => {
-    const departamento = req.params.departamento;
-    const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` WHERE lugar LIKE ? ORDER BY `fecha` DESC, RAND();";
-    const values = [`%${departamento}%`];
+    const departamento = req.params.departamento; 
+    const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` WHERE lugar LIKE ? ORDER BY `fecha` DESC, RAND();"; 
+    const values = [`%${departamento}%`]; 
 
     pool.query(query, values, (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
             return res.status(500).send("Error al obtener ofertas");
         }
-        res.json(results);
+        res.json(results); 
     });
 });
-
-// Obtener ofertas laborales por carrera
 app.get("/selecionarcarrera/:carrera", (req, res) => {
-    const carrera = req.params.carrera;
+    const carrera = req.params.carrera;  
     const query = `
         SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina 
         FROM ofertas_laborales 
         WHERE nom_oferta REGEXP ? 
         ORDER BY fecha DESC, RAND();
     `;
-
+    
     pool.query(query, [carrera], (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
@@ -166,11 +153,23 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
         res.json(results);
     });
 });
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-
+app.get('/departamentos/:departamento', (req, res) => {
+    const nombreDepartamento = req.params.nombre;
+    res.sendFile(path.join(__dirname, 'build', 'departamentos', `${nombreDepartamento}.html`));
+});
+app.get('/carreras/:carrera', (req, res) => {
+    const nombreCarrera = req.params.nombre;
+    res.sendFile(path.join(__dirname, 'build', 'carreras', `${nombreCarrera}.html`));
+});
+app.get('/todas_las_ofertas', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'todas_las_ofertas.html'));
+});
+app.get('/como_postular', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'como_postular.html'));
+});
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+    console.log(`Server listening on ${PORT}`);
 });

@@ -8,13 +8,13 @@ import Inicio from './paginas/inicio';
 import Departamentos from './paginas/departamentos';
 import Carreras from './paginas/carreras';
 import PaginaInicio from './paginas/paginainicio';
-import Comopostular from './paginas/comopostular';
+import ComoPostular from './paginas/comopostular'; // Asegúrate de que el nombre del archivo sea correcto
 
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+        setIsMenuOpen(prev => !prev);
     };
 
     const handleNavItemClick = () => {
@@ -30,12 +30,10 @@ function Navbar() {
                 <button
                     className="navbar-toggler"
                     type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded={isMenuOpen ? "true" : "false"}
-                    aria-label="Toggle navigation"
                     onClick={toggleMenu}
+                    aria-controls="navbarNav"
+                    aria-expanded={isMenuOpen}
+                    aria-label="Toggle navigation"
                 >
                     <img src="https://img.icons8.com/m_rounded/200/FFFFFF/menu.png" alt="Menú" style={{ width: '30px', height: '30px' }} />
                 </button>
@@ -75,7 +73,7 @@ function App() {
                 <Route path="/carreras" element={<Navigate to="/carreras/Administración" />} />
                 <Route path="/carreras/:carrera" element={<Carreras />} />
                 <Route path="/todas_las_ofertas" element={<PaginaInicio />} />
-                <Route path="/como_postular" element={<Comopostular />} />
+                <Route path="/como_postular" element={<ComoPostular />} /> {/* Asegúrate de que el nombre del archivo sea correcto */}
             </Routes>
         </>
     );
