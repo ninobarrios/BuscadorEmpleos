@@ -113,7 +113,6 @@ app.get('/contarObservacionesSemana', (req, res) => {
     });
 });
 
-// Contar observaciones totales
 app.get('/contarObservacionesTotal', (req, res) => {
     const query = "SELECT COUNT(*) AS count FROM ofertas_laborales;";
     pool.query(query, (err, results) => {
@@ -125,7 +124,6 @@ app.get('/contarObservacionesTotal', (req, res) => {
     });
 });
 
-// Seleccionar ofertas por departamento
 app.get("/selecionardepartamento/:departamento", (req, res) => {
     const departamento = req.params.departamento; 
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` WHERE lugar LIKE ? ORDER BY `fecha` DESC, RAND();"; 
@@ -140,7 +138,6 @@ app.get("/selecionardepartamento/:departamento", (req, res) => {
     });
 });
 
-// Seleccionar ofertas por carrera
 app.get("/selecionarcarrera/:carrera", (req, res) => {
     const carrera = req.params.carrera;  
     const query = `
@@ -161,9 +158,17 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
-
+app.get('/departamentos/:departamento', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+app.get('/carreras/:carrera', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+app.get('/todas_las_ofertas', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 app.get('/como_postular', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'como_postular.html'));
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 app.get('*', (req, res) => {
