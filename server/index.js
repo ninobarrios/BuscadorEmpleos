@@ -1,28 +1,28 @@
+// Requiere dotenv para cargar las variables del archivo .env
 require('dotenv').config();
+
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
-const path = require('path'); 
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 
+// Crear un pool de conexiones a la base de datos
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    connectTimeout: 100000,
-    ssl: {
-        rejectUnauthorized: true 
-    },
+    connectTimeout: 10000,  // Asegúrate de que el tiempo de espera es adecuado
     waitForConnections: true,
     connectionLimit: 10, 
     queueLimit: 0 
 });
 
+// Conectar al pool de conexiones
 pool.getConnection((err, connection) => {
     if (err) {
         console.error('Error connecting to the database:', err.stack);
@@ -32,7 +32,8 @@ pool.getConnection((err, connection) => {
     connection.release(); 
 });
 
-app.get("/ofertas-laborales", (req, res) => {
+// Rutas para obtener ofertas laborales
+app.get("/Ofertas-Laborales", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` ORDER BY `fecha` DESC, RAND();";
     pool.query(query, (err, results) => {
         if (err) {
@@ -43,7 +44,7 @@ app.get("/ofertas-laborales", (req, res) => {
     });
 });
 
-app.get("/ofertas-laborales-hoy", (req, res) => {
+app.get("/Ofertas-Laborales-hoy", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales WHERE fecha = (SELECT MAX(fecha) FROM ofertas_laborales) ORDER BY RAND();";
     pool.query(query, (err, results) => {
         if (err) {
@@ -54,6 +55,7 @@ app.get("/ofertas-laborales-hoy", (req, res) => {
     });
 });
 
+// Sugerencias de ofertas
 app.get('/sugerencias', (req, res) => {
     const palabra = req.query.palabra || '';
 
@@ -78,18 +80,24 @@ app.get('/sugerencias', (req, res) => {
     });
 });
 
-app.get('/contar-observaciones-dia-anterior', (req, res) => {
-    const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE DATE(fecha) = (SELECT DATE(MAX(fecha)) FROM ofertas_laborales);`;
+// Contar observaciones del día anterior
+app.get('/contarObservacionesDiaAnterior', (req, res) => {
+    const query = `
+        SELECT COUNT(*) AS count 
+        FROM ofertas_laborales 
+        WHERE DATE(fecha) = (SELECT DATE(MAX(fecha)) FROM ofertas_laborales);
+    `;
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
-            return res.status(500).send("Error al obtener datos");
+            return res.status(500).send("Error al contar observaciones del día anterior");
         }
         res.json(results[0]);
     });
 });
 
-app.get('/contar-observaciones-semana', (req, res) => {
+// Contar observaciones de la semana
+app.get('/contarObservacionesSemana', (req, res) => {
     const query = `
         SELECT COUNT(*) AS count 
         FROM ofertas_laborales AS ol 
@@ -111,8 +119,9 @@ app.get('/contar-observaciones-semana', (req, res) => {
     });
 });
 
-app.get('/contar-observaciones-total', (req, res) => {
-    const query = `SELECT COUNT(*) AS count FROM ofertas_laborales;`;
+// Contar observaciones totales
+app.get('/contarObservacionesTotal', (req, res) => {
+    const query = "SELECT COUNT(*) AS count FROM ofertas_laborales;";
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
@@ -122,21 +131,23 @@ app.get('/contar-observaciones-total', (req, res) => {
     });
 });
 
-app.get("/seleccionar-departamento/:departamento", (req, res) => {
+// Seleccionar ofertas por departamento
+app.get("/selecionardepartamento/:departamento", (req, res) => {
     const departamento = req.params.departamento; 
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` WHERE lugar LIKE ? ORDER BY `fecha` DESC, RAND();"; 
     const values = [`%${departamento}%`]; 
 
     pool.query(query, values, (err, results) => {
         if (err) {
-            console.error('Error executing query:', err);
+            console.error('Error ejecutando la consulta:', err);
             return res.status(500).send("Error al obtener ofertas");
         }
         res.json(results); 
     });
 });
 
-app.get("/seleccionar-carrera/:carrera", (req, res) => {
+// Seleccionar ofertas por carrera
+app.get("/selecionarcarrera/:carrera", (req, res) => {
     const carrera = req.params.carrera;  
     const query = `
         SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina 
@@ -147,13 +158,14 @@ app.get("/seleccionar-carrera/:carrera", (req, res) => {
     
     pool.query(query, [carrera], (err, results) => {
         if (err) {
-            console.error('Error executing query:', err);
+            console.error('Error ejecutando la consulta:', err);
             return res.status(500).send("Error al obtener ofertas");
         }
         res.json(results);
     });
 });
 
+// Iniciar el servidor
 app.listen(PORT, () => {
-    console.log(`Server listening on ${PORT}`);
+    console.log(`Server listening on port ${PORT}`);
 });
