@@ -8,7 +8,6 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, '../client/build')));
 
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
@@ -153,32 +152,6 @@ app.get("/seleccionar-carrera/:carrera", (req, res) => {
         }
         res.json(results);
     });
-});
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-
-app.get('/departamentos/:nombre', (req, res) => {
-    const nombreDepartamento = req.params.nombre;
-    res.sendFile(path.join(__dirname, '../client/build', 'departamentos', `${nombreDepartamento}.html`));
-});
-
-app.get('/carreras/:nombre', (req, res) => {
-    const nombreCarrera = req.params.nombre;
-    res.sendFile(path.join(__dirname, '../client/build', 'carreras', `${nombreCarrera}.html`));
-});
-
-app.get('/todas_las_ofertas', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'todas_las_ofertas.html'));
-});
-
-app.get('/como_postular', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'como_postular.html'));
-});
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 app.listen(PORT, () => {
