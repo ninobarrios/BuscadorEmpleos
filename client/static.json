@@ -1,9 +1,7 @@
 {
-    "routes": [
-      {
-        "source": "/(.*)", 
-        "destination": "/index.html"
-      }
-    ]
+    "root": "build/",
+    "routes": {
+      "/**": "index.html"
+    }
   }
   
