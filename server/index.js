@@ -1,4 +1,3 @@
-// Requiere dotenv para cargar las variables del archivo .env
 require('dotenv').config();
 
 const express = require('express');
@@ -10,19 +9,18 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
-// Crear un pool de conexiones a la base de datos
+
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    connectTimeout: 10000,  // Asegúrate de que el tiempo de espera es adecuado
+    connectTimeout: 10000,  
     waitForConnections: true,
     connectionLimit: 10, 
     queueLimit: 0 
 });
 
-// Conectar al pool de conexiones
 pool.getConnection((err, connection) => {
     if (err) {
         console.error('Error connecting to the database:', err.stack);
@@ -32,7 +30,6 @@ pool.getConnection((err, connection) => {
     connection.release(); 
 });
 
-// Rutas para obtener ofertas laborales
 app.get("/Ofertas-Laborales", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` ORDER BY `fecha` DESC, RAND();";
     pool.query(query, (err, results) => {
@@ -55,7 +52,6 @@ app.get("/Ofertas-Laborales-hoy", (req, res) => {
     });
 });
 
-// Sugerencias de ofertas
 app.get('/sugerencias', (req, res) => {
     const palabra = req.query.palabra || '';
 
@@ -80,7 +76,6 @@ app.get('/sugerencias', (req, res) => {
     });
 });
 
-// Contar observaciones del día anterior
 app.get('/contarObservacionesDiaAnterior', (req, res) => {
     const query = `
         SELECT COUNT(*) AS count 
@@ -96,7 +91,6 @@ app.get('/contarObservacionesDiaAnterior', (req, res) => {
     });
 });
 
-// Contar observaciones de la semana
 app.get('/contarObservacionesSemana', (req, res) => {
     const query = `
         SELECT COUNT(*) AS count 
@@ -155,7 +149,6 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
         WHERE nom_oferta REGEXP ? 
         ORDER BY fecha DESC, RAND();
     `;
-    
     pool.query(query, [carrera], (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
@@ -167,20 +160,6 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-
-app.get('/departamentos/:nombre', (req, res) => {
-    const nombreDepartamento = req.params.nombre;
-    res.sendFile(path.join(__dirname, '../client/build', 'departamentos', `${nombreDepartamento}.html`));
-});
-
-app.get('/carreras/:nombre', (req, res) => {
-    const nombreCarrera = req.params.nombre;
-    res.sendFile(path.join(__dirname, '../client/build', 'carreras', `${nombreCarrera}.html`));
-});
-
-app.get('/todas_las_ofertas', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'todas_las_ofertas.html'));
 });
 
 app.get('/como_postular', (req, res) => {

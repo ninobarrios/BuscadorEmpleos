@@ -1,4 +1,6 @@
 import React, { Suspense } from 'react';
+import { Link } from 'react-router-dom';
+
 const Footer = React.lazy(() => import('../componentes/footer'));
 const CartaPresentacion = React.lazy(() => import('../componentes/cartapresentacion'));
 
@@ -49,8 +51,8 @@ function comopostular() {
                     <p>Usa palabras clave específicas, habilidades técnicas,
                         ubicación, modalidad (remoto/presencial), nivel de
                         experiencia y sinónimos para mejorar las búsquedas de empleo.
-                        <a href='./paginainicio.js' style={{color:'#47b72f',fontWeight:'bold'}}>Ingresa aquí</a>
-                    </p>
+                        <Link to="/paginainicio" style={{ color: '#47b72f', fontWeight: 'bold' }}>Ingresa aquí</Link>
+                        </p>
                 </div>
 
                 <div className='steps'>
@@ -85,7 +87,7 @@ function comopostular() {
                     <h3>Ingresa a nuestro buscador</h3>
                 </div>
                 <div className='pslahr_right'>
-                    <a href='/paginainicio' className='postular-link'>Buscar ahora!</a>
+                    <Link to='/paginainicio' className='postular-link'>Buscar ahora!</Link>
                 </div>
             </div>
 

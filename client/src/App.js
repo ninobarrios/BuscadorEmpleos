@@ -4,12 +4,11 @@ import './componentes/estiloscomponentes.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Logo from './imagenes/logo.avif';
-import Inicio from './paginas/inicio';
-import Departamentos from './paginas/departamentos';
-import Carreras from './paginas/carreras';
-import PaginaInicio from './paginas/paginainicio';
-import ComoPostular from './paginas/comopostular'; // Asegúrate de que el nombre del archivo sea correcto
-
+const Inicio = React.lazy(() => import('./paginas/inicio'));
+const Departamentos = React.lazy(() => import('./paginas/departamentos'));
+const Carreras = React.lazy(() => import('./paginas/carreras'));
+const PaginaInicio = React.lazy(() => import('./paginas/paginainicio'));
+const ComoPostular = React.lazy(() => import('./paginas/comopostular'));
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -66,15 +65,17 @@ function App() {
     return (
         <>
             <Navbar />
-            <Routes>
-                <Route path="/" element={<Inicio />} />
-                <Route path="/departamentos" element={<Navigate to="/departamentos/Arequipa" />} />
-                <Route path="/departamentos/:departamento" element={<Departamentos />} />
-                <Route path="/carreras" element={<Navigate to="/carreras/Administración" />} />
-                <Route path="/carreras/:carrera" element={<Carreras />} />
-                <Route path="/todas_las_ofertas" element={<PaginaInicio />} />
-                <Route path="/como_postular" element={<ComoPostular />} /> {/* Asegúrate de que el nombre del archivo sea correcto */}
-            </Routes>
+            <React.Suspense fallback={<div>Cargando...</div>}>
+                <Routes>
+                    <Route path="/" element={<Inicio />} />
+                    <Route path="/departamentos" element={<Navigate to="/departamentos/Arequipa" />} />
+                    <Route path="/departamentos/:departamento" element={<Departamentos />} />
+                    <Route path="/carreras" element={<Navigate to="/carreras/Administración" />} />
+                    <Route path="/carreras/:carrera" element={<Carreras />} />
+                    <Route path="/todas_las_ofertas" element={<PaginaInicio />} />
+                    <Route path="/como_postular" element={<ComoPostular />} />
+                </Routes>
+            </React.Suspense>
         </>
     );
 }
