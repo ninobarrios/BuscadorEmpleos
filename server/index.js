@@ -7,13 +7,11 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-<<<<<<< HEAD
 // Lista de orígenes permitidos
 const allowedOrigins = [
     'http://localhost:3000',
     'https://www.practicasuniversitariasperu.com'
 ];
-=======
 // Permitir acceso desde cualquier dominio
 app.use(cors());
 app.use((req, res, next) => {
@@ -24,7 +22,6 @@ app.use((req, res, next) => {
 });
 
 
->>>>>>> 043ed73fd205610484a616e5b87a937fae7bb52e
 
 // Configuración de CORS
 app.use(cors({
@@ -69,12 +66,9 @@ pool.getConnection((err, connection) => {
     console.log('Connected to the database.');
     connection.release(); 
 });
-<<<<<<< HEAD
-app.get("/Ofertas-Laborales", (req, res) => {
-=======
+
 
 app.get("/ofertas-laborales", (req, res) => {
->>>>>>> 043ed73fd205610484a616e5b87a937fae7bb52e
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` ORDER BY `fecha` DESC, RAND();";
     pool.query(query, (err, results) => {
         if (err) {
@@ -196,7 +190,6 @@ app.get("/seleccionar-carrera/:carrera", (req, res) => {
     });
 });
 
-<<<<<<< HEAD
 // Middleware para manejar rutas de la aplicación React
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
@@ -220,8 +213,6 @@ app.get('/como_postular', (req, res) => {
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
-=======
->>>>>>> 043ed73fd205610484a616e5b87a937fae7bb52e
 
 // Iniciar el servidor
 app.listen(PORT, () => {
