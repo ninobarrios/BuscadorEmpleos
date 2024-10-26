@@ -73,7 +73,7 @@ function App() {
                     <Route path="/carreras" element={<Navigate to="/carreras/Administración" />} />
                     <Route path="/carreras/:carrera" element={<Carreras />} />
                     <Route path="/todas_las_ofertas" element={<PaginaInicio />} />
-                    <Route path="/" element={<ComoPostular />} />
+                    <Route path="/como_postular" element={<ComoPostular />} />
                 </Routes>
             </React.Suspense>
         </>

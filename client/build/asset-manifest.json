@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.e9bd578a.css",
-    "main.js": "/static/js/main.a1b8d2e4.js",
-    "static/js/429.2f7957d2.chunk.js": "/static/js/429.2f7957d2.chunk.js",
+    "main.js": "/static/js/main.12d9e9b0.js",
+    "static/js/429.54675586.chunk.js": "/static/js/429.54675586.chunk.js",
     "static/js/559.01143d87.chunk.js": "/static/js/559.01143d87.chunk.js",
     "static/js/777.bdbc0a1f.chunk.js": "/static/js/777.bdbc0a1f.chunk.js",
     "static/js/687.0f77ce71.chunk.js": "/static/js/687.0f77ce71.chunk.js",
@@ -24,8 +24,8 @@
     "static/media/buscojobs.JPG": "/static/media/buscojobs.4dd03c0777c6472a7fc8.JPG",
     "index.html": "/index.html",
     "main.e9bd578a.css.map": "/static/css/main.e9bd578a.css.map",
-    "main.a1b8d2e4.js.map": "/static/js/main.a1b8d2e4.js.map",
-    "429.2f7957d2.chunk.js.map": "/static/js/429.2f7957d2.chunk.js.map",
+    "main.12d9e9b0.js.map": "/static/js/main.12d9e9b0.js.map",
+    "429.54675586.chunk.js.map": "/static/js/429.54675586.chunk.js.map",
     "559.01143d87.chunk.js.map": "/static/js/559.01143d87.chunk.js.map",
     "777.bdbc0a1f.chunk.js.map": "/static/js/777.bdbc0a1f.chunk.js.map",
     "687.0f77ce71.chunk.js.map": "/static/js/687.0f77ce71.chunk.js.map",
@@ -42,6 +42,6 @@
   },
   "entrypoints": [
     "static/css/main.e9bd578a.css",
-    "static/js/main.a1b8d2e4.js"
+    "static/js/main.12d9e9b0.js"
   ]
 }

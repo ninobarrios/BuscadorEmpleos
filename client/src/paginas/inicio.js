@@ -231,7 +231,7 @@ function Inicio() {
             <div className='portada'>
                 <img src={portadaImg} alt='Portada' loading="lazy" />
                 <div className='contentform'>
-                    <h1>Oportunidades prueba<span style={{ color: 'white' }}>Laborales</span> </h1>
+                    <h1>Oportunidades <span style={{ color: 'white' }}>Laborales</span> </h1>
                     <h3>Descubre oportunidades laborales para estudiantes y recién egresados<br></br> en diversas carreras técnicas y profesionales.</h3>
                 </div>
             </div>
