@@ -125,7 +125,7 @@ app.get('/contarObservacionesTotal', (req, res) => {
     });
 });
 
-app.get("/seleccionar-departamento/:departamento", (req, res) => {
+app.get("/selecionardepartamento/:departamento", (req, res) => {
     const departamento = req.params.departamento; 
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` WHERE lugar LIKE ? ORDER BY `fecha` DESC, RAND();"; 
     const values = [`%${departamento}%`]; 
@@ -139,7 +139,7 @@ app.get("/seleccionar-departamento/:departamento", (req, res) => {
     });
 });
 
-app.get("/seleccionar-carrera/:carrera", (req, res) => {
+app.get("/selecionarcarrera/:carrera", (req, res) => {
     const carrera = req.params.carrera;  
     const query = `
         SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina 
