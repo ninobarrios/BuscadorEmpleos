@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -7,9 +6,32 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
-app.use(express.static(path.join(__dirname, '../client/build')));
+// Lista de orígenes permitidos
+const allowedOrigins = [
+    'http://localhost:3000',
+    'https://www.practicasuniversitariasperu.com'
+];
 
+// Configuración de CORS
+app.use(cors({
+    origin: (origin, callback) => {
+        // Verificar si el origen está en la lista de permitidos
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true); // Origen permitido
+        } else {
+            callback(new Error('No permitido por CORS')); // Origen no permitido
+        }
+    },
+    credentials: true // Si necesitas permitir credenciales
+}));
+
+// Middleware para imprimir el origen en la consola
+app.use((req, res, next) => {
+    console.log('Origin:', req.headers.origin); // Imprime el origen en la consola
+    next();
+});
+
+// Configuración de conexión a la base de datos
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -21,6 +43,7 @@ const pool = mysql.createPool({
     queueLimit: 0 
 });
 
+// Conexión a la base de datos
 pool.getConnection((err, connection) => {
     if (err) {
         console.error('Error connecting to the database:', err.stack);
@@ -29,7 +52,6 @@ pool.getConnection((err, connection) => {
     console.log('Connected to the database.');
     connection.release(); 
 });
-
 app.get("/Ofertas-Laborales", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` ORDER BY `fecha` DESC, RAND();";
     pool.query(query, (err, results) => {
@@ -155,9 +177,12 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
     });
 });
 
+// Middleware para manejar rutas de la aplicación React
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
+
+// Rutas adicionales para manejar el cliente
 app.get('/departamentos/:departamento', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
@@ -171,10 +196,12 @@ app.get('/como_postular', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
+// Manejo de rutas no definidas
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
+// Iniciar el servidor
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });

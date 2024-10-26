@@ -6,6 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node index.js",
+        "dev": "nodemon index.js",  
         "build": "react-scripts build"
     },
     "keywords": [],
@@ -18,7 +19,6 @@
         "express": "^4.19.2",
         "mysql2": "^3.10.2",
         "prerender-node": "^3.8.0"
-    }
-
-
+    },
+    "proxy": "https://buscadorempleos.onrender.com"
 }
