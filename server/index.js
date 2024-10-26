@@ -3,14 +3,28 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const path = require('path');
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+<<<<<<< HEAD
 // Lista de orígenes permitidos
 const allowedOrigins = [
     'http://localhost:3000',
     'https://www.practicasuniversitariasperu.com'
 ];
+=======
+// Permitir acceso desde cualquier dominio
+app.use(cors());
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    next();
+});
+
+
+>>>>>>> 043ed73fd205610484a616e5b87a937fae7bb52e
 
 // Configuración de CORS
 app.use(cors({
@@ -37,7 +51,10 @@ const pool = mysql.createPool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    connectTimeout: 10000,  
+    connectTimeout: 100000,
+    ssl: {
+        rejectUnauthorized: true 
+    },
     waitForConnections: true,
     connectionLimit: 10, 
     queueLimit: 0 
@@ -52,7 +69,12 @@ pool.getConnection((err, connection) => {
     console.log('Connected to the database.');
     connection.release(); 
 });
+<<<<<<< HEAD
 app.get("/Ofertas-Laborales", (req, res) => {
+=======
+
+app.get("/ofertas-laborales", (req, res) => {
+>>>>>>> 043ed73fd205610484a616e5b87a937fae7bb52e
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` ORDER BY `fecha` DESC, RAND();";
     pool.query(query, (err, results) => {
         if (err) {
@@ -63,7 +85,7 @@ app.get("/Ofertas-Laborales", (req, res) => {
     });
 });
 
-app.get("/Ofertas-Laborales-hoy", (req, res) => {
+app.get("/ofertas-laborales-hoy", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales WHERE fecha = (SELECT MAX(fecha) FROM ofertas_laborales) ORDER BY RAND();";
     pool.query(query, (err, results) => {
         if (err) {
@@ -98,22 +120,18 @@ app.get('/sugerencias', (req, res) => {
     });
 });
 
-app.get('/contarObservacionesDiaAnterior', (req, res) => {
-    const query = `
-        SELECT COUNT(*) AS count 
-        FROM ofertas_laborales 
-        WHERE DATE(fecha) = (SELECT DATE(MAX(fecha)) FROM ofertas_laborales);
-    `;
+app.get('/contar-observaciones-dia-anterior', (req, res) => {
+    const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE DATE(fecha) = (SELECT DATE(MAX(fecha)) FROM ofertas_laborales);`;
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
-            return res.status(500).send("Error al contar observaciones del día anterior");
+            return res.status(500).send("Error al obtener datos");
         }
         res.json(results[0]);
     });
 });
 
-app.get('/contarObservacionesSemana', (req, res) => {
+app.get('/contar-observaciones-semana', (req, res) => {
     const query = `
         SELECT COUNT(*) AS count 
         FROM ofertas_laborales AS ol 
@@ -135,8 +153,8 @@ app.get('/contarObservacionesSemana', (req, res) => {
     });
 });
 
-app.get('/contarObservacionesTotal', (req, res) => {
-    const query = "SELECT COUNT(*) AS count FROM ofertas_laborales;";
+app.get('/contar-observaciones-total', (req, res) => {
+    const query = `SELECT COUNT(*) AS count FROM ofertas_laborales;`;
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
@@ -146,21 +164,21 @@ app.get('/contarObservacionesTotal', (req, res) => {
     });
 });
 
-app.get("/selecionardepartamento/:departamento", (req, res) => {
+app.get("/seleccionar-departamento/:departamento", (req, res) => {
     const departamento = req.params.departamento; 
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM `ofertas_laborales` WHERE lugar LIKE ? ORDER BY `fecha` DESC, RAND();"; 
     const values = [`%${departamento}%`]; 
 
     pool.query(query, values, (err, results) => {
         if (err) {
-            console.error('Error ejecutando la consulta:', err);
+            console.error('Error executing query:', err);
             return res.status(500).send("Error al obtener ofertas");
         }
         res.json(results); 
     });
 });
 
-app.get("/selecionarcarrera/:carrera", (req, res) => {
+app.get("/seleccionar-carrera/:carrera", (req, res) => {
     const carrera = req.params.carrera;  
     const query = `
         SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina 
@@ -168,15 +186,17 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
         WHERE nom_oferta REGEXP ? 
         ORDER BY fecha DESC, RAND();
     `;
+    
     pool.query(query, [carrera], (err, results) => {
         if (err) {
-            console.error('Error ejecutando la consulta:', err);
+            console.error('Error executing query:', err);
             return res.status(500).send("Error al obtener ofertas");
         }
         res.json(results);
     });
 });
 
+<<<<<<< HEAD
 // Middleware para manejar rutas de la aplicación React
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
@@ -200,6 +220,8 @@ app.get('/como_postular', (req, res) => {
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
+=======
+>>>>>>> 043ed73fd205610484a616e5b87a937fae7bb52e
 
 // Iniciar el servidor
 app.listen(PORT, () => {

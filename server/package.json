@@ -19,6 +19,10 @@
         "express": "^4.19.2",
         "mysql2": "^3.10.2",
         "prerender-node": "^3.8.0"
+<<<<<<< HEAD
     },
     "proxy": "https://buscadorempleos.onrender.com"
+=======
+    }
+>>>>>>> 043ed73fd205610484a616e5b87a937fae7bb52e
 }

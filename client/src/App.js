@@ -65,7 +65,7 @@ function App() {
     return (
         <>
             <Navbar />
-            <React.Suspense fallback={<div>Cargando...</div>}>
+            <React.Suspense fallback={<div style={{textAlign:'center'}}>Cargando...</div>}>
                 <Routes>
                     <Route path="/" element={<Inicio />} />
                     <Route path="/departamentos" element={<Navigate to="/departamentos/Arequipa" />} />
@@ -73,7 +73,7 @@ function App() {
                     <Route path="/carreras" element={<Navigate to="/carreras/Administración" />} />
                     <Route path="/carreras/:carrera" element={<Carreras />} />
                     <Route path="/todas_las_ofertas" element={<PaginaInicio />} />
-                    <Route path="/como_postular" element={<ComoPostular />} />
+                    <Route path="/" element={<ComoPostular />} />
                 </Routes>
             </React.Suspense>
         </>
