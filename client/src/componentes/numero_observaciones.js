@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './estiloscomponentes.css'
+import './estiloscomponentes.css';
 
 function NumeroObservaciones() {
-    const [conteo, setConteo] = useState(null);
-    const [conteo2, setConteo2] = useState(null);
-    const [conteo3, setConteo3] = useState(null);
+    const [conteo, setConteo] = useState(0);
+    const [conteo2, setConteo2] = useState(0);
+    const [conteo3, setConteo3] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -17,26 +17,24 @@ function NumeroObservaciones() {
                     axios.get('https://buscadorempleos.onrender.com/contarObservacionesDiaAnterior'),
                     axios.get('https://buscadorempleos.onrender.com/contarObservacionesSemana'),
                     axios.get('https://buscadorempleos.onrender.com/contarObservacionesTotal')
-                    
                 ]);
-    
-                setConteo(responseDiaAnterior.data.count);
-                setConteo2(responseSemana.data.count);
-                setConteo3(responseTotal.data.count);
+
+                setConteo(responseDiaAnterior.data.count || 0);
+                setConteo2(responseSemana.data.count || 0);
+                setConteo3(responseTotal.data.count || 0);
             } catch (err) {
                 console.error("Error al obtener los conteos:", err);
-                setError("Error al obtener los conteos");
+                setError("Error al obtener los conteos. Intenta de nuevo más tarde.");
             } finally {
                 setLoading(false);
             }
         };
-    
+
         obtenerConteos();
     }, []);
-    
 
     if (loading) {
-        return <div className="loading" style={{margin:'50px'}}><div className="spinner"></div></div>;
+        return <div className="loading" style={{ margin: '50px' }}><div className="spinner"></div></div>;
     }
 
     if (error) {
@@ -47,18 +45,17 @@ function NumeroObservaciones() {
         <div className='total_observaciones'>
             <div className='inserciones'>
                 <div className='dia'>
-                    <p>{conteo !== null ? conteo.toLocaleString('es-PE') : 'No disponible'}</p>
+                    <p>{conteo.toLocaleString('es-PE')}</p>
                     <h5>Ofertas laborales hoy</h5>
                 </div>
                 <div className='semana'>
-                    <p>{conteo2 !== null ? conteo2.toLocaleString('es-PE') : 'No disponible'}</p>
+                    <p>{conteo2.toLocaleString('es-PE')}</p>
                     <h5>Ofertas laborales últimos 7 días</h5>
                 </div>
                 <div className='total'>
-                    <p>{conteo3 !== null ? conteo3.toLocaleString('es-PE') : 'No disponible'}</p>
-                    <h5>Total ofertas menores a 20 dias</h5>
+                    <p>{conteo3.toLocaleString('es-PE')}</p>
+                    <h5>Total ofertas menores a 20 días</h5>
                 </div>
-
             </div>
         </div>
     );

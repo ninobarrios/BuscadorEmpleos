@@ -81,7 +81,7 @@ app.get('/sugerencias', (req, res) => {
     });
 });
 
-app.get('/contar-observaciones-dia-anterior', (req, res) => {
+app.get('/contarObservacionesDiaAnterior', (req, res) => {
     const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE DATE(fecha) = (SELECT DATE(MAX(fecha)) FROM ofertas_laborales);`;
     pool.query(query, (err, results) => {
         if (err) {
@@ -92,7 +92,7 @@ app.get('/contar-observaciones-dia-anterior', (req, res) => {
     });
 });
 
-app.get('/contar-observaciones-semana', (req, res) => {
+app.get('/contarObservacionesSemana', (req, res) => {
     const query = `
         SELECT COUNT(*) AS count 
         FROM ofertas_laborales AS ol 
@@ -114,7 +114,7 @@ app.get('/contar-observaciones-semana', (req, res) => {
     });
 });
 
-app.get('/contar-observaciones-total', (req, res) => {
+app.get('/contarObservacionesTotal', (req, res) => {
     const query = `SELECT COUNT(*) AS count FROM ofertas_laborales;`;
     pool.query(query, (err, results) => {
         if (err) {
