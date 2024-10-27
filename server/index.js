@@ -151,6 +151,10 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
     });
 });
 
+app.get('/sitemap.xml', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'sitemap.xml'));
+});
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
