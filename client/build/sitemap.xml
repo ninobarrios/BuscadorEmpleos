@@ -60,6 +60,19 @@
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
+        <url>
+        <loc>https://www.practicasuniversitariasperu.com/departamentos/Puno</loc>
+        <lastmod>2024-10-18</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+        </url>
+        <url>
+        <loc>https://www.practicasuniversitariasperu.com/departamentos/La%20Libertad</loc>
+        <lastmod>2024-10-18</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
     <url>
         <loc>https://www.practicasuniversitariasperu.com/carreras/</loc>
         <lastmod>2024-10-18</lastmod>
@@ -79,7 +92,7 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://www.practicasuniversitariasperu.com/carreras/Ingeniería-de-Sistemas</loc>
+        <loc>https://www.practicasuniversitariasperu.com/carreras/Ingeniería_de_Sistemas</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
@@ -91,37 +104,37 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://www.practicasuniversitariasperu.com/carreras/Recursos-Humanos</loc>
+        <loc>https://www.practicasuniversitariasperu.com/carreras/Recursos_Humanos</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://www.practicasuniversitariasperu.com/carreras/Ingeniería-Industrial</loc>
+        <loc>https://www.practicasuniversitariasperu.com/carreras/Ingeniería_Industrial</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://www.practicasuniversitariasperu.com/Ingeniería-Mecánica</loc>
+        <loc>https://www.practicasuniversitariasperu.com/carreras/Ingeniería_Mecánica</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.practicasuniversitariasperu.com/Gastronomía</loc>
+        <loc>https://www.practicasuniversitariasperu.com/carreras/Gastronomía</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.practicasuniversitariasperu.com/Educación</loc>
+        <loc>https://www.practicasuniversitariasperu.com/carreras/Educación</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.practicasuniversitariasperu.com/como-postular</loc>
+        <loc>https://www.practicasuniversitariasperu.com/como_postular</loc>
         <lastmod>2024-10-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
