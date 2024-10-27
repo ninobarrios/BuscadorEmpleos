@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkclient=self.webpackChunkclient||[]).push([[357],{7357:(e,s,c)=>{c.r(s),c.d(s,{default:()=>t});c(5043),c(2845);var r=c(579);const t=function(){return(0,r.jsx)("div",{className:"footer",children:"\xa9 Practicas Universitarias - Peru 2024"})}}}]);
-//# sourceMappingURL=357.d9979867.chunk.js.map

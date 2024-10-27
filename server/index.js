@@ -6,6 +6,7 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.use(cors());
 app.use(express.json()); 
@@ -24,7 +25,6 @@ const pool = mysql.createPool({
     queueLimit: 0 
 });
 
-// Verifica la conexión al iniciar el servidor
 pool.getConnection((err, connection) => {
     if (err) {
         console.error('Error connecting to the database:', err.stack);
@@ -34,7 +34,6 @@ pool.getConnection((err, connection) => {
     connection.release(); 
 });
 
-// Endpoint para obtener todas las ofertas laborales
 app.get("/ofertas-laborales", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales ORDER BY fecha DESC, RAND();";
     pool.query(query, (err, results) => {
@@ -46,7 +45,6 @@ app.get("/ofertas-laborales", (req, res) => {
     });
 });
 
-// Endpoint para obtener ofertas laborales del día
 app.get("/ofertas-laborales-hoy", (req, res) => {
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales WHERE fecha = (SELECT MAX(fecha) FROM ofertas_laborales) ORDER BY RAND();";
     pool.query(query, (err, results) => {
@@ -58,7 +56,6 @@ app.get("/ofertas-laborales-hoy", (req, res) => {
     });
 });
 
-// Endpoint para sugerencias
 app.get('/sugerencias', (req, res) => {
     const palabra = req.query.palabra || '';
 
@@ -78,7 +75,6 @@ app.get('/sugerencias', (req, res) => {
     });
 });
 
-// Endpoint para contar observaciones del día anterior
 app.get('/contarObservacionesDiaAnterior', (req, res) => {
     const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE DATE(fecha) = (SELECT DATE(MAX(fecha)) FROM ofertas_laborales);`;
     pool.query(query, (err, results) => {
@@ -90,7 +86,6 @@ app.get('/contarObservacionesDiaAnterior', (req, res) => {
     });
 });
 
-// Endpoint para contar observaciones de la semana
 app.get('/contarObservacionesSemana', (req, res) => {
     const query = `
         SELECT COUNT(*) AS count 
@@ -113,7 +108,6 @@ app.get('/contarObservacionesSemana', (req, res) => {
     });
 });
 
-// Endpoint para contar todas las observaciones
 app.get('/contarObservacionesTotal', (req, res) => {
     const query = `SELECT COUNT(*) AS count FROM ofertas_laborales;`;
     pool.query(query, (err, results) => {
@@ -125,7 +119,6 @@ app.get('/contarObservacionesTotal', (req, res) => {
     });
 });
 
-// Endpoint para seleccionar ofertas por departamento
 app.get("/selecionardepartamento/:departamento", (req, res) => {
     const departamento = req.params.departamento; 
     const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales WHERE lugar LIKE ? ORDER BY fecha DESC, RAND();"; 
@@ -140,7 +133,6 @@ app.get("/selecionardepartamento/:departamento", (req, res) => {
     });
 });
 
-// Endpoint para seleccionar ofertas por carrera
 app.get("/selecionarcarrera/:carrera", (req, res) => {
     const carrera = req.params.carrera;  
     const query = `
@@ -159,16 +151,8 @@ app.get("/selecionarcarrera/:carrera", (req, res) => {
     });
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-app.get('/como_postular', (req, res) => {
-
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 app.listen(PORT, () => {
