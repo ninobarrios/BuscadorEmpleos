@@ -7,7 +7,6 @@ import portadaImg from '../imagenes/portada.avif';
 import CajaOferta from '../componentes/cajaoferta';
 import Buscador from '../componentes/buscador';
 import Paginacion from '../componentes/paginacion';
-import Inserciones from '../componentes/numero_observaciones';
 import Selectores from '../componentes/selectores';
 import Footer from '../componentes/footer';
 
@@ -237,7 +236,6 @@ function Inicio() {
             </div>
 
 
-            <Inserciones />
             <Buscador onBuscar={palabra => handleFiltroChange('palabraClave', palabra)} />
 
             <div className='selectores'>

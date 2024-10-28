@@ -3,11 +3,15 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const path = require('path');
+const compression = require('compression');
+const NodeCache = require('node-cache');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-app.use(express.static(path.join(__dirname, '../client/build')));
+const cache = new NodeCache({ stdTTL: 600 }); 
 
+app.use(compression()); 
+app.use(express.static(path.join(__dirname, '../client/build'), { maxAge: '1d' }));
 app.use(cors());
 app.use(express.json()); 
 
@@ -17,9 +21,7 @@ const pool = mysql.createPool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     connectTimeout: 10000, 
-    ssl: {
-        rejectUnauthorized: false 
-    },
+    ssl: { rejectUnauthorized: false },
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0 
@@ -35,7 +37,11 @@ pool.getConnection((err, connection) => {
 });
 
 app.get("/ofertas-laborales", (req, res) => {
-    const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales ORDER BY fecha DESC, RAND();";
+    const query = `
+        SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina 
+        FROM ofertas_laborales 
+        ORDER BY fecha DESC, RAND();
+    `;
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
@@ -46,12 +52,24 @@ app.get("/ofertas-laborales", (req, res) => {
 });
 
 app.get("/ofertas-laborales-hoy", (req, res) => {
-    const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales WHERE fecha = (SELECT MAX(fecha) FROM ofertas_laborales) ORDER BY RAND();";
+    const cacheKey = "ofertas-laborales-hoy";
+    const cachedResults = cache.get(cacheKey);
+    
+    if (cachedResults) return res.json(cachedResults);
+    
+    const query = `
+        SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina 
+        FROM ofertas_laborales 
+        WHERE fecha = (SELECT MAX(fecha) FROM ofertas_laborales) 
+        ORDER BY RAND();
+    `;
+    
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
             return res.status(500).send("Error al obtener ofertas");
         }
+        cache.set(cacheKey, results);
         res.json(results);
     });
 });
@@ -63,7 +81,12 @@ app.get('/sugerencias', (req, res) => {
         return res.json([]);  
     }
 
-    const sql = `SELECT DISTINCT nom_oferta FROM ofertas_laborales WHERE nom_oferta COLLATE utf8mb4_unicode_ci LIKE ? LIMIT 10;`;
+    const sql = `
+        SELECT DISTINCT nom_oferta 
+        FROM ofertas_laborales 
+        WHERE nom_oferta COLLATE utf8mb4_unicode_ci LIKE ? 
+        LIMIT 10;
+    `;
 
     pool.query(sql, [`%${palabra}%`], (error, results) => {
         if (error) {
@@ -76,17 +99,33 @@ app.get('/sugerencias', (req, res) => {
 });
 
 app.get('/contarObservacionesDiaAnterior', (req, res) => {
-    const query = `SELECT COUNT(*) AS count FROM ofertas_laborales WHERE DATE(fecha) = (SELECT DATE(MAX(fecha)) FROM ofertas_laborales);`;
+    const cacheKey = "contarObservacionesDiaAnterior";
+    const cachedResults = cache.get(cacheKey);
+    
+    if (cachedResults) return res.json(cachedResults);
+
+    const query = `
+        SELECT COUNT(*) AS count 
+        FROM ofertas_laborales 
+        WHERE DATE(fecha) = (SELECT DATE(MAX(fecha)) FROM ofertas_laborales);
+    `;
+
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
             return res.status(500).send("Error al obtener datos");
         }
+        cache.set(cacheKey, results[0]);
         res.json(results[0]);
     });
 });
 
 app.get('/contarObservacionesSemana', (req, res) => {
+    const cacheKey = "contarObservacionesSemana";
+    const cachedResults = cache.get(cacheKey);
+
+    if (cachedResults) return res.json(cachedResults);
+
     const query = `
         SELECT COUNT(*) AS count 
         FROM ofertas_laborales AS ol 
@@ -99,29 +138,43 @@ app.get('/contarObservacionesSemana', (req, res) => {
         ) AS ultimas_fechas 
         ON ol.fecha = ultimas_fechas.fecha;
     `;
+
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
             return res.status(500).send("Error al contar observaciones de la semana");
         }
+
+        cache.set(cacheKey, results[0]);
         res.json(results[0]);
     });
 });
 
 app.get('/contarObservacionesTotal', (req, res) => {
+    const cacheKey = "contarObservacionesTotal";
+    const cachedResults = cache.get(cacheKey);
+    
+    if (cachedResults) return res.json(cachedResults);
+
     const query = `SELECT COUNT(*) AS count FROM ofertas_laborales;`;
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error ejecutando la consulta:', err);
             return res.status(500).send("Error al contar observaciones totales");
         }
+        cache.set(cacheKey, results[0]);
         res.json(results[0]);
     });
 });
 
 app.get("/selecionardepartamento/:departamento", (req, res) => {
     const departamento = req.params.departamento; 
-    const query = "SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales WHERE lugar LIKE ? ORDER BY fecha DESC, RAND();"; 
+    const query = `
+        SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina 
+        FROM ofertas_laborales 
+        WHERE lugar LIKE ? 
+        ORDER BY fecha DESC, RAND(); 
+    `; 
     const values = [`%${departamento}%`]; 
 
     pool.query(query, values, (err, results) => {
