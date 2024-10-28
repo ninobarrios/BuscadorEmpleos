@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Ubi from '../imagenes/ubi.png';  // Ruta correcta para la ubicación
-import Indeed from '../imagenes/indeed.png';  // Verifica que esta ruta sea correcta
-import Convocatorias from '../imagenes/convocatorias_2024.png';
-import Buscojobs from '../imagenes/buscojobs.JPG';
-import Linkedin from '../imagenes/Linkedin.png';
-import Computrabajo from '../imagenes/computrabajo.png';
-import Bumeran from '../imagenes/bumeran.png';
+import Ubi from '../imagenes/ubi.avif';  
+import Indeed from '../imagenes/indeed.png';  
+import Convocatorias from '../imagenes/convocatorias_2024.avif';
+import Buscojobs from '../imagenes/buscojobs.avif';
+import Linkedin from '../imagenes/Linkedin.avif';
+import Computrabajo from '../imagenes/computrabajo.avif';
+import Bumeran from '../imagenes/bumeran.avif';
 
 import './estiloscomponentes.css';
 
