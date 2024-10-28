@@ -943,6 +943,15 @@ body {
     font-size: 16px !important;
 }
 @media (max-width: 764px) {
+    .msgini{
+        width: 90vw !important;
+        padding: 20px !important;
+        margin: 25px !important;
+    }
+    .msgdcrp_ctn{
+        margin: 0px 5vw !important;
+        width: 90vw !important;
+    }
     .nav-link.active {
         color: #eb0a44 !important;
     }
@@ -1772,4 +1781,35 @@ a.nav-link {
 
 .tips-busqueda-container strong {
     color: #2ab004;
+}
+.msgini{
+    width: 60vw;
+    margin: 100px 20vw;
+    padding: 80px;
+    background-color: #042940;
+    color: white;
+    font-style: italic;
+    border-radius: 5px;
+}
+.msgdcrp{
+    width: 100vw;
+    padding: 50px;
+    background-color: #14a800;
+    margin-top: 100px;
+}
+.msgdcrp h2{
+    font-size: 40px;
+    text-align: center;
+    margin: 0px;
+    font-weight: bold;
+}
+.msgdcrp_ctn{
+    width: 70vw;
+    margin: 0px 15vw;
+    background-color: #f4f1f1;
+    padding: 50px 10vw;
+}
+.msgdcrp_ctn p, .msgdcrp_ctn li{
+    line-height: 1.8;
+    font-size: 14px;
 }

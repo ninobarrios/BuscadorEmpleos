@@ -234,6 +234,23 @@ function Inicio() {
                     <h3>Descubre oportunidades laborales para estudiantes y recién egresados<br></br> en diversas carreras técnicas y profesionales.</h3>
                 </div>
             </div>
+            <div className='msgini'>
+                <h1 style={{ color: '#47b72f' }}>¿Estás buscando prácticas profesionales?</h1>
+                <p>En esta página encontrarás una amplia variedad de ofertas laborales dirigidas especialmente a estudiantes y recién egresados. Nuestro objetivo es ayudarte a encontrar la oportunidad que mejor se adapte a tu carrera y lugar de residencia.</p>
+                <p>
+                    Te mostramos las ofertas laborales del día de hoy, pero si quieres ver todas las prácticas vigentes menores a 20 días de antigüedad, dirígete a nuestro buscador:
+                    <a
+                        href="https://www.practicasuniversitariasperu.com/todas_las_ofertas"
+                        className="link"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        style={{ color: '#47b72f' }}>
+                        Ver todas las ofertas
+                    </a>.
+                </p>
+                <p>Te ofrecemos una recopilación de ofertas de diferentes plataformas laborales, garantizando que no te pierdas ninguna oportunidad valiosa. Aquí podrás explorar opciones que te permitirán incursionar en el mundo laboral mientras continúas con tus estudios. Además, también encontrarás oportunidades para egresados que buscan su primera experiencia profesional.</p>
+                <p><strong>¡No dejes pasar la oportunidad de dar el siguiente paso en tu carrera!</strong> Navega a través de nuestras ofertas y comienza tu camino hacia el éxito laboral.</p>
+            </div>
 
 
             <Buscador onBuscar={palabra => handleFiltroChange('palabraClave', palabra)} />
@@ -285,6 +302,54 @@ function Inicio() {
                 totalPaginas={totalPaginas}
                 onCambiarPagina={handleCambiarPagina}
             />
+
+            <div className='msgdcrp'>
+                <h2> <span style={{ color: 'white' }}>Método de Búsqueda</span> Efectivo</h2>
+                
+            </div>
+            <div className='msgdcrp_ctn'>
+
+                    <p>En el actual entorno laboral, caracterizado por su dinamismo y competencia, muchas empresas han optado por publicar sus ofertas de trabajo a través de plataformas específicas, tales como LinkedIn, Indeed, y otras bolsas de trabajo en línea. Sin embargo, esta diversidad puede convertirse en un desafío significativo al momento de buscar empleo. Con tantas plataformas disponibles, es fácil sentirse abrumado y perder de vista oportunidades que podrían ajustarse perfectamente a tu perfil profesional.</p>
+
+                    <h3>¿Por qué es Importante un Método de Búsqueda Efectivo?</h3>
+                    <p>Un método de búsqueda efectivo no solo facilita la localización de ofertas laborales, sino que también optimiza el tiempo y los recursos que dedicas a esta tarea. Según estudios recientes, más del 70% de las ofertas laborales no se publican públicamente y son ocupadas a través de redes de contacto y recomendaciones. Esto significa que la búsqueda activa en plataformas específicas puede ser clave para acceder a oportunidades ocultas.</p>
+
+                    <h3>Retos en la Búsqueda de Empleo</h3>
+                    <ol>
+                        <li><strong>Diversidad de Plataformas:</strong> Cada plataforma tiene su propio conjunto de ofertas y características. A menudo, los usuarios deben invertir tiempo buscando en múltiples sitios, lo que puede resultar tedioso y frustrante.
+                            <em> Ejemplo: </em> Imagina que estás buscando un puesto de pasante en marketing. Publicas tu currículum en LinkedIn, pero también te registras en Indeed y en una bolsa de trabajo local. Cada plataforma puede tener ofertas diferentes, y si no revisas todas, podrías perder una oportunidad que encaje perfectamente con tus habilidades.</li>
+                        <li><strong>Pérdida de Oportunidades:</strong> La falta de un enfoque centralizado puede llevar a perder oportunidades valiosas. Es posible que una oferta laboral que se ajuste a tus habilidades y experiencia esté disponible en una plataforma que no estás revisando.
+                            <em> Ejemplo: </em> Una empresa puede estar buscando un pasante en análisis de datos, pero publica la oferta exclusivamente en una plataforma menos conocida. Si solo miras las grandes plataformas, podrías perder esta valiosa oportunidad.</li>
+                    </ol>
+
+                    <h3>Nuestro Enfoque: Recopilación Centralizada de Ofertas</h3>
+                    <p>Para resolver estos problemas, en nuestra página hemos diseñado un enfoque que permite la recopilación de ofertas laborales de diversas plataformas en un solo lugar. Esto no solo ahorra tiempo, sino que también garantiza que tengas acceso a una amplia gama de oportunidades. Aquí hay algunos elementos clave de nuestro método:</p>
+
+                    <ol>
+                        <li><strong>Recopilación de Ofertas:</strong> Nos dedicamos a recoger ofertas laborales de múltiples plataformas, lo que te permite tener una visión integral de las oportunidades disponibles. Nuestro equipo se asegura de que cada oferta sea revisada y categorizada correctamente.</li>
+                        <li><strong>Filtrado por Necesidades:</strong> Las ofertas están organizadas para que puedas filtrarlas según tus preferencias. Ya sea por ubicación, tipo de trabajo o requisitos específicos, puedes personalizar tu búsqueda para que se ajuste a tus necesidades.</li>
+                        <li><strong>Actualización Constante:</strong> Nuestra base de datos se actualiza diariamente, asegurando que tengas acceso a las ofertas más recientes y relevantes. Esto es fundamental, ya que muchas ofertas son ocupadas rápidamente.</li>
+                    </ol>
+
+                    <h3>Ejemplos de Estrategias de Búsqueda Efectiva</h3>
+                    <ul>
+                        <li><strong>Establece Alertas de Empleo:</strong> Muchas plataformas permiten crear alertas de empleo personalizadas. Esto significa que recibirás notificaciones cuando se publiquen nuevas ofertas que se ajusten a tus criterios. Esta estrategia te ayuda a ser uno de los primeros en postularte.</li>
+                        <li><strong>Usa Palabras Clave:</strong> Al buscar en plataformas laborales, utiliza palabras clave específicas relacionadas con el tipo de empleo que buscas. Por ejemplo, si buscas prácticas en desarrollo web, utiliza términos como "pasantía en desarrollo front-end" o "práctica en programación".</li>
+                        <li><strong>Redes Sociales y Networking:</strong> No subestimes el poder del networking. A menudo, las ofertas de empleo se comparten a través de redes sociales. Conéctate con profesionales de tu área en LinkedIn y participa en grupos relacionados con tu carrera. Esto puede abrir puertas a oportunidades que no se publican en línea.</li>
+                    </ul>
+
+                    <h3>Ventajas de Usar Nuestra Plataforma</h3>
+                    <ul>
+                        <li><strong>Ahorra Tiempo:</strong> Al centralizar todas las ofertas laborales, puedes dedicar más tiempo a prepararte para entrevistas y menos tiempo buscando en diferentes sitios.</li>
+                        <li><strong>Aumenta tus Oportunidades:</strong> Al no depender de una sola plataforma, aumentas tus posibilidades de encontrar el trabajo ideal que se alinee con tus objetivos de carrera.</li>
+                        <li><strong>Acceso a Ofertas Exclusivas:</strong> Algunas ofertas laborales pueden ser exclusivas de plataformas específicas, y al usar nuestro servicio, te aseguras de no perderte ninguna.</li>
+                    </ul>
+
+                    <p>En resumen, nuestra misión es ayudarte a navegar el vasto mar de ofertas laborales, reduciendo la posibilidad de que te pierdas de ninguna oportunidad valiosa. Al adoptar un método de búsqueda efectivo y aprovechar nuestra plataforma, estás un paso más cerca de encontrar la práctica profesional o el trabajo ideal que te ayudará a construir tu futuro.</p>
+
+                    <p><strong>¡Comienza tu búsqueda hoy y descubre todas las ofertas que tenemos para ti!</strong></p>
+
+                </div>
             <Footer />
         </div>
     );
