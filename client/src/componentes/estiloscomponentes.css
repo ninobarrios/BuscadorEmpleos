@@ -943,6 +943,14 @@ body {
     font-size: 16px !important;
 }
 @media (max-width: 764px) {
+    .elementos_buscador{
+        flex-direction: column;
+        
+    }
+    .input_cajainiciobox{
+        width: 300px !important;
+        margin-bottom: 15px !important;
+    }
     .msgini{
         width: 90vw !important;
         padding: 20px !important;
@@ -1096,7 +1104,8 @@ body {
     }
 
     .btn_cajainiciobox {
-        right: 20px;
+        width: 300px !important;
+        margin: 0px !important;
     }
 
     .selectores {
@@ -1784,7 +1793,7 @@ a.nav-link {
 }
 .msgini{
     width: 60vw;
-    margin: 100px 20vw;
+    margin: 50px 20vw;
     padding: 80px;
     background-color: #042940;
     color: white;
@@ -1812,4 +1821,13 @@ a.nav-link {
 .msgdcrp_ctn p, .msgdcrp_ctn li{
     line-height: 1.8;
     font-size: 14px;
+}
+.alink{
+    text-decoration: none;
+    width: 60vw;
+    font-weight: bold;
+    color: #48b72f;
+}
+.alink:hover{
+    color: #003366;
 }

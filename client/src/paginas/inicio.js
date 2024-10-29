@@ -5,7 +5,6 @@ import '../componentes/estiloscomponentes.css'
 import portadaImg from '../imagenes/portada.avif';
 
 import CajaOferta from '../componentes/cajaoferta';
-import Buscador from '../componentes/buscador';
 import Paginacion from '../componentes/paginacion';
 import Selectores from '../componentes/selectores';
 import Footer from '../componentes/footer';
@@ -253,7 +252,6 @@ function Inicio() {
             </div>
 
 
-            <Buscador onBuscar={palabra => handleFiltroChange('palabraClave', palabra)} />
 
             <div className='selectores'>
                 <Select
@@ -278,7 +276,8 @@ function Inicio() {
 
             />
 
-            <div className='totalofertas'>{totalOfertas.toLocaleString('es-PE')} Empleos Hoy</div>
+            <div className='totalofertas'>{totalOfertas.toLocaleString('es-PE')} Ofertas laborale hoy</div>
+            <a className='alink' href="/todas_las_ofertas">Ver todas las ofertas</a>
             <div className='contenidoprincipal'>
                 <div className='contenedordecajas'>
                     {ofertasMostradas.length > 0 ? (
