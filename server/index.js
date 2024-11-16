@@ -58,7 +58,7 @@ app.get("/ofertas-laborales-hoy", (req, res) => {
     if (cachedResults) return res.json(cachedResults);
 
     const query = `
-SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales WHERE fecha = (SELECT MAX(fecha) FROM ofertas_laborales) ORDER BY nom_empresa;
+SELECT plataforma, nom_oferta, nom_empresa, lugar, link_pagina FROM ofertas_laborales WHERE fecha = (SELECT MAX(fecha) FROM ofertas_laborales) ORDER BY nom_empresa DESC;
 
     `;
 
