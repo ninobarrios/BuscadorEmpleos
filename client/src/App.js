@@ -42,18 +42,18 @@ function Navbar() {
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/" onClick={handleNavItemClick} end>Inicio</NavLink>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <NavLink className="nav-link" to="/departamentos" onClick={handleNavItemClick}>Departamentos</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/carreras" onClick={handleNavItemClick}>Carreras</NavLink>
-                        </li>
+                        </li>}
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/todas_las_ofertas" onClick={handleNavItemClick}>Todas las Ofertas</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/como_postular" onClick={handleNavItemClick}>¿Cómo Postular?</NavLink>
-                        </li>
+                        </li>*/}
                     </ul>
                 </div>
             </div>

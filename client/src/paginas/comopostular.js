@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
-const Footer = React.lazy(() => import('../componentes/footer'));
+//const Footer = React.lazy(() => import('../componentes/footer'));
 const CartaPresentacion = React.lazy(() => import('../componentes/cartapresentacion'));
 
 function comopostular() {
@@ -11,6 +11,36 @@ function comopostular() {
                 <h2>¿Listo para encontrar tu <span style={{ color: '#47b72f' }}>empleo ideal?</span></h2>
                 <p>Sigue estos pasos para presentar tu postulación
                     de manera exitosa <br></br>y destacar entre los candidatos.</p>
+            </div>
+            <div className="tips-busqueda-container">
+                <h2>Consejos de Busqueda</h2>
+                <p style={{width:'80%'}}>
+                    Al buscar empleo, es fundamental ingresar palabras clave relacionadas con tu carrera para asegurarte de no perderte ninguna oportunidad. Aquí tienes algunas sugerencias para diferentes campos:
+                </p>
+                <div className='imgtip'></div>
+                <ul className="tips-list">
+                    <li>
+                        <h3>Ingeniería Agronómica</h3>
+                        <p style={{width:'90%'}}>
+                            Utiliza palabras clave como: <strong>'Ingeniería Agrícola', 'Ingeniero Agrónomo', 'Agronomía', 'Agroindustrial'</strong>.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Economía</h3>
+                        <p>
+                            Considera usar términos como: <strong>'finanzas', 'mercado', 'inversiones', 'nóminas', 'créditos y cobranzas'</strong>.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Ciencias de la Comunicación</h3>
+                        <p>
+                            Busca con palabras clave como: <strong>'comunicación', 'periodismo', 'audiovisuales', 'relaciones públicas', 'comunicador social', 'redes sociales', 'periodista'</strong>.
+                        </p>
+                    </li>
+                </ul>
+                <p>
+                    <strong>Tip:</strong> Usa combinaciones específicas para ampliar tus opciones laborales y mejorar tus resultados en la búsqueda.
+                </p>
             </div>
             <div className='inicimsg'>
                 <h2>¡Tu futuro profesional comienza aquí!</h2>
@@ -51,7 +81,7 @@ function comopostular() {
                     <p>Usa palabras clave específicas, habilidades técnicas,
                         ubicación, modalidad (remoto/presencial), nivel de
                         experiencia y sinónimos para mejorar las búsquedas de empleo.
-                        <Link to="/paginainicio" style={{ color: '#47b72f', fontWeight: 'bold' }}>Ingresa aquí</Link>
+                        
                         </p>
                 </div>
 
@@ -86,9 +116,9 @@ function comopostular() {
                     <h2>¡Y postula ahora!</h2>
                     <h3>Ingresa a nuestro buscador</h3>
                 </div>
-                <div className='pslahr_right'>
+               {/* <div className='pslahr_right'>
                     <Link to='/paginainicio' className='postular-link'>Buscar ahora!</Link>
-                </div>
+                </div>*/}
             </div>
 
             <section className="ofertas-seccion">
@@ -227,15 +257,11 @@ function comopostular() {
                             Envía tu CV en PDF para evitar problemas de formato y asegurarte de que se vea igual en todos los dispositivos.
                         </p>
                     </div>
-
+                    
                 </div>
-
             </div>
 
-            <Suspense fallback={<div className="loading"><div className="spinner"></div></div>}>
-                <Footer />
-            </Suspense>
-
+            
         </div>
     )
 }

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+//import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Ubi from '../imagenes/ubi.avif';  
@@ -21,9 +22,9 @@ const plataformaImages = {
 };
 
 const CajaOferta = ({ oferta_laboral }) => {
-    const [copied, setCopied] = useState(false);
+    //const [copied, setCopied] = useState(false);
 
-    const handleButtonClick = (e) => {
+    /*const handleButtonClick = (e) => {
         e.stopPropagation(); 
 
         if (oferta_laboral.plataforma === 'Computrabajo') {
@@ -36,7 +37,7 @@ const CajaOferta = ({ oferta_laboral }) => {
         } else {
             window.open(oferta_laboral.link_pagina, '_blank');
         }
-    };
+    };*/
 
     const capitalizeFirstLetter = (text) => {
         if (!text) return ''; 
@@ -62,7 +63,7 @@ const CajaOferta = ({ oferta_laboral }) => {
                 )}
             </div>
 
-            <button className='btn-official' onClick={handleButtonClick}>
+           {/* <button className='btn-official' onClick={handleButtonClick}>
                 {oferta_laboral.plataforma === 'Computrabajo' ? 'Copiar enlace' : 'Postular aquí'}
             </button>
 
@@ -82,7 +83,7 @@ const CajaOferta = ({ oferta_laboral }) => {
                 }}>
                     ¡Enlace Copiado!
                 </div>
-            )}
+            )}*/}
         </div>
     );
 };
